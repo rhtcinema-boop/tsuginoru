@@ -503,6 +503,71 @@ nav button{font-size:13px}
 .nmi{display:flex;align-items:center;gap:10px}.nmi>.ic{width:30px;height:30px}.nmi>span{min-width:0}
 .rowbtn>.ic{width:32px;height:32px}
 .ic svg,.bi{fill:currentColor!important;stroke:none!important}
+
+/* ==== 19. 起動画面の並び直しと4秒の開く演出 ==== */
+html #splash{justify-content:flex-start;gap:0;padding-top:env(safe-area-inset-top,0px)}
+html #splash .spmid{flex:1 1 auto;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,2.4vh,18px);position:relative;z-index:1}
+html #splash .cmp{width:min(176px,26vh);height:min(176px,26vh)}
+html #splash .spt{font-size:min(46px,7vh)}
+html #splash .tapopen{position:relative;left:auto;right:auto;bottom:auto!important;flex:none;height:44px;line-height:44px;margin-bottom:calc(20vh + 8px + env(safe-area-inset-bottom,0px));z-index:1}
+#splash.quick .cmp{animation:none}
+#splash .bloom{position:absolute;left:0;top:0;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;background:radial-gradient(circle,rgba(233,199,122,.55) 0,rgba(233,199,122,.18) 38%,rgba(233,199,122,0) 66%);opacity:0;transform:scale(.3);pointer-events:none;z-index:2}
+#splash .sring{position:absolute;left:0;top:0;border-radius:50%;border:1.5px solid #e9c77a;box-shadow:0 0 10px rgba(233,199,122,.45);opacity:0;pointer-events:none;z-index:3}
+html #splash.opening{cursor:default}
+html #splash.opening .tapopen{animation:none;opacity:0;transition:opacity .4s ease}
+html #splash.opening .needle{animation:spinLux 1.6s cubic-bezier(.16,1,.3,1) both}
+html #splash.opening .gring{animation:drawLux 1.35s .15s cubic-bezier(.65,0,.35,1) forwards}
+html #splash.opening .ring{stroke-dasharray:none;stroke-dashoffset:0;animation:ringGold 1.2s 1.45s ease forwards}
+html #splash.opening .bloom{animation:bloom 1.8s 1.45s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .spt::after{animation:streak 1.1s 1.9s cubic-bezier(.45,0,.25,1) forwards}
+html #splash.opening .kira:nth-of-type(1){animation:glint 1.2s 2.2s ease-in-out forwards}
+html #splash .gring{stroke-dasharray:100;stroke-dashoffset:100}
+html #splash .spt::after{content:attr(data-t);position:absolute;inset:0;letter-spacing:inherit;background:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,250,235,.95) 50%,rgba(255,255,255,0) 58%);background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none}
+@keyframes spinLux{from{transform:rotate(-720deg)}to{transform:rotate(0)}}
+@keyframes drawLux{to{stroke-dashoffset:0}}
+@keyframes ringGold{to{stroke:#e9c77a}}
+@keyframes streak{from{background-position:100% 0}to{background-position:0 0}}
+@keyframes glint{0%{opacity:0;transform:scale(.4)}50%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(.7)}}
+@keyframes bloom{0%{opacity:0;transform:scale(.6)}50%{opacity:.45;transform:scale(1)}100%{opacity:.3;transform:scale(1.08)}}
+/* 開く前の演出も跳ねない動きに */
+html #splash.full .cmp{animation:cmpLux .9s cubic-bezier(.22,1,.36,1) both}
+html #splash.full .needle{animation:spinLux 1.4s .1s cubic-bezier(.16,1,.3,1) both}
+html #splash.full .spt{animation:titleLux 1.1s .7s cubic-bezier(.22,1,.36,1) forwards}
+html #splash.full .kira{animation:none;opacity:0}
+@keyframes cmpLux{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes titleLux{from{opacity:0;letter-spacing:.34em;transform:translateY(6px)}to{opacity:1;letter-spacing:.14em;transform:none}}
+.obgrid .pick{min-height:74px}.obbody{padding-bottom:28px}
+.obfoot .obmore{display:block;width:100%;text-align:center;margin:0 0 6px;min-height:40px;font-size:15px}
+@media (max-width:359px),(max-height:600px){.coach .bub small{display:none}.coach .bub{padding:5px 12px}}
+
+/* ==== 映画の始まりのような開く演出（紺と金・羅針盤の輪を光がなぞるのが主役） ==== */
+html #splash .streaks,html #splash .dust{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+html #splash .streaks i{position:absolute;left:-30%;top:var(--y);width:var(--w);height:1.5px;border-radius:2px;background:linear-gradient(90deg,rgba(233,199,122,0),rgba(255,236,190,.9),rgba(233,199,122,0));opacity:0;transform:rotate(var(--a))}
+html #splash .dust i{position:absolute;left:50%;top:44%;width:var(--s);height:var(--s);border-radius:50%;background:#f3dca0;opacity:0}
+html #splash .comet{transform-origin:0 0;transform-box:view-box;opacity:0}
+html #splash .flare{position:absolute;left:0;right:0;top:0;height:2px;margin-top:-1px;background:linear-gradient(90deg,rgba(255,240,200,0) 0,rgba(255,240,200,.95) 50%,rgba(255,240,200,0) 100%);box-shadow:0 0 18px 4px rgba(233,199,122,.55);opacity:0;transform:scaleX(0);pointer-events:none;z-index:3}
+html #splash.opening .spmid{animation:push 3.3s cubic-bezier(.45,0,.25,1) both}
+html #splash.opening .cmp{animation:emerge 2s cubic-bezier(.33,0,.2,1) both}
+html #splash.opening .spt{animation:titleCine 2.6s cubic-bezier(.33,0,.2,1) both}
+html #splash.opening .sps{animation:subCine 3s ease both}
+html #splash.opening .needle{animation:spinLux 1.9s .35s cubic-bezier(.16,1,.3,1) both}
+html #splash.opening .gring{animation:drawLux 1.3s .3s cubic-bezier(.65,0,.35,1) forwards}
+html #splash.opening .comet{animation:orbit 1.3s .3s cubic-bezier(.65,0,.35,1) both}
+html #splash.opening .streaks i{animation:sweep 1.5s var(--d) cubic-bezier(.45,0,.25,1) forwards}
+html #splash.opening .dust i{animation:drift 2.4s var(--d) cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .bloom{animation:bloom 1.4s 2.75s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .flare{animation:flare .75s 2.85s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .spt::after{animation:streak 1s 2.1s cubic-bezier(.45,0,.25,1) forwards}
+html #splash.opening .kira{animation:none!important;opacity:0}
+@keyframes push{from{transform:scale(1)}to{transform:scale(1.045)}}
+@keyframes emerge{0%{opacity:1}14%{opacity:.08;transform:scale(.97)}55%{opacity:1;transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+@keyframes titleCine{0%{opacity:1}10%{opacity:0;letter-spacing:.34em}62%{opacity:0;letter-spacing:.34em;transform:translateY(6px)}100%{opacity:1;letter-spacing:.14em;transform:none}}
+@keyframes subCine{0%{opacity:.95}8%{opacity:0}78%{opacity:0}100%{opacity:.9}}
+@keyframes orbit{0%{opacity:0;transform:rotate(0)}8%{opacity:1}88%{opacity:1}100%{opacity:0;transform:rotate(360deg)}}
+@keyframes sweep{0%{opacity:0;transform:translateX(0) rotate(var(--a))}25%{opacity:.85}100%{opacity:0;transform:translateX(170vw) rotate(var(--a))}}
+@keyframes drift{0%{opacity:0;transform:translate(0,0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.6)}}
+@keyframes flare{0%{opacity:0;transform:scaleX(0)}35%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.2)}}
+@keyframes bloom{0%{opacity:0;transform:scale(.6)}45%{opacity:.7;transform:scale(1.1)}100%{opacity:.5;transform:scale(1.3)}}
 /* 演出の重なり */
 #fxc{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:90}
 .cele{position:fixed;left:0;right:0;top:34%;z-index:91;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:8px;animation:celeIn .5s cubic-bezier(.2,1.6,.4,1) both,fadeAway .35s ease-in 1.35s forwards}
@@ -580,7 +645,7 @@ nav button{font-size:13px}
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
 </style>
 
-<div id="splash" aria-hidden="true"><div class="tapopen">タップして開く</div><div class="glow"></div><div class="stars"><i style="left:33.4%;top:13.1%;--d:0.91s;--s:2px"></i><i style="left:80.2%;top:9.3%;--d:0.82s;--s:4px"></i><i style="left:23.2%;top:8.8%;--d:0.59s;--s:2px"></i><i style="left:11.5%;top:31.4%;--d:1.16s;--s:2px"></i><i style="left:92.1%;top:45.3%;--d:0.82s;--s:2px"></i><i style="left:57.2%;top:29.6%;--d:1.37s;--s:2px"></i><i style="left:55.3%;top:11.9%;--d:0.59s;--s:4px"></i><i style="left:14.1%;top:23.7%;--d:1.14s;--s:2px"></i><i style="left:12.7%;top:41.3%;--d:0.26s;--s:2px"></i><i style="left:54.5%;top:7.2%;--d:0.08s;--s:2px"></i><i style="left:49.7%;top:38.6%;--d:1.09s;--s:3px"></i><i style="left:58.0%;top:33.4%;--d:0.42s;--s:2px"></i><i style="left:68.7%;top:19.4%;--d:0.80s;--s:4px"></i><i style="left:49.5%;top:26.0%;--d:0.63s;--s:4px"></i><i style="left:95.1%;top:10.9%;--d:0.59s;--s:3px"></i><i style="left:17.3%;top:35.8%;--d:0.05s;--s:2px"></i><i style="left:74.9%;top:41.4%;--d:1.23s;--s:3px"></i><i style="left:35.0%;top:26.5%;--d:0.70s;--s:3px"></i><i style="left:9.5%;top:9.3%;--d:0.38s;--s:2px"></i><i style="left:8.7%;top:50.0%;--d:0.91s;--s:3px"></i><i style="left:29.8%;top:28.8%;--d:0.94s;--s:2px"></i><i style="left:91.4%;top:26.8%;--d:0.86s;--s:3px"></i><i style="left:8.5%;top:54.5%;--d:0.18s;--s:2px"></i><i style="left:40.4%;top:64.4%;--d:0.70s;--s:2px"></i><i style="left:45.2%;top:39.8%;--d:1.24s;--s:3px"></i><i style="left:84.2%;top:21.7%;--d:0.58s;--s:3px"></i></div><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#f5b93a"/></linearGradient></defs><circle r="96" fill="#0c2d6b" opacity=".4"/><circle class="ring" r="118" fill="none" stroke="#fff" stroke-width="14" transform="rotate(-90)"/><g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M0 -104v16M0 88v16M-104 0h16M88 0h16"/></g><g class="needle"><path d="M70 -70 L19 19 L-19 -19Z" fill="url(#spg)"/><path d="M-70 70 L-19 -19 L19 19Z" fill="#fff"/></g><circle r="12" fill="#0c2d6b"/></svg><div class="spt">ツギノル<svg class="kira" style="right:-26px;top:-12px;--d:1.25s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg><svg class="kira" style="left:-30px;bottom:-4px;width:18px;height:18px;--d:1.45s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg></div><div class="sps">次の行き先を、すぐ決める</div><div class="waves"><svg class="w1" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg><svg class="w2" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg></div></div>
+<div id="splash" aria-hidden="true"><div class="glow"></div><div class="stars"><i style="left:33.4%;top:13.1%;--d:0.91s;--s:2px"></i><i style="left:80.2%;top:9.3%;--d:0.82s;--s:4px"></i><i style="left:23.2%;top:8.8%;--d:0.59s;--s:2px"></i><i style="left:11.5%;top:31.4%;--d:1.16s;--s:2px"></i><i style="left:92.1%;top:45.3%;--d:0.82s;--s:2px"></i><i style="left:57.2%;top:29.6%;--d:1.37s;--s:2px"></i><i style="left:55.3%;top:11.9%;--d:0.59s;--s:4px"></i><i style="left:14.1%;top:23.7%;--d:1.14s;--s:2px"></i><i style="left:12.7%;top:41.3%;--d:0.26s;--s:2px"></i><i style="left:54.5%;top:7.2%;--d:0.08s;--s:2px"></i><i style="left:49.7%;top:38.6%;--d:1.09s;--s:3px"></i><i style="left:58.0%;top:33.4%;--d:0.42s;--s:2px"></i><i style="left:68.7%;top:19.4%;--d:0.80s;--s:4px"></i><i style="left:49.5%;top:26.0%;--d:0.63s;--s:4px"></i><i style="left:95.1%;top:10.9%;--d:0.59s;--s:3px"></i><i style="left:17.3%;top:35.8%;--d:0.05s;--s:2px"></i><i style="left:74.9%;top:41.4%;--d:1.23s;--s:3px"></i><i style="left:35.0%;top:26.5%;--d:0.70s;--s:3px"></i><i style="left:9.5%;top:9.3%;--d:0.38s;--s:2px"></i><i style="left:8.7%;top:50.0%;--d:0.91s;--s:3px"></i><i style="left:29.8%;top:28.8%;--d:0.94s;--s:2px"></i><i style="left:91.4%;top:26.8%;--d:0.86s;--s:3px"></i><i style="left:8.5%;top:54.5%;--d:0.18s;--s:2px"></i><i style="left:40.4%;top:64.4%;--d:0.70s;--s:2px"></i><i style="left:45.2%;top:39.8%;--d:1.24s;--s:3px"></i><i style="left:84.2%;top:21.7%;--d:0.58s;--s:3px"></i></div><div class="spmid"><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#f5b93a"/></linearGradient></defs><circle r="96" fill="#0c2d6b" opacity=".4"/><circle class="ring" r="118" fill="none" stroke="#fff" stroke-width="14" transform="rotate(-90)"/><circle class="gring" r="136" fill="none" stroke="url(#spg)" stroke-width="2.5" transform="rotate(-90)" pathLength="100"/><g class="comet"><circle cx="0" cy="-136" r="11" fill="#f5d27a" opacity=".25"/><circle cx="0" cy="-136" r="4.5" fill="#fffaf0"/></g><g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M0 -104v16M0 88v16M-104 0h16M88 0h16"/></g><g class="needle"><path d="M70 -70 L19 19 L-19 -19Z" fill="url(#spg)"/><path d="M-70 70 L-19 -19 L19 19Z" fill="#fff"/></g><circle r="12" fill="#0c2d6b"/></svg><div class="spt" data-t="ツギノル">ツギノル<svg class="kira" style="right:-26px;top:-12px;--d:1.25s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg><svg class="kira" style="left:-30px;bottom:-4px;width:18px;height:18px;--d:1.45s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg></div><div class="sps">次の行き先を、すぐ決める</div></div><div class="tapopen">タップして開く</div><div class="bloom" aria-hidden="true"></div><div class="streaks" aria-hidden="true"><i style="--y:42%;--d:0.73s;--w:220px;--a:-10deg"></i><i style="--y:46%;--d:0.76s;--w:130px;--a:-8deg"></i><i style="--y:43%;--d:0.80s;--w:130px;--a:-14deg"></i><i style="--y:41%;--d:0.18s;--w:90px;--a:-8deg"></i><i style="--y:77%;--d:1.25s;--w:130px;--a:-8deg"></i><i style="--y:13%;--d:0.69s;--w:90px;--a:-14deg"></i><i style="--y:25%;--d:0.31s;--w:90px;--a:-10deg"></i><i style="--y:34%;--d:0.77s;--w:130px;--a:-8deg"></i></div><div class="dust" aria-hidden="true"><i style="--x:-26vw;--y:-16vh;--d:0.01s;--s:2px"></i><i style="--x:-4vw;--y:-18vh;--d:1.60s;--s:2px"></i><i style="--x:20vw;--y:-15vh;--d:0.37s;--s:2px"></i><i style="--x:-45vw;--y:5vh;--d:0.17s;--s:2px"></i><i style="--x:33vw;--y:-9vh;--d:1.53s;--s:3px"></i><i style="--x:-48vw;--y:-23vh;--d:1.46s;--s:2px"></i><i style="--x:-12vw;--y:17vh;--d:0.67s;--s:3px"></i><i style="--x:12vw;--y:22vh;--d:0.43s;--s:2px"></i><i style="--x:-18vw;--y:-39vh;--d:0.66s;--s:2px"></i><i style="--x:-35vw;--y:17vh;--d:0.02s;--s:2px"></i><i style="--x:29vw;--y:-26vh;--d:0.89s;--s:2px"></i><i style="--x:1vw;--y:39vh;--d:1.23s;--s:2px"></i><i style="--x:14vw;--y:-31vh;--d:0.67s;--s:2px"></i><i style="--x:-48vw;--y:29vh;--d:1.56s;--s:3px"></i><i style="--x:-19vw;--y:31vh;--d:0.34s;--s:2px"></i><i style="--x:48vw;--y:8vh;--d:0.92s;--s:2px"></i></div><div class="flare" aria-hidden="true"></div><div class="sring" aria-hidden="true"></div><div class="waves"><svg class="w1" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg><svg class="w2" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg></div></div>
 <header>
   <div class="hrow">
     <h1>ツギノル</h1>
@@ -1484,8 +1549,8 @@ function renderOb(dir){
   if(ob.step===0){
     const card=a=>pick(`data-obpick="${a.id}"`,ico("r_"+a.id,"a-"+a.area)+`<span>${wb(short(a))}</span>`,ob.must.has(a.id));
     const bigs=ATTR.filter(a=>isOpen(a)&&isBig(a));const rest=ATTR.filter(a=>isOpen(a)&&!isBig(a));
-    body.innerHTML=`<h2>絶対乗りたいものは？</h2><p>複数選択できます。後から変更できます。</p><div class="obgrid">${bigs.map(card).join("")}</div>`+(ob.all?`<div class="obgrid" style="margin-top:10px">${rest.map(card).join("")}</div>`:`<button class="big-btn sec" type="button" id="obMore" style="margin-top:12px">他も見る</button>`);
-    foot.innerHTML=`<button class="big-btn pri" type="button" id="obNext">${ob.must.size?`次へ（${ob.must.size}つ選択中）`:"選ばずに次へ"}</button>`;
+    body.innerHTML=`<h2>絶対乗りたいものは？</h2><p>複数選択できます。後から変更できます。</p><div class="obgrid">${bigs.map(card).join("")}</div>`+(ob.all?`<div class="obgrid" style="margin-top:10px">${rest.map(card).join("")}</div>`:"");
+    foot.innerHTML=(ob.all?"":`<button class="link obmore" type="button" id="obMore">ほかの乗り物も見る（${rest.length}）</button>`)+`<button class="big-btn pri" type="button" id="obNext">${ob.must.size?`次へ（${ob.must.size}つ選択中）`:"選ばずに次へ"}</button>`; // 「他も見る」は下の固定の所に置き、半分切れないように
   }else if(ob.step===1){
     const pc=parkClose(today());const nm=nowMin();const cur=ob.redo?S.exit:null;
     let opts=[["17:00","17時"],["19:00","19時"]].filter(([v])=>mins(v)<mins(pc));
@@ -1603,13 +1668,26 @@ function splashRun(){const sp=document.getElementById("splash");if(!sp)return;sp
   const quick=S.splashDay===todayKey();S.splashDay=todayKey();
   // 音がオンなら「タップして開く」で待つ（iPhone はタップの後でないと音を鳴らせないため）。音オフ・動きを減らす・試しのときは今まで通り自動で閉じる
   const wait=sndOn()&&!splashNoWait();if(wait)sp.classList.add("wait");
-  let fin=false;const end=()=>{if(fin)return;fin=true;document.removeEventListener("keydown",onKey,true);sp.classList.add("out");setTimeout(()=>{sp.remove();maybeCoach();},quick?260:430);};
-  const open=()=>{if(fin)return;SND.helloed=true;playCue("open");if(wait)buzz([20]);fxLog("tap-open");end();};
+  let fin=false,opening=false,revealing=false;
+  const done=()=>{if(fin)return;fin=true;document.removeEventListener("keydown",onKey,true);sp.remove();if(FX.c)FX.c.style.zIndex="";maybeCoach();};
+  // 羅針盤の中心から円を広げて中の画面を見せる（半透明の重ね合わせは使わない）
+  const reveal=ms=>{if(revealing||fin)return;revealing=true;sp.style.pointerEvents="none";const c=sp.querySelector(".cmp").getBoundingClientRect();const cx=c.left+c.width/2,cy=c.top+c.height/2;
+    const R=Math.hypot(Math.max(cx,innerWidth-cx),Math.max(cy,innerHeight-cy))+20;const ring=sp.querySelector(".sring");const t0=performance.now();
+    const f=t=>{if(fin)return;const k=Math.min(1,(t-t0)/ms);const e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;const r=Math.max(0,e*R);
+      const m=`radial-gradient(circle at ${cx}px ${cy}px, transparent ${r}px, #000 ${r+.5}px)`;sp.style.webkitMaskImage=m;sp.style.maskImage=m;
+      ring.style.width=ring.style.height=(2*r)+"px";ring.style.left=(cx-r)+"px";ring.style.top=(cy-r)+"px";ring.style.opacity=k<.85?1:(1-k)/.15;
+      if(k<1)requestAnimationFrame(f);else done();};requestAnimationFrame(f);};
+  // タップした後の約4秒: 針が回って止まる → 金の光ときらめき → 文字が光る → 円で開く（起動の音に合わせる）
+  const openShow=()=>{opening=true;sp.classList.remove("ready");sp.classList.add("opening");fxLog("open-show");{const c=sp.querySelector(".cmp").getBoundingClientRect();const bl=sp.querySelector(".bloom");bl.style.left=(c.left+c.width/2)+"px";bl.style.top=(c.top+c.height/2)+"px";const fl=sp.querySelector(".flare");fl.style.top=(c.top+c.height/2)+"px";}
+    setTimeout(()=>reveal(850),3150);};
+  const open=()=>{if(fin)return;if(opening){reveal(380);return;} // 演出中にもう一度タップしたら飛ばす
+    if(!wait){if(sndOn()){SND.helloed=true;playCue("open");}reveal(quick?380:520);return;}
+    SND.helloed=true;playCue("open");buzz([20]);fxLog("tap-open");openShow();};
   const onKey=e=>{if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();open();}};
   sp.addEventListener("click",open);document.addEventListener("keydown",onKey,true);
   // 最初の描画（予定の計算）が終わってから動かす。遅いスマホでも動きの途中で止まらないように
   setTimeout(()=>{if(fin)return;sp.classList.add(quick?"quick":"full");fxLog(quick?"splash-quick":"splash");window.__splashAt=performance.now();
-    setTimeout(()=>{if(fin)return;if(wait){sp.classList.add("ready");fxLog("splash-wait");}else end();},quick?420:2000);},0);}
+    setTimeout(()=>{if(fin||opening||revealing)return;if(wait){sp.classList.add("ready");fxLog("splash-wait");}else reveal(quick?380:520);},quick?420:2000);},0);}
 // 試しのときに起動画面で待たない: 動作確認用の設定で選べる（既定は ?debug=1 か仮の時刻のとき待たない）
 const splashNoWait=()=>!!window.__TG_NOWAIT||(S.splashNoWait!=null?!!S.splashNoWait:(/[?&]debug=1/.test(location.search)||!!S.timeOverride));
 
