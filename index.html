@@ -755,6 +755,124 @@ html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-s
 .pvhead .ic{width:28px;height:28px}
 #planList .step.pv .t{display:flex;align-items:flex-start;justify-content:flex-end;font-size:15px;color:var(--navy)}
 #planList .step.pv .t::after{content:none!important}
+/* ==== 22. 予定を主役に ==== */
+#planBanner{display:grid;gap:6px;margin:0 0 10px}
+#planBanner .pbnote{display:flex;align-items:center;gap:6px;margin:0;font-size:14px;font-weight:700;color:var(--sea-fg)}
+#planBanner .pbnote .bi{width:18px;height:18px;flex:none}
+#planBanner .pbrow{display:flex;align-items:center;gap:10px;background:var(--sea);color:var(--sea-fg);border-radius:14px;padding:10px 12px;font-size:14px;font-weight:700}
+#planBanner .pbrow>span:not(.ic){flex:1;min-width:0}
+#planBanner .pbrow .ic{width:28px;height:28px}
+#planBanner .pbin{background:var(--panel);color:var(--navy);box-shadow:var(--shadow)}
+#planBanner .pbin .sm{flex:none;min-height:40px}
+.phcard{padding:12px 14px}
+.phtop{display:grid;grid-template-columns:auto auto 1fr;gap:4px 18px;align-items:end}
+.phtop .phn{font-size:28px;line-height:1.1;color:var(--navy)}
+.phtop .phn small{font-size:14px;margin-left:2px;color:var(--muted)}
+.phsub{font-size:13px;color:var(--muted);text-align:right;line-height:1.3}
+.phsub b{display:block;font-size:18px;color:var(--navy)}
+.phbtns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}
+.phbtns .big-btn{min-height:48px;font-size:17px}
+.phbtns .ghost{min-height:48px;white-space:nowrap}
+#planNote{padding:8px 12px;font-size:14px}
+#planBanner .pbrow{padding:8px 12px}
+.addlist{display:grid;gap:8px}
+.addr{display:flex;align-items:center;gap:10px;width:100%;border:0;background:var(--bg);border-radius:14px;padding:10px 12px;text-align:left;min-height:56px}
+.addr .nm{flex:1;min-width:0;font-weight:800;color:var(--navy);font-size:15px}
+.addr .nm small{display:block;font-size:13px;font-weight:600;color:var(--muted)}
+.addr .aw{flex:none;text-align:right;color:var(--navy);line-height:1.1}
+.addr .aw b{font-size:20px}.addr .aw small{font-size:12px;color:var(--muted);margin:0 1px}
+.addr .plus{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:800;font-size:18px}
+#planList .step{position:relative}
+#planList .step{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#planList .step .stepbody{padding-right:40px}
+#planList .rowx{position:absolute;right:4px;top:4px;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:var(--muted);font-size:20px;line-height:1;z-index:1}
+#planList .rowx:active{background:var(--bg)}
+#planList .step.lift{z-index:5;opacity:.96}
+#planList .step.lift .stepbody{box-shadow:0 10px 28px rgba(20,40,90,.25),0 0 0 2px var(--accent);transform:scale(1.02)}
+#planList .dropline{height:4px;border-radius:2px;background:var(--accent);margin:-2px 0 -2px 100px;pointer-events:none}
+.tick{display:inline-block;animation:tick .6s var(--ease)}
+@keyframes tick{0%{transform:scale(1.25);color:var(--accent)}100%{transform:none}}
+@media (max-width:359px){html .phtop{grid-template-columns:auto 1fr}html .phsub{grid-column:1/-1;text-align:left}html .phsub b{display:inline;margin-left:6px;font-size:15px}html .phbtns{grid-template-columns:1fr}html .phbtns .ghost{min-height:40px}}
+/* ==== 23. 予定の行を詰める・つまみ・直し方 ==== */
+#planList .step{margin-bottom:6px}
+#planList .step .stepbody{padding:7px 62px 7px 12px;min-height:0}
+#planList .step .txt{font-size:15px;line-height:1.3}
+#planList .step .meta{font-size:13px;line-height:1.35;gap:0 8px;margin-top:2px}
+#planList .step .meta>span{white-space:nowrap}
+#planList .step .meta .tag{font-size:12px;padding:1px 6px}
+#planList .step .t{min-height:30px;padding-top:4px;font-size:15px}
+#planList .step .rail .ic{width:30px;height:30px}
+#planList .rowx{top:50%;transform:translateY(-50%);right:30px;width:32px;height:40px;font-size:18px}
+#planList .grip{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:24px;height:40px;display:grid;align-content:center;justify-items:center;gap:3px;touch-action:none;cursor:grab;z-index:1}
+#planList .grip i{display:block;width:16px;height:2.5px;border-radius:2px;background:var(--muted);opacity:.7}
+#planList .step.lift{z-index:6;transition:none}
+#planList.dragging .step:not(.lift){transition:transform .18s var(--ease)}
+#planList .step.lift .stepbody{box-shadow:0 12px 30px rgba(20,40,90,.28),0 0 0 2px var(--accent)}
+#planList .fixrow{grid-column:3/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0 2px;font-size:13px;color:var(--bad);font-weight:700}
+#planList .fixrow .sm{min-height:36px;padding:4px 10px;font-size:13px;border:1px solid color-mix(in srgb,var(--bad) 40%,transparent);background:var(--panel);color:var(--bad)}
+#planList .step.warnfit .stepbody{background:color-mix(in srgb,var(--bad) 7%,var(--panel))}
+.addrw{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center}
+.addrw .addnext{min-height:56px;padding:4px 10px;font-size:14px}
+#tab-plan h2{margin:12px 0 6px}
+#planList .tl-now{min-height:28px}
+#planList .step .meta .ar{display:inline-flex;align-items:center}
+#planList .step .meta .adot{margin-right:3px}
+.phcard{padding:10px 14px}
+.phtop .phn{font-size:26px}
+.phbtns{margin-top:8px}
+.phbtns .big-btn,.phbtns .ghost{min-height:44px}
+#planBanner .pbin{padding:6px 10px}
+#planBanner .pbin .sm{min-height:36px}
+#planNote{padding:6px 12px;margin-bottom:4px}
+#planNote .pbn{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--sea-fg)}
+#planNote .pbn .bi{width:16px;height:16px;flex:none}
+#planList .step{grid-template-columns:46px 30px minmax(0,1fr);gap:0 6px;margin-bottom:4px}
+#planList .tl{grid-template-columns:46px 30px minmax(0,1fr);gap:0 6px}
+#planList .step .t{font-size:14px;padding-top:6px}
+#planList .step .stepbody{padding:6px 52px 6px 10px}
+#planList .rowx{right:24px;width:28px}
+#planList .grip{right:2px;width:22px}
+#tab-plan h2{margin:8px 0 2px;font-size:16px}
+#planList .tl-now{min-height:24px;margin-bottom:2px}
+#planNote .pbn+.help{width:32px;height:32px;margin-left:auto;float:right;margin-top:-4px}
+#planNote{margin-bottom:8px}
+#planList .step,#planList .tl{grid-template-columns:52px 30px minmax(0,1fr)}
+#planList .step.open .t{font-size:14px;padding:4px 0}
+#planList .step .meta{font-size:14px;line-height:1.35}
+#planList .step .meta>span.tag{white-space:normal;max-width:100%}
+#planList .step .meta{min-width:0;overflow-wrap:anywhere}
+#planList .tl-now{display:none}
+#planBanner{margin-bottom:6px}
+#planList .step .stepbody{padding:5px 50px 5px 10px}
+#planList .step .txt{line-height:1.25}
+#planList .step .meta{line-height:1.3;margin-top:1px}
+#planList .rowx{right:22px;width:28px}
+#planList .grip{width:20px}
+/* ==== 25. 予定の仕上げ2 ==== */
+.phlate{font-size:13px;font-weight:700;color:var(--bad);margin-top:2px}
+#planNote .pbline{display:flex;align-items:center;flex-wrap:wrap;gap:2px 10px}
+#planNote .pbline .fee{color:var(--fg);font-size:14px}
+#planNote .pbline .help{margin-left:auto;width:30px;height:30px;float:none;margin-top:0}
+.planhead.compact .phtop,.planhead.compact .phlate{display:none}
+.planhead.compact .phbtns{margin-top:0}
+.planhead.compact .phbtns .big-btn,.planhead.compact .phbtns .ghost{min-height:40px;font-size:15px}
+.planhead.compact .phmini{display:block;margin-bottom:6px;padding:6px 12px;font-size:14px}
+#planList .step.lift{z-index:8}
+#planList .step.lift .stepbody{background:var(--panel);transform:rotate(-.6deg)}
+#planList.dragging .step:not(.lift) .stepbody{opacity:.92}
+#planList .step .stepbody{padding-right:34px}
+#planList .rowx{right:2px;top:4px;transform:none;width:30px;height:30px;font-size:17px}
+#planList .grip{right:5px;top:auto;bottom:4px;transform:none;height:26px;width:24px}
+#planBanner .pbin{padding:4px 8px}
+#planBanner .pbin .sm{min-height:34px}
+#planList .step,#planList .tl{grid-template-columns:46px 26px minmax(0,1fr);gap:0 6px}
+#planList .step .rail .ic{width:26px;height:26px}
+#planList .step .meta{gap:0 6px}
+.phin{text-align:right;font-size:13px;color:var(--muted);line-height:1.2}
+.phin .sm{display:block;margin:2px 0 0 auto;min-height:40px;padding:6px 14px;font-size:15px}
+@media (max-width:359px){html .phin{grid-column:1/-1;text-align:left;display:flex;align-items:center;gap:8px}html .phin .sm{margin:0}}
+#planList.dragging>*,#planList .step.lift{animation:none!important} /* 現れる動きの「最後の形」が指の動きを上書きしないように */
+#planList .step.open .t{font-size:13px;letter-spacing:-.02em;padding:4px 0}
 /* 演出を少なく */
 .fxless *,.fxless *::before,.fxless *::after{animation:none!important;transition:none!important}
 .fxless .big-btn.pri::after{display:none}
@@ -762,7 +880,7 @@ html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-s
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
 </style>
 
-<div id="splash" aria-hidden="true"><div class="glow"></div><div class="stars"><i style="left:33.4%;top:13.1%;--d:0.91s;--s:2px"></i><i style="left:80.2%;top:9.3%;--d:0.82s;--s:4px"></i><i style="left:23.2%;top:8.8%;--d:0.59s;--s:2px"></i><i style="left:11.5%;top:31.4%;--d:1.16s;--s:2px"></i><i style="left:92.1%;top:45.3%;--d:0.82s;--s:2px"></i><i style="left:57.2%;top:29.6%;--d:1.37s;--s:2px"></i><i style="left:55.3%;top:11.9%;--d:0.59s;--s:4px"></i><i style="left:14.1%;top:23.7%;--d:1.14s;--s:2px"></i><i style="left:12.7%;top:41.3%;--d:0.26s;--s:2px"></i><i style="left:54.5%;top:7.2%;--d:0.08s;--s:2px"></i><i style="left:49.7%;top:38.6%;--d:1.09s;--s:3px"></i><i style="left:58.0%;top:33.4%;--d:0.42s;--s:2px"></i><i style="left:68.7%;top:19.4%;--d:0.80s;--s:4px"></i><i style="left:49.5%;top:26.0%;--d:0.63s;--s:4px"></i><i style="left:95.1%;top:10.9%;--d:0.59s;--s:3px"></i><i style="left:17.3%;top:35.8%;--d:0.05s;--s:2px"></i><i style="left:74.9%;top:41.4%;--d:1.23s;--s:3px"></i><i style="left:35.0%;top:26.5%;--d:0.70s;--s:3px"></i><i style="left:9.5%;top:9.3%;--d:0.38s;--s:2px"></i><i style="left:8.7%;top:50.0%;--d:0.91s;--s:3px"></i><i style="left:29.8%;top:28.8%;--d:0.94s;--s:2px"></i><i style="left:91.4%;top:26.8%;--d:0.86s;--s:3px"></i><i style="left:8.5%;top:54.5%;--d:0.18s;--s:2px"></i><i style="left:40.4%;top:64.4%;--d:0.70s;--s:2px"></i><i style="left:45.2%;top:39.8%;--d:1.24s;--s:3px"></i><i style="left:84.2%;top:21.7%;--d:0.58s;--s:3px"></i></div><div class="spmid"><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#f5b93a"/></linearGradient></defs><circle r="96" fill="#0c2d6b" opacity=".4"/><circle class="ring" r="118" fill="none" stroke="#fff" stroke-width="14" transform="rotate(-90)"/><circle class="gring" r="136" fill="none" stroke="url(#spg)" stroke-width="2.5" transform="rotate(-90)" pathLength="100"/><g class="comet"><circle cx="0" cy="-136" r="11" fill="#f5d27a" opacity=".25"/><circle cx="0" cy="-136" r="4.5" fill="#fffaf0"/></g><g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M0 -104v16M0 88v16M-104 0h16M88 0h16"/></g><g class="needle"><path d="M70 -70 L19 19 L-19 -19Z" fill="url(#spg)"/><path d="M-70 70 L-19 -19 L19 19Z" fill="#fff"/></g><circle r="12" fill="#0c2d6b"/></svg><div class="spt" data-t="ツギノル">ツギノル<svg class="kira" style="right:-26px;top:-12px;--d:1.25s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg><svg class="kira" style="left:-30px;bottom:-4px;width:18px;height:18px;--d:1.45s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg></div><div class="sps">次の行き先を、すぐ決める</div><div class="reward" aria-hidden="true"></div></div><div class="tapopen">タップして開く</div><div class="bloom" aria-hidden="true"></div><div class="streaks" aria-hidden="true"><i style="--y:42%;--d:0.73s;--w:220px;--a:-10deg"></i><i style="--y:46%;--d:0.76s;--w:130px;--a:-8deg"></i><i style="--y:43%;--d:0.80s;--w:130px;--a:-14deg"></i><i style="--y:41%;--d:0.18s;--w:90px;--a:-8deg"></i><i style="--y:77%;--d:1.25s;--w:130px;--a:-8deg"></i><i style="--y:13%;--d:0.69s;--w:90px;--a:-14deg"></i><i style="--y:25%;--d:0.31s;--w:90px;--a:-10deg"></i><i style="--y:34%;--d:0.77s;--w:130px;--a:-8deg"></i></div><div class="dust" aria-hidden="true"><i style="--x:51vw;--y:45vh;--d:1.61s;--s:2px"></i><i style="--x:-58vw;--y:-19vh;--d:0.68s;--s:3px"></i><i style="--x:-44vw;--y:-31vh;--d:0.80s;--s:2px"></i><i style="--x:14vw;--y:40vh;--d:0.19s;--s:3px"></i><i style="--x:-9vw;--y:1vh;--d:1.32s;--s:3px"></i><i style="--x:32vw;--y:-29vh;--d:0.06s;--s:3px"></i><i style="--x:19vw;--y:12vh;--d:1.75s;--s:3px"></i><i style="--x:8vw;--y:36vh;--d:1.74s;--s:3px"></i><i style="--x:19vw;--y:-19vh;--d:0.15s;--s:3px"></i><i style="--x:-39vw;--y:-2vh;--d:1.42s;--s:2px"></i><i style="--x:-38vw;--y:-32vh;--d:0.58s;--s:4px"></i><i style="--x:-37vw;--y:-39vh;--d:0.18s;--s:2px"></i><i style="--x:8vw;--y:44vh;--d:0.51s;--s:4px"></i><i style="--x:-20vw;--y:-13vh;--d:0.52s;--s:3px"></i><i style="--x:47vw;--y:-5vh;--d:0.39s;--s:2px"></i><i style="--x:-47vw;--y:28vh;--d:1.27s;--s:3px"></i><i style="--x:-31vw;--y:5vh;--d:1.65s;--s:4px"></i><i style="--x:-48vw;--y:-12vh;--d:0.81s;--s:2px"></i><i style="--x:-53vw;--y:-8vh;--d:0.04s;--s:2px"></i><i style="--x:22vw;--y:47vh;--d:1.45s;--s:2px"></i><i style="--x:5vw;--y:49vh;--d:1.35s;--s:3px"></i><i style="--x:-58vw;--y:29vh;--d:0.88s;--s:2px"></i><i style="--x:-51vw;--y:-3vh;--d:0.35s;--s:3px"></i><i style="--x:54vw;--y:-28vh;--d:0.19s;--s:4px"></i><i style="--x:18vw;--y:19vh;--d:1.00s;--s:2px"></i><i style="--x:-30vw;--y:-8vh;--d:1.62s;--s:3px"></i><i style="--x:31vw;--y:16vh;--d:0.75s;--s:2px"></i><i style="--x:47vw;--y:19vh;--d:0.74s;--s:2px"></i></div><div class="ripples" aria-hidden="true"><i></i><i></i><i></i></div><div class="flare" aria-hidden="true"></div><div class="sring" aria-hidden="true"></div><div class="waves"><svg class="w1" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg><svg class="w2" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg></div></div>
+<div id="splash" aria-hidden="true"><div class="glow"></div><div class="stars"><i style="left:33.4%;top:13.1%;--d:0.91s;--s:2px"></i><i style="left:80.2%;top:9.3%;--d:0.82s;--s:4px"></i><i style="left:23.2%;top:8.8%;--d:0.59s;--s:2px"></i><i style="left:11.5%;top:31.4%;--d:1.16s;--s:2px"></i><i style="left:92.1%;top:45.3%;--d:0.82s;--s:2px"></i><i style="left:57.2%;top:29.6%;--d:1.37s;--s:2px"></i><i style="left:55.3%;top:11.9%;--d:0.59s;--s:4px"></i><i style="left:14.1%;top:23.7%;--d:1.14s;--s:2px"></i><i style="left:12.7%;top:41.3%;--d:0.26s;--s:2px"></i><i style="left:54.5%;top:7.2%;--d:0.08s;--s:2px"></i><i style="left:49.7%;top:38.6%;--d:1.09s;--s:3px"></i><i style="left:58.0%;top:33.4%;--d:0.42s;--s:2px"></i><i style="left:68.7%;top:19.4%;--d:0.80s;--s:4px"></i><i style="left:49.5%;top:26.0%;--d:0.63s;--s:4px"></i><i style="left:95.1%;top:10.9%;--d:0.59s;--s:3px"></i><i style="left:17.3%;top:35.8%;--d:0.05s;--s:2px"></i><i style="left:74.9%;top:41.4%;--d:1.23s;--s:3px"></i><i style="left:35.0%;top:26.5%;--d:0.70s;--s:3px"></i><i style="left:9.5%;top:9.3%;--d:0.38s;--s:2px"></i><i style="left:8.7%;top:50.0%;--d:0.91s;--s:3px"></i><i style="left:29.8%;top:28.8%;--d:0.94s;--s:2px"></i><i style="left:91.4%;top:26.8%;--d:0.86s;--s:3px"></i><i style="left:8.5%;top:54.5%;--d:0.18s;--s:2px"></i><i style="left:40.4%;top:64.4%;--d:0.70s;--s:2px"></i><i style="left:45.2%;top:39.8%;--d:1.24s;--s:3px"></i><i style="left:84.2%;top:21.7%;--d:0.58s;--s:3px"></i></div><div class="spmid"><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#f5b93a"/></linearGradient></defs><circle r="96" fill="#0c2d6b" opacity=".4"/><circle class="ring" r="118" fill="none" stroke="#fff" stroke-width="14" transform="rotate(-90)"/><circle class="gring" r="136" fill="none" stroke="url(#spg)" stroke-width="2.5" transform="rotate(-90)" pathLength="100"/><g class="comet"><circle cx="0" cy="-136" r="11" fill="#f5d27a" opacity=".25"/><circle cx="0" cy="-136" r="4.5" fill="#fffaf0"/></g><g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M0 -104v16M0 88v16M-104 0h16M88 0h16"/></g><g class="needle"><path d="M70 -70 L19 19 L-19 -19Z" fill="url(#spg)"/><path d="M-70 70 L-19 -19 L19 19Z" fill="#fff"/></g><circle r="12" fill="#0c2d6b"/></svg><div class="spt" data-t="ツギノル">ツギノル<svg class="kira" style="right:-26px;top:-12px;--d:1.25s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg><svg class="kira" style="left:-30px;bottom:-4px;width:18px;height:18px;--d:1.45s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg></div><div class="sps">今日の順番を、自分で組む</div><div class="reward" aria-hidden="true"></div></div><div class="tapopen">タップして開く</div><div class="bloom" aria-hidden="true"></div><div class="streaks" aria-hidden="true"><i style="--y:42%;--d:0.73s;--w:220px;--a:-10deg"></i><i style="--y:46%;--d:0.76s;--w:130px;--a:-8deg"></i><i style="--y:43%;--d:0.80s;--w:130px;--a:-14deg"></i><i style="--y:41%;--d:0.18s;--w:90px;--a:-8deg"></i><i style="--y:77%;--d:1.25s;--w:130px;--a:-8deg"></i><i style="--y:13%;--d:0.69s;--w:90px;--a:-14deg"></i><i style="--y:25%;--d:0.31s;--w:90px;--a:-10deg"></i><i style="--y:34%;--d:0.77s;--w:130px;--a:-8deg"></i></div><div class="dust" aria-hidden="true"><i style="--x:51vw;--y:45vh;--d:1.61s;--s:2px"></i><i style="--x:-58vw;--y:-19vh;--d:0.68s;--s:3px"></i><i style="--x:-44vw;--y:-31vh;--d:0.80s;--s:2px"></i><i style="--x:14vw;--y:40vh;--d:0.19s;--s:3px"></i><i style="--x:-9vw;--y:1vh;--d:1.32s;--s:3px"></i><i style="--x:32vw;--y:-29vh;--d:0.06s;--s:3px"></i><i style="--x:19vw;--y:12vh;--d:1.75s;--s:3px"></i><i style="--x:8vw;--y:36vh;--d:1.74s;--s:3px"></i><i style="--x:19vw;--y:-19vh;--d:0.15s;--s:3px"></i><i style="--x:-39vw;--y:-2vh;--d:1.42s;--s:2px"></i><i style="--x:-38vw;--y:-32vh;--d:0.58s;--s:4px"></i><i style="--x:-37vw;--y:-39vh;--d:0.18s;--s:2px"></i><i style="--x:8vw;--y:44vh;--d:0.51s;--s:4px"></i><i style="--x:-20vw;--y:-13vh;--d:0.52s;--s:3px"></i><i style="--x:47vw;--y:-5vh;--d:0.39s;--s:2px"></i><i style="--x:-47vw;--y:28vh;--d:1.27s;--s:3px"></i><i style="--x:-31vw;--y:5vh;--d:1.65s;--s:4px"></i><i style="--x:-48vw;--y:-12vh;--d:0.81s;--s:2px"></i><i style="--x:-53vw;--y:-8vh;--d:0.04s;--s:2px"></i><i style="--x:22vw;--y:47vh;--d:1.45s;--s:2px"></i><i style="--x:5vw;--y:49vh;--d:1.35s;--s:3px"></i><i style="--x:-58vw;--y:29vh;--d:0.88s;--s:2px"></i><i style="--x:-51vw;--y:-3vh;--d:0.35s;--s:3px"></i><i style="--x:54vw;--y:-28vh;--d:0.19s;--s:4px"></i><i style="--x:18vw;--y:19vh;--d:1.00s;--s:2px"></i><i style="--x:-30vw;--y:-8vh;--d:1.62s;--s:3px"></i><i style="--x:31vw;--y:16vh;--d:0.75s;--s:2px"></i><i style="--x:47vw;--y:19vh;--d:0.74s;--s:2px"></i></div><div class="ripples" aria-hidden="true"><i></i><i></i><i></i></div><div class="flare" aria-hidden="true"></div><div class="sring" aria-hidden="true"></div><div class="waves"><svg class="w1" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg><svg class="w2" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg></div></div>
 <header>
   <div class="hrow">
     <h1>ツギノル</h1>
@@ -822,17 +940,15 @@ html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-s
   </section>
 
   <section id="tab-plan" hidden>
-    <div class="planhead"><div class="phmini" aria-hidden="true"></div><div class="card">
-      <div class="grid2">
-        <div><div class="eyebrow">まだ乗っていない</div><div class="num" style="font-size:28px"><span id="planLeft"></span></div></div>
-        <div><div class="eyebrow">帰る時間</div><div class="num" style="font-size:28px" id="planExit"></div></div>
+    <div id="planBanner"></div>
+    <div class="planhead"><div class="phmini" aria-hidden="true"></div><div class="card phcard">
+      <div class="phtop">
+        <div><div class="eyebrow">帰る時間</div><div class="num phn" id="planExit"></div></div>
+        <div><div class="eyebrow">今日の予定</div><div class="num phn"><span id="planCan"></span><small>か所</small></div><div class="phlate" id="planLate" hidden></div></div>
+        <div class="phsub" id="phSub">まだ乗っていない<b class="num" id="planLeft"></b></div>
+        <div class="phin" id="phIn" hidden><span>入園したら</span><button class="sm on" type="button" data-enter="1">入園した</button></div>
       </div>
-      <div class="btns" style="margin-top:10px">
-        <button class="ghost" type="button" id="addItem">＋ 予定を追加</button>
-        <button class="ghost" type="button" id="replan">組み直す</button>
-        <button class="ghost" type="button" id="sendPlan">予定を送る</button>
-        <button class="ghost" type="button" id="unlockAll" hidden>手で動かした分を元に戻す</button>
-      </div>
+      <div class="phbtns"><button class="big-btn pri" type="button" id="addRide">＋ 乗り物を足す</button><button class="ghost" type="button" id="replan">おすすめに戻す</button></div>
     </div></div>
     <div class="card form" id="addForm" hidden style="margin:0 0 10px">
       <label>種類<select id="addKind"><option value="ride">乗り物</option><option value="meal">食事</option><option value="rest">休憩</option><option value="show">ショー</option><option value="note">メモ</option></select></label>
@@ -845,9 +961,14 @@ html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-s
       <div class="full" style="display:grid;grid-template-columns:1fr auto;gap:8px"><button class="primary" type="button" id="addGo" style="width:100%;min-height:52px">追加する</button><button class="ghost" type="button" id="addCancel" style="min-height:52px">やめる</button></div>
     </div>
     <div class="card note" id="planNote"></div>
-    <h2><span id="planTtl">今日の予定</span><button class="help" type="button" data-help="plan" aria-label="使い方">?</button></h2>
+    <h2 id="planH2"><span id="planTtl">今日の予定</span><button class="help" type="button" data-help="plan" aria-label="使い方">?</button></h2>
     <div class="helpbox" id="help-plan" hidden><p>行をタップすると「時刻を変える」「時刻を動かさない」「前へ」「後へ」「消す」などのボタンが出ます。</p><p>「時刻を動かさない」にした行は、組み直しても動きません。消したものは「元に戻す」で戻せます。</p><p>乗った・場所が変わった・待ち時間が変わったとき、自動で組み直します（10分ごとにも）。</p><p>有料パスの時間は メニュー → 有料パス で直せます。</p></div>
     <div class="list" id="planList"></div>
+    <div class="btns" id="planTools" style="margin-top:12px">
+      <button class="ghost" type="button" id="addItem">＋ 食事・休憩など</button>
+      <button class="ghost" type="button" id="sendPlan">予定を送る</button>
+      <button class="ghost" type="button" id="unlockAll" hidden>手で動かした分を元に戻す</button>
+    </div>
     <h2 id="planSkipHead">今日の予定に入らなかったもの</h2>
     <div class="list" id="planSkip"></div>
   </section>
@@ -963,8 +1084,8 @@ html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-s
 <div class="toast" id="toast" role="status"></div>
 <div id="actbar" hidden></div>
 <nav>
-  <button type="button" data-tab="near" aria-selected="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>今</button>
   <button type="button" data-tab="plan"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>予定</button>
+  <button type="button" data-tab="near" aria-selected="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>今</button>
   <button type="button" data-tab="menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>メニュー</button>
 </nav>
 <div class="sheet" id="sheet" hidden><div class="sheetin" id="sheetIn" role="dialog" aria-modal="true"></div></div>
@@ -977,11 +1098,11 @@ html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-s
   <div class="gbody">
     <div class="gtop"><h2 id="guideH">使い方は3つだけ</h2></div>
     <ol>
-      <li><span class="gi g1" aria-hidden="true"><b>1</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">入園したら、行き先へ</span><span class="gs">「入園した」を押すと出ます</span></span></li>
-      <li><span class="gi g2" aria-hidden="true"><b>2</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">並んで乗る</span><span class="gs">待ち時間の目安つき</span></span></li>
+      <li><span class="gi g1" aria-hidden="true"><b>1</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">予定で順番を組む</span><span class="gs">足す・消す・長押しで動かす</span></span></li>
+      <li><span class="gi g2" aria-hidden="true"><b>2</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">入園したら押す</span><span class="gs">「入園した」で行き先が出る</span></span></li>
       <li><span class="gi g3" aria-hidden="true"><b>3</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">乗ったら「乗った」</span><span class="gs">次の行き先が自動で出る</span></span></li>
     </ol>
-    <p class="gnote"><span>入園前は「予定」で</span><span>行く日の流れを確認できます</span></p>
+    <p class="gnote"><span>順番と時刻は、変えるたびに</span><span>その場で出し直します</span></p>
   </div>
   <div class="gfoot"><button class="big-btn pri" type="button" id="guideGo">はじめる</button></div>
 </div>
@@ -1587,10 +1708,62 @@ function planFits(){ // 前の行の終了 > 次の開始 / 購入が乗車よ�
 }
 // DPAを登録・変更したらプランを組み直す
 let replanT=null;
-function replanAfterDpa(){if(!planToday().length)return false;clearTimeout(replanT);replanT=setTimeout(()=>{buildPlan();renderAll();},150);return true;}
+function replanAfterDpa(){if(!planToday().length)return false;S.myPlan=null;clearTimeout(replanT);replanT=setTimeout(()=>{buildPlan();renderAll();},150);return true;}
 // 自動の組み直し: 乗った・エリア変更・待ち時間の更新のとき、または前回から10分たったとき。入力中は保留する
 const hasPlan=()=>!!S.planBuilt&&S.planDay===todayKey();
-function rebuild(){if(!hasPlan())return false;buildPlan();return true;}
+function rebuild(){if(!hasPlan())return false;planBuild();return true;}
+// 自分で組んだ日は、自動の作り直しでも順番を崩さない（時刻だけ出し直す）。おすすめのまま（myPlan なし）なら今まで通り buildPlan
+function mine(){return S.myPlan===todayKey()&&hasPlan();}
+function planBuild(){if(mine()){retime();return;}buildPlan();}
+const AS={MH:"ハーバー",AWF:"アメリカン",PD:"ポート",LRD:"ロストリバー",AC:"アラビアン",ML:"マーメイド",MI:"ミステリアス",FS:"ファンタジー"}; // 予定の行で使う短い場所名（表示だけ）
+// 組んだ順番のまま、歩き＋待ち（estWait）＋乗る時間を足して時刻を出し直す（見せ方の計算。おすすめを作る buildPlan は使わない）
+function retime(){const plan=planToday();if(!plan.length)return;const nm=nowMin();let cur=Math.max(nm,planStart());let area=S.area;
+  const isDone=p=>{const a=p.attr?byId[p.attr]:null;return (p.k==="ride"&&a&&ridden(a.id))||(p.k==="meal"&&ate(mealKind(p)));};
+  const isFixed=p=>!!(p.inq||p.lock||p.dpa||p.k==="show");
+  const fixed=plan.filter(p=>p.k!=="note"&&p.k!=="buy"&&isFixed(p)&&!isDone(p)).sort((x,y)=>x.t-y.t);const used=new Set();
+  const passFixed=q=>{used.add(q.id);cur=Math.max(cur,endOf(q));area=endArea(q)||area;}; // 時刻が決まっている行（有料パス・固定・ショー・並び中）は、その時刻のまま、流れがその前後をよける
+  for(const p of plan){if(p.k==="note"||p.k==="buy")continue;const a=p.attr?byId[p.attr]:null;
+    if(isDone(p)||(!p.inq&&!isFixed(p)&&endOf(p)<=nm&&p.t<cur-1)){area=endArea(p)||area;continue;}
+    if(isFixed(p)){if(!used.has(p.id))passFixed(p);continue;}
+    for(;;){const to=areaOf(p);const wk=to&&area?walk(area,to):0;const t=cur+wk;const w=p.k==="ride"&&a?estWait(a,t):(p.w||0);const end=t+w+(p.dur||0);
+      const nx=fixed.find(q=>!used.has(q.id)&&q.t<end+(areaOf(q)&&to?walk(to,areaOf(q)):0)&&endOf(q)>cur);
+      if(nx&&nx.t>=cur-1){passFixed(nx);continue;}
+      p.t=t;if(wk)p.walk=wk;else delete p.walk;if(p.k==="ride"&&a)p.w=w;delete p.w0;cur=endOf(p);area=endArea(p)||area;break;}}
+  S.plan.sort((x,y)=>x.t-y.t||(x.k==="buy"?-1:(y.k==="buy"?1:0)));S.builtAt=nowMin();}
+const planTimes=()=>Object.fromEntries(planToday().map(p=>[p.id,p.t]));
+function flashChanged(before,extra){const ids=planToday().filter(p=>before[p.id]!==p.t).map(p=>p.id).concat(extra||[]);TICK=new Set(ids);flashRows(ids);setTimeout(()=>{TICK=new Set();},1300);}
+let TICK=new Set(),PBN="",PMID=null;
+// 並べ替え（行 from を、並びの to 番目へ）。動かした行は固定扱い（lock）
+function moveTo(from,to,lockIt){const plan=planToday();const me=plan[from];if(!me||to==null||from===to)return false;
+  if(me.k==="note"||me.k==="buy"||(me.dpa&&!me.prov)){toast(me.k==="buy"?"買う時刻は、時刻をタップして直せます":(me.k==="note"?"メモは動かせません":"有料パスの時間は動かせません（メニュー → 有料パス で直せます）"));return false;}
+  const snap=JSON.stringify(S);const before=planTimes();plan.splice(from,1);plan.splice(Math.max(0,Math.min(to,plan.length)),0,me);
+  S.myPlan=todayKey();me.lock=false;delete me.inq;retime();if(lockIt)me.lock=true;save();renderAll();flashChanged(before,[me.id]);
+  toast(`${planLabel(me)}を${fromMin(me.t)}に動かしました`,"元に戻す",()=>restore(snap));return true;}
+// 乗り物を足す（予定の最後に1タップで）
+function tailOf(){const plan=planToday().filter(p=>p.k!=="note"&&p.k!=="buy");const nm=nowMin();let t=Math.max(nm,planStart()),area=S.area;plan.forEach(p=>{if(endOf(p)>t){t=endOf(p);area=endArea(p)||area;}});return{t,area};}
+// 足す位置: 帰る時間に収まる中で、待ち＋歩きが一番少なく済む所（写しで試して決める。S は元に戻す）
+function firstPend(){const plan=planToday();const nm=nowMin();let k=0;plan.forEach((p,i)=>{const a=p.attr?byId[p.attr]:null;if((p.k==="ride"&&a&&ridden(a.id))||(p.inq)||(endOf(p)<=nm&&p.k!=="buy"))k=i+1;});return k;}
+function lateCount(){const w=planFits();return planToday().filter(p=>w[p.id]).length;} // 赤い行の数（帰る時間を過ぎる・重なる）
+function bestSpot(id){const a=byId[id];const snap=JSON.stringify(S);const n=planToday().length;let best=null;
+  try{for(let k=firstPend();k<=n;k++){S=Object.assign(DEF(),JSON.parse(snap));const plan=planToday();
+      plan.splice(k,0,{id:"_try",k:"ride",attr:id,text:a.name,t:24*60,dur:a.dur,w:0});retime();
+      const late=lateCount();const me=planToday().find(x=>x.id==="_try");const meLate=me&&planFits()["_try"]==="退園に間に合わない";const cost=planToday().filter(p=>p.k==="ride"&&p.attr&&!ridden(p.attr)&&!p.dpa&&p.t>=nowMin()).reduce((s,p)=>s+(p.w||0)+(p.walk||0),0);const end=Math.max(...planToday().map(endOf));
+      const sc=late*100000+(meLate?50000:0)+cost*10+end/100;if(!best||sc<best.sc)best={k,sc,late};}} // 足した乗り物そのものは帰る時間に収める
+  finally{S=Object.assign(DEF(),JSON.parse(snap));}
+  return best||{k:n,late:0};}
+function openAddRide(){const plan=planToday();const inPlan=new Set(plan.filter(p=>p.k==="ride"&&p.attr).map(p=>p.attr));const tl=tailOf();
+  const list=ATTR.filter(a=>usable(a)&&!ridden(a.id)&&!inPlan.has(a.id)).map(a=>{const wk=walk(tl.area,a.area);return{a,wk,w:estWait(a,Math.max(nowMin(),planStart())+wk)};}).sort((x,y)=>(x.wk+x.w)-(y.wk+y.w));
+  openSheet(`<h3>乗り物を足す</h3><p class="note" style="margin:0 0 8px">タップで、帰る時間に収まって待ちと歩きが一番少なく済む所に入れます。「次に」で次の行き先にします。</p><div class="addlist">${list.length?list.map(x=>`<div class="addrw"><button class="addr" type="button" data-addride="${x.a.id}">${ico("r_"+x.a.id,"a-"+x.a.area)}<span class="nm">${wb(short(x.a))}<small>${AN(x.a.area)}</small></span><span class="aw"><small>待ち</small><b class="num">${x.w}</b><small>分</small></span><span class="plus" aria-hidden="true">＋</span></button><button class="sm addnext" type="button" data-addnext="${x.a.id}" aria-label="${esc(short(x.a))}を次に入れる">次に</button></div>`).join(""):`<div class="empty">足せる乗り物はありません</div>`}</div><div class="btns" style="margin-top:10px"><button class="ghost" type="button" data-addother="1">＋ 食事・休憩・ショー</button><button class="ghost" type="button" data-tab="dpa">＋ 有料パス</button></div>`);}
+// 足すと、ほかの行が帰る時間に入らなくなる時は、先に名前で知らせる
+function addRideAsk(id,next){const a=byId[id];if(!a)return;const spot=next?{k:firstPend()}:bestSpot(id);const snap=JSON.stringify(S);let out=[];
+  try{const w0=planFits();const bad0=new Set(planToday().filter(p=>w0[p.id]).map(p=>p.id));const plan=planToday();plan.splice(Math.min(spot.k,plan.length),0,{id:"_try",k:"ride",attr:id,text:a.name,t:24*60,dur:a.dur,w:0});retime();
+    const w1=planFits();out=planToday().filter(p=>w1[p.id]&&!bad0.has(p.id)&&p.id!=="_try").map(p=>p.attr&&byId[p.attr]?short(byId[p.attr]):planLabel(p));var selfLate=!!w1["_try"];}finally{S=Object.assign(DEF(),JSON.parse(snap));}
+  if(!out.length&&!selfLate){addRideEnd(id,next,spot);return;}
+  openSheet(`<h3>${wb(short(a))}を入れると</h3><p class="note" style="margin:0 0 10px">${out.length?`<b>${out.map(esc).join("・")}</b>が帰る時間に入らなくなります。`:""}${selfLate?`${esc(short(a))}は帰る時間までに入りません。`:""}</p><div class="btns"><button class="big-btn pri" type="button" data-addyes="${id}|${next?1:0}">それでも入れる</button><button class="big-btn sec" type="button" data-sheetclose="1">やめる</button></div>`);}
+function addRideEnd(id,next,spot0){const a=byId[id];if(!a)return;const snap=JSON.stringify(S);const tk=todayKey();if(S.planDay!==tk){S.plan=[];S.planDay=tk;}S.planBuilt=true;
+  const spot=spot0||(next?{k:firstPend()}:bestSpot(id));const before=planTimes();const row={id:nid(),k:"ride",attr:id,text:a.name,t:24*60,dur:a.dur,w:0};S.plan.splice(Math.min(spot.k,S.plan.length),0,row);if(S.drop)delete S.drop[id];S.myPlan=tk;S.day=tk;retime();save();
+  closeSheet();renderAll();flashChanged(before,[row.id]);setTimeout(()=>{const r=document.querySelector(`#planList .step[data-id="${row.id}"]`);if(r)r.scrollIntoView({block:"center"});},30);
+  {const lc=lateCount();toast(`${short(a)}を${fromMin(row.t)}に入れました${lc?`（直す所のある行が${lc}つ）`:""}`,"元に戻す",()=>restore(snap));}}
 const typingIn=sel=>{const ae=document.activeElement;return !!(ae&&ae.closest&&ae.closest(sel||"main")&&/INPUT|SELECT|TEXTAREA/.test(ae.tagName));};
 const editingPlan=()=>typingIn("#tab-plan");
 function ensureFresh(){if(!hasPlan()||editingPlan())return false;if(S.pendingRebuild||S.builtAt==null||Math.abs(nowMin()-S.builtAt)>=10){if(typeof autoRebuild==="function")autoRebuild();else buildPlan();return true;}return false;}
@@ -1702,7 +1875,7 @@ function obFinish(budget){
   const redo=ob.redo;
   ATTR.forEach(a=>{if(!isOpen(a))return;if(ob.must.has(a.id))S.prio[a.id]="must";else if(S.prio[a.id]!=="skip"||!redo)S.prio[a.id]="want";});
   if(ob.exit)S.exit=ob.exit;S.dpaBudget=budget;S.onb=true;S.alt=null;S.day=todayKey();
-  guideHold=true;closeOb();buildPlan();save();showTab("near");const quiet=!redo&&!fxOff();showMaking(()=>{guideHold=false;if(!quiet)toast(redo?"予定を作り直しました":"予定ができました");maybeCoach();}); // 使い方の画面は「プランができました」の後
+  guideHold=true;S.myPlan=null;closeOb();buildPlan();save();showTab("plan");const quiet=!redo&&!fxOff();showMaking(()=>{guideHold=false;if(!quiet)toast(redo?"予定を作り直しました":"予定ができました");maybeCoach();}); // 使い方の画面は「プランができました」の後
 }
 
 
@@ -1782,13 +1955,13 @@ function countUp(root){if(fxOff())return;root.querySelectorAll(".cu").forEach(el
 // 使い方の画面: 予定ができた直後に1回だけ（前から使っている人も次に開いた時に1回）。上の「?」でいつでも開く
 let guideHold=false,guideFrom=null;
 function openGuide(){const g=document.getElementById("guide");if(!g.hidden)return;guideFrom=document.activeElement;const c=document.querySelector(".coach");if(c){c.remove();if(c._off)document.removeEventListener("pointerdown",c._off,true);}
-  g.querySelectorAll(".gi svg").forEach((v,i)=>{v.innerHTML=IC[["pin","clock","check"][i]];}); // 影絵のアイコン（後で読み込む形に合わせて開く時に入れる）
+  g.querySelectorAll(".gi svg").forEach((v,i)=>{v.innerHTML=IC[["swap","pin","check"][i]];}); // 影絵のアイコン（後で読み込む形に合わせて開く時に入れる）
   document.getElementById("guideGo").textContent=S.guideDone?"閉じる":"はじめる";
   g.hidden=false;document.getElementById("toast").classList.remove("show");armBack();setTimeout(()=>{const b=document.getElementById("guideGo");if(b&&!g.hidden)b.focus({preventScroll:true});},40);}
 function closeGuide(){const g=document.getElementById("guide");if(g.hidden)return false;g.hidden=true;if(!S.guideDone){S.guideDone=true;save();}
   const f=guideFrom;guideFrom=null;if(f&&f.isConnected&&f.id==="guideBtn")f.focus({preventScroll:true});setTimeout(maybeCoach,0);return true;}
 function guideShown(){return !document.getElementById("guide").hidden;}
-function maybeGuide(){if(guideShown())return true;if(S.guideDone||!S.onb||ob||guideHold||S.tab!=="near"||document.getElementById("splash")||document.getElementById("making")||!document.getElementById("sheet").hidden)return false;
+function maybeGuide(){if(guideShown())return true;if(S.guideDone||!S.onb||ob||guideHold||!["near","plan"].includes(S.tab)||document.getElementById("splash")||document.getElementById("making")||!document.getElementById("sheet").hidden)return false;
   const k=NOW&&NOW.kind;if(k==="over"||k==="leave"||k==="home")return false;openGuide();return true;}
 document.getElementById("guideGo").addEventListener("click",()=>closeGuide());
 document.getElementById("guideBtn").addEventListener("click",()=>openGuide());
@@ -2081,7 +2254,7 @@ let lastAct=0;const BOOT_AT=Date.now();let OPEN_AT=Date.now(); // 開いた（�
 const sigOf=c=>c?c.kind+":"+(c.a?c.a.id:(c.row?(c.row.attr||c.row.k+(c.row.mk||"")):(c.mk||""))):"";
 let autoMsg=null;
 // 自動の見直し（10分ごと・自動取得）では、今の主役の行を一時的に「動かさない」にして組み直す（主役を黙って変えない）
-function autoRebuild(){const c=NOW;const r=c&&c.row&&planToday().find(p=>p.id===c.row.id);const had=r?!!r.lock:true;if(r)r.lock=true;buildPlan();if(r&&!had){const n=planToday().find(p=>p.id===r.id);if(n)n.lock=false;}}
+function autoRebuild(){if(mine()){retime();return;}const c=NOW;const r=c&&c.row&&planToday().find(p=>p.id===c.row.id);const had=r?!!r.lock:true;if(r)r.lock=true;buildPlan();if(r&&!had){const n=planToday().find(p=>p.id===r.id);if(n)n.lock=false;}}
 function explainAuto(prev,c,nm){ // 押していないのに主役が変わったときの理由
   const pa=prev.split(":")[1];const a=pa&&byId[pa];const name=c.a?short(c.a):(c.row?planLabel(c.row):"");
   let why="予定を見直したため";
@@ -2103,7 +2276,7 @@ function exitChanged(snap,v){const before=new Set(JSON.parse(snap).planSkip||[])
 let FLASH=new Set();function flashRows(ids){FLASH=new Set(ids);renderPlan();setTimeout(()=>{FLASH=new Set();document.querySelectorAll("#planList .flash").forEach(e=>e.classList.remove("flash"));},1300);}
 const planSig=()=>Object.fromEntries(planToday().map(p=>[p.id,p.t]));
 
-document.querySelector("main").addEventListener("scroll",e=>{if(S.tab!=="plan")return;const h=document.querySelector(".planhead");if(!h)return;const y=e.target.scrollTop;if(y>120)h.classList.add("compact");else if(y<8)h.classList.remove("compact");},{passive:true}); // 行ったり来たりしないよう幅を持たせる
+document.querySelector("main").addEventListener("scroll",e=>{if(S.tab!=="plan"||(LP&&LP.on))return;const h=document.querySelector(".planhead");if(!h)return;const y=e.target.scrollTop;if(y>120)h.classList.add("compact");else if(y<8)h.classList.remove("compact");},{passive:true}); // 行ったり来たりしないよう幅を持たせる
 
 // 今日の予定を文字で送る（押したときだけ。navigator.share か、無ければコピー）
 function planText(){const t=today();const nm=nowMin();const rows=planToday().filter(p=>p.k!=="note"&&endOf(p)>=nm&&!(p.k==="ride"&&p.attr&&ridden(p.attr)));
@@ -2236,7 +2409,7 @@ function nowCard2(st){const nm=st.nm;
   const pick=()=>{passes=[];for(const p of rows){const h=passWait(p,nm);if(h){passes.push({a:byId[p.attr],slot:h.slot});continue;}return p;}return null;};
   let p=pick();
   const off=p&&!rowOk(p,nm);
-  if(off&&hasPlan()&&S.onb&&headFix!==nm&&!editingPlan()&&!openRow){headFix=nm;buildPlan();rows=headRows(nm);p=pick();}
+  if(off&&hasPlan()&&S.onb&&headFix!==nm&&!editingPlan()&&!openRow){headFix=nm;planBuild();rows=headRows(nm);p=pick();}
   if(p&&!rowOk(p,nm)){rows=rows.filter(r=>rowOk(r,nm));p=pick();}
   if(!p&&!buy&&S.onb&&hasPlan()&&!staleDay()){const a=tailCand(nm);if(a){insertRow(a,nm);rows=headRows(nm);p=pick();}}
   // 保有している有料パスで、まだ乗れない時間のものは上に一言だけ
@@ -2422,29 +2595,38 @@ function renderPlan(){
   document.getElementById("planExit").textContent=fromMin(exitMin());{const mi=document.querySelector(".phmini");if(mi)mi.textContent=`まだ乗っていない ${left.length}・帰る時間 ${fromMin(exitMin())}`;}
   document.getElementById("unlockAll").hidden=!plan.some(p=>p.lock&&!p.dpa);
   const warn=planFits();
+  {const can=plan.filter(p=>p.k==="ride"&&p.attr).length;const lateN=plan.filter(p=>warn[p.id]).length;const ls=document.getElementById("planLate");if(ls){ls.textContent=lateN?`うち${lateN}つは直す所あり`:"";ls.hidden=!lateN;}const ce=document.getElementById("planCan");if(ce.textContent!==String(can)){if(ce.textContent!==""&&!fxOff()){ce.classList.remove("tick");void ce.offsetWidth;ce.classList.add("tick");}ce.textContent=String(can);}
+   const pb=document.getElementById("planBanner");const k=NOW&&NOW.kind;const lines=[];
+   PBN=S.onb&&hasPlan()&&k!=="home"?(mine()?"自分で組んだ順番です。時刻はその場で出し直します":"おすすめの順番です。自由に変えられます"):"";
+   {const showIn=S.onb&&!inPark()&&k!=="home";document.getElementById("phIn").hidden=!showIn;document.getElementById("phSub").hidden=showIn;}
+   PMID=(plan.find(p=>p.k==="ride"&&p.attr&&!p.dpa&&!ridden(p.attr)&&p.t>=12*60&&p.t<18*60&&(p.w||0)>=60)||{}).id||null;
+   pb.innerHTML=lines.join("");pb.hidden=!lines.length;}
   let nowIdx=-1;plan.forEach((p,i)=>{if(p.t<=nm)nowIdx=i;});
   const inqIdx=plan.findIndex(p=>p.inq&&p.attr&&!ridden(p.attr));if(inqIdx>=0)nowIdx=inqIdx; // 並び中の行を「今」にする
+  const seen0={};const rowKey0=p=>{const b=p.k+":"+(p.attr||p.text);seen0[b]=(seen0[b]||0)+1;return b+"#"+seen0[b];};
   const seen={};const rowKey=p=>{const b=p.k+":"+(p.attr||p.text);seen[b]=(seen[b]||0)+1;return b+"#"+seen[b];}; // 組み直しても同じ行を開いたままにする
   const el=document.getElementById("planList");const homeV=!!(NOW&&NOW.kind==="home");
-  {const tt=document.getElementById("planTtl");if(tt)tt.textContent=homeV?"行く日の予定":"今日の予定";}
+  {const tt=document.getElementById("planTtl");if(tt)tt.textContent=homeV?"行く日の予定":"今日の予定";const h2=document.getElementById("planH2");if(h2)h2.hidden=!homeV&&!!PBN;}
   if(!plan.length&&homeV){el.innerHTML=S.tab==="plan"?previewHtml():"";}
   else if(!plan.length){el.innerHTML=`<div class="empty">今日の予定はまだありません</div>`;}
   else el.innerHTML=plan.map((p,i)=>{
     const a=p.attr?byId[p.attr]:null;const ride=p.k==="ride"&&a;const done=ride&&ridden(a.id);const inq=ride&&p.inq&&!done;
-    const meta=[];
-    if(a&&p.k!=="buy")meta.push(`<span>${AN(a.area)}</span>`);
-    if(p.k==="buy")meta.push(`<span>${a.dpa.toLocaleString()}円</span>`,`<span>公式アプリで購入</span>`);
+    const meta=[];const areaTag=a&&p.k!=="buy"?`<span class="ar a-${a.area}"><i class="adot" aria-hidden="true"></i>${AS[a.area]||esc(AREAS[a.area])}</span>`:"";
+    const key0=rowKey0(p);const isOpen0=openRow===key0;
+    if(p.k==="buy")meta.push(`<span>${a.dpa.toLocaleString()}円</span>`);
     if(ride&&p.dpa)meta.push(`<span class="tag dpa">${p.prov?"有料パス（これから買う）":"有料パス"}</span>`);
-    if(ride&&p.prov&&!done)meta.push(`<span class="tag mute">買えなかったら並んで乗る（待ち約${estWait(a,p.t)}分）</span>`);
+    if(ride&&p.prov&&!done&&isOpen0)meta.push(`<span class="tag mute">買えなかったら並んで乗る（待ち約${estWait(a,p.t)}分）</span>`); // 開いた時だけ（行を2段に保つ）
     if(inq){} // 自動の並び中は内部の印だけ（画面には出さない）
     else if(ride&&!p.dpa&&p.w)meta.push(`<span>待ち${p.w}分</span>`);
-    if(p.walk)meta.push(`<span>歩いて${p.walk}分</span>`);
-    if(!a&&p.area)meta.push(`<span>${AN(p.area)}</span>`);
+    if(p.walk)meta.push(`<span>歩き${p.walk}分</span>`);
+    if(areaTag)meta.push(areaTag);
+    if(!a&&p.area)meta.push(`<span class="ar a-${p.area}"><i class="adot" aria-hidden="true"></i>${AS[p.area]||esc(AREAS[p.area])}</span>`);
     if(ride&&a.to)meta.push(`<span>${AN(a.to)}に着く</span>`);
     if(ride&&!done&&stopInfo(a))meta.push(`<span class="tag bad">休止中</span>`);
     if(p.why)meta.push(`<span class="tag ${/止まる|混む/.test(p.why)?"warn":"ok"}">${esc(nice(p.why))}</span>`);
     if(p.lock)meta.push(`<span class="tag sea">時刻を動かさない</span>`);
-    if(warn[p.id])meta.push(`<span class="tag bad">${esc(nice(warn[p.id]))}</span>`);
+    if(p.id===PMID)meta.push(`<span class="tag warn">午後は待ちが長くなります</span>`);
+    if(warn[p.id])meta.push(`<span class="tag bad">${esc(nice(warn[p.id]==="退園に間に合わない"?"帰る時間を過ぎます":warn[p.id]))}</span>`);
     // ボタンは「⋯」で開く（乗った・買った・食べた／前へ・後へ・固定・消す）
     const key=rowKey(p);ROWKEY[p.id]=key;const open=openRow===key;const ctl=[];
     if(ride)ctl.push(`<button class="sm ${done?"on":""}" type="button" data-ride="${a.id}">${done?"乗った ✓":"乗った"}</button>`);
@@ -2455,11 +2637,15 @@ function renderPlan(){
     if(!(p.dpa&&!p.prov))ctl.push(`<button class="sm danger" type="button" data-del="${i}">消す</button>`);
     const cls=["step",p.k,open?"open":"",i===nowIdx?"now":"",(done||(!inq&&endOf(p)<nm&&i<nowIdx))?"past":"",p.lock?"locked":"",warn[p.id]?"warnfit":"",FLASH.has(p.id)?"flash":""].join(" ");
     const kk=done?"done":(ride&&stopInfo(a)?"stop":kindOfRow(p));
-    const body=`<span class="txt">${wb(planLabel(p))}</span><span class="meta">${meta.join("")}</span>`;
-    return `<div class="${cls} k-${kk}" draggable="true" data-idx="${i}">
-      <label class="t num"><span>${fromMin(p.t)}</span><input type="time" value="${fromMin(p.t)}" data-ptime="${p.id}" aria-label="${esc(planLabel(p))}の時刻"></label>
+    const body=`<span class="txt">${wb(p.k==="buy"&&a?short(a):planLabel(p))}</span><span class="meta">${p.k==="buy"?`<span class="tag dpa">有料パスを公式アプリで購入</span>`:""}${p.k==="buy"&&(p.aim||p.ps)?`<span>${fromMin(p.aim||p.ps)}ごろの枠</span>`:""}${meta.join("")}</span>`;
+    const late=warn[p.id]==="退園に間に合わない"&&!done;const ovl=!!warn[p.id]&&!late&&!done&&!(p.dpa&&!p.prov)&&p.k!=="buy";
+    const fix=late?`<div class="fixrow"><span>直し方:</span><button class="sm" type="button" data-del="${i}">消す</button>${i>firstPend()?`<button class="sm" type="button" data-up="${i}">前へ動かす</button>`:""}${a&&a.dpa&&p.k==="ride"&&!p.dpa&&!soldOut(a.id)?`<button class="sm" type="button" data-todpa="${a.id}">有料パスにする</button>`:""}</div>`:(ovl?`<div class="fixrow"><span>直し方:</span>${i>firstPend()?`<button class="sm" type="button" data-up="${i}">前へ</button>`:""}${i<plan.length-1?`<button class="sm" type="button" data-down="${i}">後へ</button>`:""}<button class="sm" type="button" data-del="${i}">消す</button></div>`:"");
+    return `<div class="${cls} k-${kk}" draggable="true" data-idx="${i}" data-id="${p.id}">
+      <label class="t num"><span class="${TICK.has(p.id)?"tick":""}">${fromMin(p.t)}</span><input type="time" value="${fromMin(p.t)}" data-ptime="${p.id}" aria-label="${esc(planLabel(p))}の時刻"></label>
       <div class="rail">${ico(kk==="done"||kk==="stop"?KIND_IC[kk]:rowIc(p))}</div>
       ${ctl.length?`<button class="morebtn stepbody ${open?"on":""}" type="button" data-more="${esc(key)}" aria-expanded="${open}">${body}</button>`:`<div class="stepbody">${body}</div>`}
+      ${!done&&!(p.dpa&&!p.prov)?`<button class="rowx" type="button" data-del="${i}" aria-label="${esc(planLabel(p))}を消す">×</button>`:""}
+      ${!done&&p.k!=="note"&&p.k!=="buy"&&!(p.dpa&&!p.prov)?`<span class="grip" aria-hidden="true"><i></i><i></i><i></i></span>`:""}${fix}
       ${open&&ctl.length?`<div class="ctl">${ctl.join("")}</div>`:""}</div>`;
   }).join("");
   if(plan.length){ // 乗ったもの（チェック）を上に、いま位置の印を予定の中に
@@ -2468,7 +2654,8 @@ function renderPlan(){
     const mark=nowIdx<0?`<div class="tl tl-now"><span class="t num">${fromMin(nm)}</span><div class="rail"><span class="nowdot" aria-hidden="true"></span></div><div class="nowlbl">現在</div></div>`:"";
     el.insertAdjacentHTML("afterbegin",doneBox+mark);}
   const sk=document.getElementById("planSkip");
-  const skipIds=S.planDay===todayKey()?(S.planSkip||[]).filter(id=>!ridden(id)&&prio(byId[id])!=="skip"&&!dropped(id)):[];
+  const inPlanIds=new Set(plan.filter(p=>p.attr&&(p.k==="ride"||p.k==="buy")).map(p=>p.attr));
+  const skipIds=S.planDay===todayKey()?(S.planSkip||[]).filter(id=>!ridden(id)&&prio(byId[id])!=="skip"&&!dropped(id)&&!inPlanIds.has(id)):[];
   const dropIds=ATTR.filter(a=>dropped(a.id)&&!ridden(a.id)).map(a=>a.id);
   const rows=skipIds.map(id=>{const a=byId[id];const why=(S.planWhy||{})[id];return `<div class="row"><div class="name">${wb(short(a))}</div><div class="sub"><span>${AN(a.area)}</span>${prioTag(a)}${why?`<span class="tag bad">${esc(nice(why))}</span>`:""}${a.dpa&&!soldOut(id)&&!(SOLD_BY[id]&&nowMin()>mins(SOLD_BY[id]))?`<span class="tag mute">有料パスなら入る（${a.dpa.toLocaleString()}円）</span>`:""}</div></div>`;})
     .concat(dropIds.map(id=>{const a=byId[id];return `<div class="row done"><div class="name">${wb(short(a))}</div><div class="sub"><span>${AN(a.area)}</span><span class="tag mute">今日は乗らない</span></div><div class="right"><button class="sm" type="button" data-undrop="${id}">戻す</button></div></div>`;}))
@@ -2482,10 +2669,12 @@ function renderPlan(){
   const buyPlan=plan.filter(p=>p.k==="buy").reduce((s,p)=>s+byId[p.attr].dpa,0);
   const lines=[];
   if(mustSkip&&!(NOW&&NOW.kind==="home")){const dpaLeft=skipIds.filter(id=>prio(byId[id])==="must"&&byId[id].dpa&&!soldOut(id)&&!(SOLD_BY[id]&&nowMin()>mins(SOLD_BY[id]))).length;lines.push(`<b>入らない絶対乗るもの: ${skipIds.filter(id=>prio(byId[id])==="must").map(id=>esc(short(byId[id]))).join("・")}</b>${dpaLeft&&S.dpaBudget!==""&&nowMin()<exitMin()?"。有料パスを増やすと入ります":""}`);}
-  if(spent()+buyPlan>0)lines.push(`有料パス 1人 <b>¥${(spent()+buyPlan).toLocaleString()}</b>${buyPlan?`（これから買う分 ¥${buyPlan.toLocaleString()}）`:""}`);
+  const feeTxt=spent()+buyPlan>0?`有料パス 1人 <b>¥${(spent()+buyPlan).toLocaleString()}</b>`:"";
   if((S.planMiss||[]).length&&S.planDay===todayKey())lines.push(`<b>${S.planMiss.join("・")}が入りません</b>`);
   if(condSummary())lines.push(esc(condSummary()));
+  if(PBN||feeTxt)lines.unshift(`<span class="pbline">${PBN?`<span class="pbn">${svg(mine()?"swap":"star")}${mine()?"自分で組んだ順番":"おすすめの順番（自由に変えられます）"}</span>`:""}${feeTxt?`<span class="fee">${feeTxt}</span>`:""}<button class="help" type="button" data-help="plan" aria-label="使い方">?</button></span>`);
   if(NOW&&NOW.kind==="gate"){const td=today();lines.unshift(`今日（${td.getMonth()+1}/${td.getDate()}）行く場合の流れです`);}
+
   note.innerHTML=lines.join("<br>");note.hidden=!lines.length;
   const sel=document.getElementById("addAttr");
   if(!sel.options.length)sel.innerHTML=ATTR.filter(isOpen).map(a=>`<option value="${a.id}">${esc(short(a))}</option>`).join("");
@@ -2597,6 +2786,8 @@ function openDpaForm(id,slot){
   toast("乗れる時間を入れて「登録する」");
 }
 function movePlan(i,dir){
+  {const plan=planToday();const me=plan[i];if(!me)return;let j=i+dir;if(me.k!=="buy"&&me.k!=="note")while(j>=0&&j<plan.length&&(plan[j].k==="buy"||plan[j].k==="note"))j+=dir;if(j<0||j>=plan.length)return;
+   if(plan[j].dpa&&!plan[j].prov){toast("有料パスの時間は動かせません（メニュー → 有料パス で直せます）");return;}moveTo(i,j,false);return;}
   const plan=planToday();const me=plan[i];if(!me)return;const snap=JSON.stringify(S);
   let j=i+dir;if(me.k!=="buy"&&me.k!=="note")while(j>=0&&j<plan.length&&(plan[j].k==="buy"||plan[j].k==="note"))j+=dir; // 購入・メモの行は飛び越える
   if(j<0||j>=plan.length)return;
@@ -2624,7 +2815,7 @@ function delPlan(i){
     if(p.k==="meal"){S.noMeal=S.noMeal||{};S.noMeal[mealKind(p)]=todayKey();}
     if(isBuy){S.noBuy[p.attr]=todayKey();S.plan=S.plan.filter(q=>!(q.attr===p.attr&&(q.k==="buy"||q.prov)));}
     else if(isRide)S.drop[p.attr]=todayKey();
-    openRow=null;S.builtAt=nowMin();S.pendingRebuild=false; // 消すだけ。空いた時間はそのまま（組み直しは「組み直す」を押したとき・10分ごとの見直し）
+    openRow=null;S.myPlan=todayKey();retime();S.pendingRebuild=false; // 消したら、組んだ順番のまま時刻を出し直す
   });
 }
 
@@ -2669,7 +2860,12 @@ document.addEventListener("click",e=>{
   if(ds.nobuy){const id=ds.nobuy;const n=Object.keys(S.noBuy).filter(k=>k!==id&&isToday(S.noBuy[k])).length+1;const off=n>=2&&S.dpaBudget!=="0";
     withReason(off?"今日は有料パスを勧めません（設定で戻せます）":"この有料パスは買いません",`${short(byId[id])}の有料パスを買わない`,()=>{S.noBuy[id]=todayKey();if(off){S.dpaPrev=S.dpaBudget;S.dpaBudget="0";S.dpaOffDay=todayKey();}S.plan=S.plan.filter(q=>!(q.attr===id&&(q.k==="buy"||q.prov)));S.day=todayKey();rebuild();});return;}
   if(ds.buygo){const v=document.getElementById("buySlot").value;if(!v){toast("乗れる時間を入れてください");return;}if(addDpa(ds.buygo,v))closeSheet();return;}
-  if(ds.enter){S.inPark=todayKey();if(S.area!=="MH"){S.area="MH";touchQ();S.areaAt=nowMin();save();rebuild();}else save();renderAll();return;} // 入園した: 今いる場所はハーバー
+  if(ds.enter){S.inPark=todayKey();if(S.area!=="MH"){S.area="MH";touchQ();S.areaAt=nowMin();save();rebuild();}else save();renderAll();if(S.tab!=="near")showTab("near");return;}
+  if(ds.addride){addRideAsk(ds.addride);return;}
+  if(ds.addnext){addRideAsk(ds.addnext,true);return;}
+  if(ds.addyes){const [id,nx]=ds.addyes.split("|");addRideEnd(id,nx==="1");return;}
+  if(ds.todpa){showTab("dpa");setTimeout(()=>{const s2=document.getElementById("dpaAttr");if(s2){s2.value=ds.todpa;s2.dispatchEvent(new Event("change",{bubbles:true}));s2.scrollIntoView({block:"center"});}},50);return;}
+  if(ds.addother){closeSheet();const f=document.getElementById("addForm");f.hidden=false;document.getElementById("addTime").value=fromMin(nowMin()+10);document.getElementById("addArea").value=S.area;wrapTimes();f.scrollIntoView({block:"center"});return;} // 入園した: 今いる場所はハーバー
   if(ds.tab){showTab(ds.tab);return;}
   if(ds.help){const h=document.getElementById("help-"+ds.help);h.hidden=!h.hidden;return;}
   if(ds.area){closeSheet();if(S.area!==ds.area){S.area=ds.area;touchQ();S.areaAt=nowMin();enteredNow();save();rebuild();}renderAll();toast("今いる場所: "+AREAS[S.area]);return;}
@@ -2700,7 +2896,8 @@ document.addEventListener("click",e=>{
   if(b.id==="dpaAdd"){addDpa(document.getElementById("dpaAttr").value,document.getElementById("dpaSlot").value,document.getElementById("dpaBought").value);return;}
   if(ds.dpause!=null){const x=S.dpas[+ds.dpause];if(!x.used){markRide(x.id,true);x.used=true;}else{x.used=false;delete S.ridden[x.id];rebuild();}save();renderAll();return;}
   if(ds.dpadel!=null){const x=S.dpas[+ds.dpadel];withUndo(byId[x.id].name+" のDPAを削除しました",()=>{S.dpas.splice(+ds.dpadel,1);replanAfterDpa();});return;}
-  if(b.id==="replan"){withUndo("組み直しました",()=>buildPlan());return;}
+  if(b.id==="replan"){withUndo("おすすめの順番に戻しました",()=>{S.myPlan=null;buildPlan();});return;}
+  if(b.id==="addRide"){openAddRide();return;}
   if(b.id==="unlockAll"){withUndo("手で動かした分を元に戻しました",()=>{planToday().forEach(p=>p.lock=false);buildPlan();});return;}
   if(b.id==="addItem"){const f=document.getElementById("addForm");f.hidden=!f.hidden;document.getElementById("addTime").value=fromMin(nowMin()+10);document.getElementById("addArea").value=S.area;wrapTimes();return;}
   if(b.id==="sendPlan"){sendPlan();return;}
@@ -2770,12 +2967,35 @@ document.addEventListener("change",e=>{
 // 入力欄を離れたら、保留していた組み直し・描き直しをする
 document.addEventListener("focusout",e=>{const el=e.target;if(!el||!el.closest||!el.closest("main"))return;
   setTimeout(()=>{if(typingIn()||!(waitDirty||S.pendingRebuild||needRender))return;const re=waitDirty||S.pendingRebuild;waitDirty=false;needRender=false;if(re)rebuild();renderAll();},200);});
+// 長押しで並べ替え（指）。行が浮き、離した所へ動く。時刻はその場で出し直す
+let LP=null,lpEat=0;
+function lpRows(){return [...document.querySelectorAll("#planList .step[data-idx]")];}
+function lpStart(){if(!LP)return;const p=planToday()[LP.from];if(!p||p.k==="note"||p.k==="buy"||(p.dpa&&!p.prov)){LP=null;return;}
+  LP.on=true;LP.rows=lpRows().map(r=>{const b=r.getBoundingClientRect();return{r,i:+r.dataset.idx,mid:b.top+b.height/2};});const rb=LP.row.getBoundingClientRect();LP.h=rb.height+8;LP.sc=document.querySelector("main").scrollTop;
+  document.getElementById("planList").classList.add("dragging");LP.row.classList.add("lift");buzz([12]);}
+document.addEventListener("touchstart",e=>{const row=e.target.closest&&e.target.closest("#planList .step[data-idx]");if(!row||e.touches.length!==1||e.target.closest(".rowx,.ctl,.fixrow,input,select"))return;const t=e.touches[0];
+  const grip=!!e.target.closest(".grip");LP={row,from:+row.dataset.idx,x:t.clientX,y:t.clientY,on:false,to:null,timer:setTimeout(lpStart,grip?0:380)};},{passive:true});
+document.addEventListener("touchmove",e=>{if(!LP)return;const t=e.touches[0];if(!LP.on){if(Math.hypot(t.clientX-LP.x,t.clientY-LP.y)>8){clearTimeout(LP.timer);LP=null;}return;}
+  e.preventDefault();lpMove(t.clientY);},{passive:false});
+// 指の位置に行を浮かせてついてこさせ、入る場所を空ける（見えている位置から毎回計算するので、スクロールしてもずれない）
+function lpMove(y){const m=document.querySelector("main");const hb=(document.querySelector(".planhead")||m).getBoundingClientRect().bottom;
+  const r=LP.row.getBoundingClientRect();if(LP.off==null)LP.off=LP.y-(r.top+r.height/2-(LP.T||0));const nat=r.top+r.height/2-(LP.T||0);LP.T=y-LP.off-nat;LP.row.style.transform=`translateY(${LP.T}px) scale(1.02)`;
+  let to=LP.from;const mids=LP.rows.filter(o=>o.i!==LP.from).map(o=>{const b=o.r.getBoundingClientRect();return{o,mid:b.top+b.height/2-(o.sh||0)};});
+  for(const q of mids){if(q.o.i>LP.from&&y>q.mid)to=Math.max(to,q.o.i);if(q.o.i<LP.from&&y<q.mid)to=Math.min(to,q.o.i);}
+  LP.to=to;for(const q of mids){const o=q.o;let sh=0;if(LP.from<to&&o.i>LP.from&&o.i<=to)sh=-LP.h;if(to<LP.from&&o.i>=to&&o.i<LP.from)sh=LP.h;o.sh=sh;o.r.style.transform=sh?`translateY(${sh}px)`:"";}
+  if(y<hb+24)m.scrollBy(0,-8);else if(y>innerHeight-150)m.scrollBy(0,8);}
+function lpEnd(commit){const L=LP;LP=null;if(!L)return;clearTimeout(L.timer);if(!L.on)return;lpEat=performance.now();document.getElementById("planList").classList.remove("dragging");L.row.classList.remove("lift");lpRows().forEach(r=>r.style.transform="");if(commit&&L.to!=null&&L.to!==L.from)moveTo(L.from,L.to,false);}
+document.addEventListener("touchend",e=>{if(LP&&LP.on)e.preventDefault();lpEnd(true);},{passive:false});
+document.addEventListener("touchcancel",()=>lpEnd(false));
+document.addEventListener("click",e=>{if(performance.now()-lpEat<450&&e.target.closest&&e.target.closest("#planList")){e.preventDefault();e.stopPropagation();}},true);
+document.addEventListener("contextmenu",e=>{if(LP&&e.target.closest&&e.target.closest("#planList"))e.preventDefault();});
 // drag & drop (PC)
 let dragIdx=null;
 document.addEventListener("dragstart",e=>{const s=e.target.closest(".step");if(!s)return;dragIdx=+s.dataset.idx;e.dataTransfer.effectAllowed="move";});
 document.addEventListener("dragover",e=>{const s=e.target.closest(".step");if(!s||dragIdx==null)return;e.preventDefault();s.classList.add("dragover");});
 document.addEventListener("dragleave",e=>{const s=e.target.closest(".step");if(s)s.classList.remove("dragover");});
-document.addEventListener("drop",e=>{const s=e.target.closest(".step");if(!s||dragIdx==null)return;e.preventDefault();const plan=planToday();const to=+s.dataset.idx;const [it]=plan.splice(dragIdx,1);plan.splice(to,0,it);
+document.addEventListener("drop",e=>{const s=e.target.closest(".step");if(!s||dragIdx==null)return;e.preventDefault();const from=dragIdx;dragIdx=null;moveTo(from,+s.dataset.idx,false);});
+document.addEventListener("drop_old",e=>{const s=e.target.closest(".step");if(!s||dragIdx==null)return;e.preventDefault();const plan=planToday();const to=+s.dataset.idx;const [it]=plan.splice(dragIdx,1);plan.splice(to,0,it);
   // ドロップした行は前の行の終了時刻に付け直す
   const prev=plan[to-1],next=plan[to+1];it.t=prev?endOf(prev)+((endArea(prev)&&areaOf(it))?walk(endArea(prev),areaOf(it)):0):(next?Math.max(0,next.t-(it.dur||15)-(it.w||0)):it.t);it.lock=true;delete it.inq;delete it.w0;if(it.k==="ride"&&it.attr&&!it.dpa)it.w=estWait(byId[it.attr],it.t);dragIdx=null;save();renderPlan();});
 
@@ -2795,7 +3015,7 @@ document.addEventListener("drop",e=>{const s=e.target.closest(".step");if(!s||dr
   else if(!staleDay())S.day=todayKey();
   save();
   document.getElementById("timeOverride").value=S.timeOverride||"";
-  renderAll();showTab(MAIN.includes(S.tab)?S.tab:"near");
+  renderAll();showTab(!S.onb?"near":(inPark()?"near":"plan")); // 入園前に開いたら予定、入園後に開いたら今
   if(autoOn())fetchApi(true);
   // 入力中は一覧を描き直さない（キーボードが閉じるのを防ぐ）
   setInterval(()=>{const ae=document.activeElement;const typing=ae&&ae.closest&&ae.closest("main")&&/INPUT|SELECT|TEXTAREA/.test(ae.tagName);if(!typing&&ensureFresh()){renderAll();return;}renderHeader();if((S.tab==="near"||S.tab==="waits")&&!typing)renderNear();if(S.tab==="dpa"&&!typing)renderDpa();if(S.tab==="plan"&&!typing)renderPlan();},30000);
