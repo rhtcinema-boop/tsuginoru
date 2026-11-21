@@ -534,7 +534,7 @@ nav button{font-size:13px}
 @keyframes fadeAway2{to{opacity:0;transform:scale(1.05)}}
 /* スプラッシュ（開くとき） */
 #splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;overflow:hidden;color:#fff;background:linear-gradient(180deg,#06163f 0%,#0e3492 58%,#2a6fe0 100%)}
-#splash:not(.out){animation:splFail .01s 7s forwards}
+#splash:not(.out):not(.js){animation:splFail .01s 7s forwards} /* JS が動かなかったときだけ自動で消える */
 @keyframes splFail{to{opacity:0;visibility:hidden}}
 #splash .glow{position:absolute;left:50%;top:42%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(127,178,255,.45),rgba(127,178,255,0) 65%)}
 #splash .stars i{position:absolute;width:var(--s,3px);height:var(--s,3px);border-radius:50%;background:#fff;opacity:.55}
@@ -560,6 +560,11 @@ nav button{font-size:13px}
 #splash.quick .sps{opacity:1}
 #splash.out{animation:splOut .42s ease-in forwards;pointer-events:none}
 #splash.quick.out{animation-duration:.25s}
+#splash .tapopen{position:absolute;left:0;right:0;bottom:calc(24% + env(safe-area-inset-bottom,0px));text-align:center;font-size:16px;font-weight:700;letter-spacing:.12em;color:#fff;opacity:0;pointer-events:none}
+#splash.ready .tapopen{animation:tapIn .5s ease-out forwards,tapPulse 2.4s ease-in-out .5s infinite}
+@keyframes tapIn{from{opacity:0;transform:translateY(8px)}to{opacity:.95;transform:none}}
+@keyframes tapPulse{0%,100%{opacity:.95}50%{opacity:.45}}
+#splash.wait{cursor:pointer}
 @keyframes tw{from{opacity:.15;transform:scale(.6)}to{opacity:1;transform:scale(1.15)}}
 @keyframes wave{to{transform:translateX(-50%)}}
 @keyframes cmpIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
@@ -575,7 +580,7 @@ nav button{font-size:13px}
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
 </style>
 
-<div id="splash" aria-hidden="true"><div class="glow"></div><div class="stars"><i style="left:33.4%;top:13.1%;--d:0.91s;--s:2px"></i><i style="left:80.2%;top:9.3%;--d:0.82s;--s:4px"></i><i style="left:23.2%;top:8.8%;--d:0.59s;--s:2px"></i><i style="left:11.5%;top:31.4%;--d:1.16s;--s:2px"></i><i style="left:92.1%;top:45.3%;--d:0.82s;--s:2px"></i><i style="left:57.2%;top:29.6%;--d:1.37s;--s:2px"></i><i style="left:55.3%;top:11.9%;--d:0.59s;--s:4px"></i><i style="left:14.1%;top:23.7%;--d:1.14s;--s:2px"></i><i style="left:12.7%;top:41.3%;--d:0.26s;--s:2px"></i><i style="left:54.5%;top:7.2%;--d:0.08s;--s:2px"></i><i style="left:49.7%;top:38.6%;--d:1.09s;--s:3px"></i><i style="left:58.0%;top:33.4%;--d:0.42s;--s:2px"></i><i style="left:68.7%;top:19.4%;--d:0.80s;--s:4px"></i><i style="left:49.5%;top:26.0%;--d:0.63s;--s:4px"></i><i style="left:95.1%;top:10.9%;--d:0.59s;--s:3px"></i><i style="left:17.3%;top:35.8%;--d:0.05s;--s:2px"></i><i style="left:74.9%;top:41.4%;--d:1.23s;--s:3px"></i><i style="left:35.0%;top:26.5%;--d:0.70s;--s:3px"></i><i style="left:9.5%;top:9.3%;--d:0.38s;--s:2px"></i><i style="left:8.7%;top:50.0%;--d:0.91s;--s:3px"></i><i style="left:29.8%;top:28.8%;--d:0.94s;--s:2px"></i><i style="left:91.4%;top:26.8%;--d:0.86s;--s:3px"></i><i style="left:8.5%;top:54.5%;--d:0.18s;--s:2px"></i><i style="left:40.4%;top:64.4%;--d:0.70s;--s:2px"></i><i style="left:45.2%;top:39.8%;--d:1.24s;--s:3px"></i><i style="left:84.2%;top:21.7%;--d:0.58s;--s:3px"></i></div><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#f5b93a"/></linearGradient></defs><circle r="96" fill="#0c2d6b" opacity=".4"/><circle class="ring" r="118" fill="none" stroke="#fff" stroke-width="14" transform="rotate(-90)"/><g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M0 -104v16M0 88v16M-104 0h16M88 0h16"/></g><g class="needle"><path d="M70 -70 L19 19 L-19 -19Z" fill="url(#spg)"/><path d="M-70 70 L-19 -19 L19 19Z" fill="#fff"/></g><circle r="12" fill="#0c2d6b"/></svg><div class="spt">ツギノル<svg class="kira" style="right:-26px;top:-12px;--d:1.25s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg><svg class="kira" style="left:-30px;bottom:-4px;width:18px;height:18px;--d:1.45s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg></div><div class="sps">次の行き先を、すぐ決める</div><div class="waves"><svg class="w1" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg><svg class="w2" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg></div></div>
+<div id="splash" aria-hidden="true"><div class="tapopen">タップして開く</div><div class="glow"></div><div class="stars"><i style="left:33.4%;top:13.1%;--d:0.91s;--s:2px"></i><i style="left:80.2%;top:9.3%;--d:0.82s;--s:4px"></i><i style="left:23.2%;top:8.8%;--d:0.59s;--s:2px"></i><i style="left:11.5%;top:31.4%;--d:1.16s;--s:2px"></i><i style="left:92.1%;top:45.3%;--d:0.82s;--s:2px"></i><i style="left:57.2%;top:29.6%;--d:1.37s;--s:2px"></i><i style="left:55.3%;top:11.9%;--d:0.59s;--s:4px"></i><i style="left:14.1%;top:23.7%;--d:1.14s;--s:2px"></i><i style="left:12.7%;top:41.3%;--d:0.26s;--s:2px"></i><i style="left:54.5%;top:7.2%;--d:0.08s;--s:2px"></i><i style="left:49.7%;top:38.6%;--d:1.09s;--s:3px"></i><i style="left:58.0%;top:33.4%;--d:0.42s;--s:2px"></i><i style="left:68.7%;top:19.4%;--d:0.80s;--s:4px"></i><i style="left:49.5%;top:26.0%;--d:0.63s;--s:4px"></i><i style="left:95.1%;top:10.9%;--d:0.59s;--s:3px"></i><i style="left:17.3%;top:35.8%;--d:0.05s;--s:2px"></i><i style="left:74.9%;top:41.4%;--d:1.23s;--s:3px"></i><i style="left:35.0%;top:26.5%;--d:0.70s;--s:3px"></i><i style="left:9.5%;top:9.3%;--d:0.38s;--s:2px"></i><i style="left:8.7%;top:50.0%;--d:0.91s;--s:3px"></i><i style="left:29.8%;top:28.8%;--d:0.94s;--s:2px"></i><i style="left:91.4%;top:26.8%;--d:0.86s;--s:3px"></i><i style="left:8.5%;top:54.5%;--d:0.18s;--s:2px"></i><i style="left:40.4%;top:64.4%;--d:0.70s;--s:2px"></i><i style="left:45.2%;top:39.8%;--d:1.24s;--s:3px"></i><i style="left:84.2%;top:21.7%;--d:0.58s;--s:3px"></i></div><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#f5b93a"/></linearGradient></defs><circle r="96" fill="#0c2d6b" opacity=".4"/><circle class="ring" r="118" fill="none" stroke="#fff" stroke-width="14" transform="rotate(-90)"/><g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M0 -104v16M0 88v16M-104 0h16M88 0h16"/></g><g class="needle"><path d="M70 -70 L19 19 L-19 -19Z" fill="url(#spg)"/><path d="M-70 70 L-19 -19 L19 19Z" fill="#fff"/></g><circle r="12" fill="#0c2d6b"/></svg><div class="spt">ツギノル<svg class="kira" style="right:-26px;top:-12px;--d:1.25s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg><svg class="kira" style="left:-30px;bottom:-4px;width:18px;height:18px;--d:1.45s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg></div><div class="sps">次の行き先を、すぐ決める</div><div class="waves"><svg class="w1" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg><svg class="w2" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg></div></div>
 <header>
   <div class="hrow">
     <h1>ツギノル</h1>
@@ -756,7 +761,7 @@ nav button{font-size:13px}
     </div>
     <h2>今日 <small id="todayLabel"></small></h2>
     <div class="card note" id="todayNote"></div>
-    <details class="dev" id="devBox" hidden><summary>動作確認用</summary><div class="toggle tov"><span style="flex:1">時刻を仮に決める</span><button class="sm" id="timeBtn" type="button">時刻を指定</button><input type="time" id="timeOverride" aria-label="仮の時刻"></div></details>
+    <details class="dev" id="devBox" hidden><summary>動作確認用</summary><label class="toggle"><input type="checkbox" id="spNoWait">試しのときは起動画面で待たない</label><div class="toggle tov"><span style="flex:1">時刻を仮に決める</span><button class="sm" id="timeBtn" type="button">時刻を指定</button><input type="time" id="timeOverride" aria-label="仮の時刻"></div></details>
     <h2>やり直す</h2>
     <div class="card">
       <button class="big-btn sec" type="button" id="redoOb">最初の質問をやり直す</button>
@@ -1593,13 +1598,20 @@ function showMaking(done){if(fxOff()){playCue("plan");done();return;}fxLog("maki
   const t1=setTimeout(()=>{el.classList.add("ok");el.querySelector(".mt").textContent="プランができました";playCue("plan");const r=el.querySelector(".mc").getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,34,"star",{speed:6,g:0.04,drag:0.95,life:45,size:8});},1080);
   const t2=setTimeout(end,1650);el.addEventListener("click",end);}
 // 開くとき: 1日の最初は2秒ほど、2回目からは短く。タップで飛ばせる
-function splashRun(){const sp=document.getElementById("splash");if(!sp)return;
+function splashRun(){const sp=document.getElementById("splash");if(!sp)return;sp.classList.add("js");
   if(fxOff()){sp.remove();return;}
   const quick=S.splashDay===todayKey();S.splashDay=todayKey();
-  let fin=false;const end=()=>{if(fin)return;fin=true;sp.classList.add("out");setTimeout(()=>{sp.remove();maybeCoach();},quick?260:430);};
-  sp.addEventListener("click",()=>{if(!fin){SND.helloed=true;playCue("open");}end();}); // 2回目以降は、スプラッシュをタップすると起動の音
+  // 音がオンなら「タップして開く」で待つ（iPhone はタップの後でないと音を鳴らせないため）。音オフ・動きを減らす・試しのときは今まで通り自動で閉じる
+  const wait=sndOn()&&!splashNoWait();if(wait)sp.classList.add("wait");
+  let fin=false;const end=()=>{if(fin)return;fin=true;document.removeEventListener("keydown",onKey,true);sp.classList.add("out");setTimeout(()=>{sp.remove();maybeCoach();},quick?260:430);};
+  const open=()=>{if(fin)return;SND.helloed=true;playCue("open");if(wait)buzz([20]);fxLog("tap-open");end();};
+  const onKey=e=>{if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();open();}};
+  sp.addEventListener("click",open);document.addEventListener("keydown",onKey,true);
   // 最初の描画（予定の計算）が終わってから動かす。遅いスマホでも動きの途中で止まらないように
-  setTimeout(()=>{if(fin)return;sp.classList.add(quick?"quick":"full");fxLog(quick?"splash-quick":"splash");window.__splashAt=performance.now();setTimeout(end,quick?420:2000);},0);}
+  setTimeout(()=>{if(fin)return;sp.classList.add(quick?"quick":"full");fxLog(quick?"splash-quick":"splash");window.__splashAt=performance.now();
+    setTimeout(()=>{if(fin)return;if(wait){sp.classList.add("ready");fxLog("splash-wait");}else end();},quick?420:2000);},0);}
+// 試しのときに起動画面で待たない: 動作確認用の設定で選べる（既定は ?debug=1 か仮の時刻のとき待たない）
+const splashNoWait=()=>!!window.__TG_NOWAIT||(S.splashNoWait!=null?!!S.splashNoWait:(/[?&]debug=1/.test(location.search)||!!S.timeOverride));
 
 
 // 乗り物ごとの絵（自作の簡単な形）
@@ -2241,7 +2253,7 @@ function renderSet(){
   document.getElementById("startTime").value=S.start||"";
   document.getElementById("srOk").checked=!!S.srOk;
   document.getElementById("height").value=S.height||"";
-  document.getElementById("dpaBudget").value=S.dpaBudget;document.getElementById("fxLess").checked=!!S.fxLess;document.getElementById("sndOn").checked=sndOn();document.getElementById("devBox").hidden=!dbgOn();document.getElementById("vibOn").checked=vibOn();
+  document.getElementById("dpaBudget").value=S.dpaBudget;document.getElementById("fxLess").checked=!!S.fxLess;document.getElementById("sndOn").checked=sndOn();document.getElementById("devBox").hidden=!dbgOn();document.getElementById("spNoWait").checked=splashNoWait();document.getElementById("vibOn").checked=vibOn();
   const c=S.cond;document.getElementById("cWeather").value=c.weather;document.getElementById("cCrowd").value=c.crowd;document.getElementById("cContra").checked=!!c.contra;document.getElementById("cOutdoor").checked=!!c.outdoor;document.getElementById("cWalk").checked=!!c.walk;document.getElementById("cKids").checked=!!c.kids;document.getElementById("cMemo").value=c.memo||"";
   document.getElementById("condNote").textContent=({rain:"屋根なしの列は空き、屋内の列は混む見込みで組みます",wind:"止まりやすい乗り物は後回し。止まったら「休止中にする」で記録",heat:"屋内の列は混む見込み。水分と日陰を",cold:"屋内の列は混む見込みで組みます"})[c.weather]||"";
   if(AUTO_WAIT){document.getElementById("apiOn").checked=!!S.apiOn;const note=document.getElementById("apiNote");note.hidden=!S.apiOn;document.getElementById("apiBtn").hidden=!S.apiOn;if(apiFresh())note.textContent=`データ ${fromMin(S.api.at)}（${S.api.n}件）`;else if(S.apiOn&&S.api&&isToday(S.api.day))note.textContent=`データが古い（${fromMin(S.api.at)}）。待ち時間一覧の「更新」で取り直せます`;else if(S.apiOn&&!note.textContent)note.textContent="まだ取れていません";}
@@ -2458,6 +2470,7 @@ document.addEventListener("change",e=>{
   if(t.id==="cWalk"){S.cond.walk=t.checked;replanAfterDpa();save();renderAll();return;}
   if(t.id==="cKids"){S.cond.kids=t.checked;replanAfterDpa();save();renderAll();return;}
   if(t.id==="cMemo"){S.cond.memo=t.value;save();renderAll();return;}
+  if(t.id==="spNoWait"){S.splashNoWait=t.checked;save();return;}
   if(t.id==="sndOn"){S.snd=t.checked;save();if(t.checked){sndInit();playCue("ride");}toast(t.checked?"音をオンにしました":"音をオフにしました");return;}
   if(t.id==="vibOn"){S.vib=t.checked;save();if(t.checked)buzz([30]);toast(t.checked?"振動をオンにしました":"振動をオフにしました");return;}
   if(t.id==="fxLess"){S.fxLess=t.checked;applyFx();save();toast(t.checked?"演出を少なくしました":"演出を元に戻しました");return;}
