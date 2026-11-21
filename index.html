@@ -696,8 +696,8 @@ html #splash .reward .rn .rt{text-align:center;white-space:nowrap}html #splash .
 #splash.quick.out{animation-duration:.25s}
 #splash .tapopen{position:absolute;left:0;right:0;bottom:calc(24% + env(safe-area-inset-bottom,0px));text-align:center;font-size:16px;font-weight:700;letter-spacing:.12em;color:#fff;opacity:0;pointer-events:none}
 #splash.ready .tapopen{animation:tapIn .5s ease-out forwards,tapPulse 2.4s ease-in-out .5s infinite}
-@keyframes tapIn{from{opacity:0;transform:translateY(8px)}to{opacity:.95;transform:none}}
-@keyframes tapPulse{0%,100%{opacity:.95}50%{opacity:.45}}
+@keyframes tapIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes tapPulse{0%,100%{opacity:1}50%{opacity:.76}}
 #splash.wait{cursor:pointer}
 @keyframes tw{from{opacity:.15;transform:scale(.6)}to{opacity:1;transform:scale(1.15)}}
 @keyframes wave{to{transform:translateX(-50%)}}
@@ -707,6 +707,54 @@ html #splash .reward .rn .rt{text-align:center;white-space:nowrap}html #splash .
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:.95;transform:none}}
 @keyframes kira{0%{opacity:0;transform:scale(0) rotate(-45deg)}50%{opacity:1;transform:scale(1.2) rotate(0)}100%{opacity:0;transform:scale(.6) rotate(20deg)}}
 @keyframes splOut{to{opacity:0;transform:scale(1.08);visibility:hidden}}
+/* 使い方: カードの順番（1 歩く → 2 待つ → 3 乗った） */
+.facts.steps small::before,.big-btn.st3::before{display:inline-grid;place-items:center;flex:none;border-radius:50%;font-family:var(--display);font-weight:800;line-height:1}
+.facts.steps small::before{width:18px;height:18px;margin:-2px 6px 0 0;vertical-align:middle;font-size:12px;background:var(--navy);color:#fff}
+.facts.steps>div:nth-child(1) small::before{content:"1"}.facts.steps>div:nth-child(2) small::before{content:"2"}
+.big-btn.st3::before{content:"3";width:22px;height:22px;font-size:13px;background:var(--gold2);color:var(--navy)}
+.hrow .hq{font-size:16px;color:var(--navy)}
+/* 使い方の画面（1回だけ・「?」でいつでも） */
+#guide{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:linear-gradient(180deg,#e3edff 0,#f6f9ff 38%,#fff 100%);padding:env(safe-area-inset-top,0px) max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px));animation:fadeIn .22s both}
+#guide[hidden]{display:none}
+#guide .gbody{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;padding:16px 0 8px}
+#guide .gtop{display:flex;align-items:center;gap:10px;margin:0 0 16px}
+#guide h2{display:block;margin:0;font-size:24px;line-height:1.3;color:var(--navy);letter-spacing:.02em}
+#guide ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+#guide li{display:flex;align-items:center;gap:14px;background:#fff;border-radius:16px;padding:14px 14px 14px 16px;box-shadow:0 2px 12px rgba(20,40,90,.08);border:1px solid #e3e9f6}
+#guide .gi{position:relative;flex:none;width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:var(--kc);color:var(--kf)}
+#guide .gi svg{width:28px;height:28px;fill:currentColor}
+#guide .gi b{position:absolute;left:-7px;top:-7px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;font-family:var(--display);font-size:13px;font-weight:800;line-height:1;box-shadow:0 0 0 2px #fff}
+#guide .g1{--kc:var(--accent);--kf:#fff}#guide .g2{--kc:var(--gold2);--kf:var(--navy)}#guide .g3{--kc:var(--ok);--kf:#fff}
+#guide .gt{display:block;font-size:18px;font-weight:800;color:var(--navy);line-height:1.35}
+#guide .gs{display:block;font-size:14px;color:var(--muted);line-height:1.45;margin-top:2px}
+#guide .gnote{margin:16px 0 0;font-size:14px;color:var(--muted);text-align:center;line-height:1.5}
+#guide .gnote span{display:inline-block}
+#guide .gfoot{flex:none;padding:10px 0 calc(16px + env(safe-area-inset-bottom,0px))}
+/* ==== 21. 開いた時の分かりやすさ ==== */
+html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-shadow:0 1px 10px rgba(5,20,60,.55)}
+.hrow .hq{width:42px;height:42px;padding:4px;background-clip:content-box;margin:-8px -9px -8px -3px}
+.hrow .hq::after{content:none}
+/* 有料パスを買える時: 主役カードのすぐ下に大きく（畳まない） */
+#buyBox .bbline .bbl{flex:1;min-width:0;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+#buyBox .bbline b{display:inline;font-size:15px}
+#buyBox .bbline .car{font-size:18px;flex:none}
+#buyBox .bbx{display:none}
+#buyBox.open .bbx{display:block;padding:0 12px 12px}
+#buyBox .bbx .note{margin:0 0 8px;font-size:14px}
+#buyBox .bbhow{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:0 0 10px;padding:8px 12px;border-radius:12px;background:var(--panel);font-size:14px;font-weight:800;color:var(--navy)}
+#buyBox .bbhow .ar{color:var(--dpa)}
+#buyBox.open .bbx .bbb{display:grid;padding:0;margin:0}
+.up .nm small{display:block;font-size:13px;font-weight:600;color:var(--muted)}
+/* 「まだ並んでいる」をボタンの中で折らない */
+.acts2 .big-btn{white-space:nowrap}
+@media (max-width:359px){.acts2 .big-btn{font-size:15px;padding-inline:6px}}
+/* 入園前（パークの外）の「今」 */
+.hero .say.gate{background:var(--sea);color:var(--sea-fg)}
+.nw{display:inline-block}
+.pvhead{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:10px 12px;border-radius:14px;background:var(--sea);color:var(--sea-fg);font-size:14px;font-weight:800}
+.pvhead .ic{width:28px;height:28px}
+#planList .step.pv .t{display:flex;align-items:flex-start;justify-content:flex-end;font-size:15px;color:var(--navy)}
+#planList .step.pv .t::after{content:none!important}
 /* 演出を少なく */
 .fxless *,.fxless *::before,.fxless *::after{animation:none!important;transition:none!important}
 .fxless .big-btn.pri::after{display:none}
@@ -719,6 +767,7 @@ html #splash .reward .rn .rt{text-align:center;white-space:nowrap}html #splash .
   <div class="hrow">
     <h1>ツギノル</h1>
     <div class="clock"><span class="tag warn" id="clockTag" hidden>試し中</span><span class="num" id="clock">--:--</span></div>
+    <button class="help hq" type="button" id="guideBtn" aria-label="使い方" aria-haspopup="dialog">?</button>
   </div>
   <button class="areabtn" id="areaBtn" type="button" aria-haspopup="dialog"><span id="areaIc"></span><span class="lbl">今いる場所</span><b id="areaName"></b><span class="car" aria-hidden="true">▾</span></button>
 </header>
@@ -796,7 +845,7 @@ html #splash .reward .rn .rt{text-align:center;white-space:nowrap}html #splash .
       <div class="full" style="display:grid;grid-template-columns:1fr auto;gap:8px"><button class="primary" type="button" id="addGo" style="width:100%;min-height:52px">追加する</button><button class="ghost" type="button" id="addCancel" style="min-height:52px">やめる</button></div>
     </div>
     <div class="card note" id="planNote"></div>
-    <h2>今日の予定<button class="help" type="button" data-help="plan" aria-label="使い方">?</button></h2>
+    <h2><span id="planTtl">今日の予定</span><button class="help" type="button" data-help="plan" aria-label="使い方">?</button></h2>
     <div class="helpbox" id="help-plan" hidden><p>行をタップすると「時刻を変える」「時刻を動かさない」「前へ」「後へ」「消す」などのボタンが出ます。</p><p>「時刻を動かさない」にした行は、組み直しても動きません。消したものは「元に戻す」で戻せます。</p><p>乗った・場所が変わった・待ち時間が変わったとき、自動で組み直します（10分ごとにも）。</p><p>有料パスの時間は メニュー → 有料パス で直せます。</p></div>
     <div class="list" id="planList"></div>
     <h2 id="planSkipHead">今日の予定に入らなかったもの</h2>
@@ -923,6 +972,18 @@ html #splash .reward .rn .rt{text-align:center;white-space:nowrap}html #splash .
   <div class="obhead"><button class="back" id="obBack" type="button">‹ 戻る</button><span class="obstep" id="obStep"></span></div>
   <div class="obbody" id="obBody"></div>
   <div class="obfoot" id="obFoot"></div>
+</div>
+<div id="guide" role="dialog" aria-modal="true" aria-labelledby="guideH" hidden>
+  <div class="gbody">
+    <div class="gtop"><h2 id="guideH">使い方は3つだけ</h2></div>
+    <ol>
+      <li><span class="gi g1" aria-hidden="true"><b>1</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">入園したら、行き先へ</span><span class="gs">「入園した」を押すと出ます</span></span></li>
+      <li><span class="gi g2" aria-hidden="true"><b>2</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">並んで乗る</span><span class="gs">待ち時間の目安つき</span></span></li>
+      <li><span class="gi g3" aria-hidden="true"><b>3</b><svg viewBox="0 0 24 24"></svg></span><span><span class="gt">乗ったら「乗った」</span><span class="gs">次の行き先が自動で出る</span></span></li>
+    </ol>
+    <p class="gnote"><span>入園前は「予定」で</span><span>行く日の流れを確認できます</span></p>
+  </div>
+  <div class="gfoot"><button class="big-btn pri" type="button" id="guideGo">はじめる</button></div>
 </div>
 
 <script>
@@ -1084,14 +1145,18 @@ function toast(msg,act,fn){
   const t=document.getElementById("toast");
   t.innerHTML=`<span class="tmsg">${esc(nice(msg)).replace(/\n/g,"<br><small>").replace(/<small>([^<]*)$/,"<small>$1</small>")}</span>`+(act?`<button type="button" class="toastbtn">${esc(act)}</button>`:"");
   t.onclick=act?(e=>{if(e.target.closest(".toastbtn")){fn();toast("戻しました");}}):null;
-  const fl=!document.getElementById("sheet").hidden||!document.getElementById("ob").hidden||!!document.getElementById("making")||(typeof S!=="undefined"&&S.tab==="plan");t.classList.toggle("float",fl);
-  t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),act?6000:3000);
+  t.classList.add("float"); // お知らせはいつも上に出す（カードの数字を隠さない）
+  {const co=document.querySelector(".coach");if(co){co.remove();if(co._off)document.removeEventListener("pointerdown",co._off,true);}} // 吹き出しと同時に出さない（お知らせが消えたら戻す）
+  t.classList.add("show");placeToast();clearTimeout(toastT);toastT=setTimeout(()=>{t.classList.remove("show");setTimeout(()=>{try{maybeCoach();}catch(e){}},60);},act?6000:3000);
 }
+// お知らせの位置: 画面の上。お祝いの表示が出ていればその下
+function placeToast(){const t=document.getElementById("toast");let y=0;document.querySelectorAll(".cele,.tix").forEach(e=>{const r=e.getBoundingClientRect();if(r.height&&r.top<innerHeight/2)y=Math.max(y,r.bottom+6);});if(y)t.style.setProperty("top",y+"px","important");else t.style.removeProperty("top");}
 // 状態を丸ごと控えてから実行し、トーストで取り消せるようにする
 function withUndo(msg,fn){const snap=JSON.stringify(S);fn();save();renderAll();toast(msg,"元に戻す",()=>restore(snap));}
 
 // ============ domain helpers ============
 const isToday=v=>v===todayKey();
+const inPark=()=>S.inPark===todayKey()||Object.values(S.ridden||{}).some(v=>v===todayKey())||(S.dpas||[]).some(x=>x.day===todayKey())||!!(S.eat&&S.eat.day===todayKey()); // 今日は入園済みか（表示の切り替えだけに使う）
 const ridden=id=>isToday(S.ridden[id]);
 const dropped=id=>isToday(S.drop[id]);
 const noBuy=id=>isToday(S.noBuy[id]);
@@ -1547,7 +1612,7 @@ const short=a=>NICK[a.id]||dn(a.name.split("：")[0]);
 const WB_RE=new RegExp("([ァ-ヶー])(?=("+["エクスプロレーション","ジェリーフィッシュ","メディテレーニアン","ファンタスティック","ストーリーブック","ビスコッティーズ","フェスティバル","ポルトフィーノ","アドベンチャー","ディスカバリー","ベースキャンプ","キャンティーナ","ルーズヴェルト","レールウェイ","スプリングス","ダックリング","クックアウト","ネバーランド","クックハウス","リストランテ","ファンタジー","ミステリアス","シーライダー","ロティサリー","ランディング","フードコート","ブラザーズ","スピリッツ","ブック","フィッシュ","アイランド","ヴィークル","ベーカリー","フライング","カルーセル","ジャンピン","ヴォヤッジ","ウォーター","ジャーニー","アメリカン","レストラン","アラビアン","カナレット","フローズン","スクーター","コースター","ダイニング","バンケット","マーメイド","カーペット","スチーマー","バルーン","コースト","キッチン","ランタン","ダイナー","キャンプ","トリート","ラグーン","ハーバー","ラウンジ","シアター","スナック","フレンズ","フロント","オアシス","ギャレー","ロスト","リバー","レース","ランプ","ライン","バギー","デルタ","ルーム","バイツ","ポート","グリル"].join("|")+"))","g");
 const wb=s=>esc(s).replace(/・/g,"・<wbr>").replace(/([ァ-ヶー])([のと＆])(?=[ァ-ヶ一-龠])/g,"$1$2<wbr>").replace(/([^\s])（/g,"$1<wbr>（").replace(/：/g,"：<wbr>").replace(WB_RE,"$1<wbr>"); // 名前は語の切れ目でだけ折り返す
 // 組み立てが作る文や注意の言葉を、画面に出すときだけ普通の言葉に直す（保存している中身は変えない）
-const fd=s=>String(s||"").replace(/ダッフィー限定メニュー/g,"限定メニューあり").replace(/モバイルオーダー限定/g,"スマホでの注文のみ").replace(/キャラダイはPS/g,"テーマのある食事（要予約）").replace(/PS（事前予約）推奨/g,"事前予約がおすすめ").replace(/PS必須級/g,"事前予約がほぼ必要").replace(/PS推奨/g,"事前予約がおすすめ");
+const fd=s=>String(s||"").replace(/ダッフィー限定メニュー/g,"限定メニューあり").replace(/ダッフィー/g,"限定").replace(/モバイルオーダー限定/g,"スマホでの注文のみ").replace(/キャラダイはPS/g,"テーマのある食事（要予約）").replace(/PS（事前予約）推奨/g,"事前予約がおすすめ").replace(/PS必須級/g,"事前予約がほぼ必要").replace(/PS推奨/g,"事前予約がおすすめ");
 function nice(s){return dn(String(s??"")).replace(/モバイルオーダーで並ばない/g,"スマホで注文して並ばない").replace(/・モバイルオーダー/g,"・スマホで注文").replace(/（モバイルオーダー）/g,"（スマホで注文）").replace(/屋内の列/g,"列は屋根の下").replace(/休憩（運営再開待ち）/g,"休憩（乗り物の再開待ち）")
   .replace(/DPA購入: /g,"有料パスを買う: ").replace(/（(\d\d:\d\d)前後の枠を狙う）/g,"（$1ごろ）")
   .replace(/DPA枠に遅刻: /g,"有料パスの時間に遅れそう: ").replace(/DPA枠の外/g,"有料パスの時間の外")
@@ -1618,7 +1683,7 @@ function renderOb(dir){
   if(ob.step===0){
     const card=a=>pick(`data-obpick="${a.id}"`,ico("r_"+a.id,"a-"+a.area)+`<span>${wb(short(a))}</span>`,ob.must.has(a.id));
     const bigs=ATTR.filter(a=>isOpen(a)&&isBig(a));const rest=ATTR.filter(a=>isOpen(a)&&!isBig(a));
-    body.innerHTML=`<h2>絶対乗りたいものは？</h2><p>複数選択できます。後から変更できます。</p><div class="obgrid">${bigs.map(card).join("")}</div>`+(ob.all?`<div class="obgrid" style="margin-top:10px">${rest.map(card).join("")}</div>`:"");
+    body.innerHTML=`<h2>絶対乗りたいものは？</h2><p>3つ答えると、今日回る順番ができます。複数選べて、後から変えられます。</p><div class="obgrid">${bigs.map(card).join("")}</div>`+(ob.all?`<div class="obgrid" style="margin-top:10px">${rest.map(card).join("")}</div>`:"");
     foot.innerHTML=(ob.all?"":`<button class="link obmore" type="button" id="obMore">ほかの乗り物も見る（${rest.length}）</button>`)+`<button class="big-btn pri" type="button" id="obNext">${ob.must.size?`次へ（${ob.must.size}つ選択中）`:"選ばずに次へ"}</button>`; // 「他も見る」は下の固定の所に置き、半分切れないように
   }else if(ob.step===1){
     const pc=parkClose(today());const nm=nowMin();const cur=ob.redo?S.exit:null;
@@ -1637,7 +1702,7 @@ function obFinish(budget){
   const redo=ob.redo;
   ATTR.forEach(a=>{if(!isOpen(a))return;if(ob.must.has(a.id))S.prio[a.id]="must";else if(S.prio[a.id]!=="skip"||!redo)S.prio[a.id]="want";});
   if(ob.exit)S.exit=ob.exit;S.dpaBudget=budget;S.onb=true;S.alt=null;S.day=todayKey();
-  closeOb();buildPlan();save();showTab("near");const quiet=!redo&&!fxOff();showMaking(()=>{if(!quiet)toast(redo?"予定を作り直しました":"予定ができました");maybeCoach();});
+  guideHold=true;closeOb();buildPlan();save();showTab("near");const quiet=!redo&&!fxOff();showMaking(()=>{guideHold=false;if(!quiet)toast(redo?"予定を作り直しました":"予定ができました");maybeCoach();}); // 使い方の画面は「プランができました」の後
 }
 
 
@@ -1700,7 +1765,7 @@ function celebrate(b0){const a=celeCount();const n=ATTR.filter(x=>ridden(x.id)).
   if(fxOff())return big;fxLog(big?"big":"celebrate");
   const el=document.createElement("div");el.className="cele"+(big?" bigc":"");el.setAttribute("aria-hidden","true");
   el.innerHTML=big?`<div class="c1">絶対乗るものをすべて達成</div><div class="c2">${a.left?`時間があれば: まだ乗っていない ${a.left}`:"乗りたいものはすべて完了"}</div>`:`<div class="c1"><em>${n}</em>つ目に乗りました</div><div class="c2">まだ乗っていない ${a.left}</div>`;
-  document.body.appendChild(el);setTimeout(()=>el.remove(),big?3200:1800);
+  document.body.appendChild(el);placeToast();setTimeout(()=>{el.remove();placeToast();},big?3200:1800);
   {const t=document.getElementById("toast");if(t.classList.contains("show")&&!t.classList.contains("float"))el.style.bottom=(innerHeight-t.getBoundingClientRect().top+8)+"px";} // お知らせにも重ねない
   const [bx,by]=btnPoint("#actbar .big-btn.pri");
   burst(bx,by,big?60:46,"rect",{up:true,speed:11,spread:1.3,g:0.22,drag:0.975,life:80,jx:120,size:10});
@@ -1709,15 +1774,29 @@ function celebrate(b0){const a=celeCount();const n=ATTR.filter(x=>ridden(x.id)).
 function fxTicket(id,slot){if(fxOff())return;const a=byId[id];fxLog("ticket");
   const el=document.createElement("div");el.className="tix";el.setAttribute("aria-hidden","true");
   el.innerHTML=`<div class="tk"><div class="tk1">${svg("ticket")}有料パスを登録しました</div><div class="tk2">${wb(short(a))}</div><div class="tk3">乗車 <b class="num">${esc(slot)}</b>〜</div></div>`;
-  document.body.appendChild(el);setTimeout(()=>{const r=el.getBoundingClientRect();burst(innerWidth/2,r.top+20,26,"star",{speed:5,g:0.05,drag:0.95,life:50,size:8});},560);setTimeout(()=>el.remove(),2000);}
+  document.body.appendChild(el);placeToast();setTimeout(()=>{const r=el.getBoundingClientRect();burst(innerWidth/2,r.top+20,26,"star",{speed:5,g:0.05,drag:0.95,life:50,size:8});},560);setTimeout(()=>{el.remove();placeToast();},2000);}
 // 数字のカウントアップ
 function countUp(root){if(fxOff())return;root.querySelectorAll(".cu").forEach(el=>{const to=+el.dataset.to;if(!(to>0))return;const t0=performance.now(),D=520;
   const f=t=>{const k=Math.min(1,(t-t0)/D);const e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e);if(k<1&&el.isConnected)requestAnimationFrame(f);};el.textContent="0";requestAnimationFrame(f);});}
 // はじめて「今」に来たときの案内（1回だけ・どこを押しても消える）
-function maybeCoach(){const old=document.querySelector(".coach");if(old&&!old.isConnected)return;const k=NOW&&NOW.kind;if(["over","leave"].includes(k)){if(old)old.remove();return;} // 閉園・帰る時間の後は出さない
+// 使い方の画面: 予定ができた直後に1回だけ（前から使っている人も次に開いた時に1回）。上の「?」でいつでも開く
+let guideHold=false,guideFrom=null;
+function openGuide(){const g=document.getElementById("guide");if(!g.hidden)return;guideFrom=document.activeElement;const c=document.querySelector(".coach");if(c){c.remove();if(c._off)document.removeEventListener("pointerdown",c._off,true);}
+  g.querySelectorAll(".gi svg").forEach((v,i)=>{v.innerHTML=IC[["pin","clock","check"][i]];}); // 影絵のアイコン（後で読み込む形に合わせて開く時に入れる）
+  document.getElementById("guideGo").textContent=S.guideDone?"閉じる":"はじめる";
+  g.hidden=false;document.getElementById("toast").classList.remove("show");armBack();setTimeout(()=>{const b=document.getElementById("guideGo");if(b&&!g.hidden)b.focus({preventScroll:true});},40);}
+function closeGuide(){const g=document.getElementById("guide");if(g.hidden)return false;g.hidden=true;if(!S.guideDone){S.guideDone=true;save();}
+  const f=guideFrom;guideFrom=null;if(f&&f.isConnected&&f.id==="guideBtn")f.focus({preventScroll:true});setTimeout(maybeCoach,0);return true;}
+function guideShown(){return !document.getElementById("guide").hidden;}
+function maybeGuide(){if(guideShown())return true;if(S.guideDone||!S.onb||ob||guideHold||S.tab!=="near"||document.getElementById("splash")||document.getElementById("making")||!document.getElementById("sheet").hidden)return false;
+  const k=NOW&&NOW.kind;if(k==="over"||k==="leave"||k==="home")return false;openGuide();return true;}
+document.getElementById("guideGo").addEventListener("click",()=>closeGuide());
+document.getElementById("guideBtn").addEventListener("click",()=>openGuide());
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&guideShown()){e.preventDefault();closeGuide();}});
+function maybeCoach(){if(guideHold||maybeGuide())return;const old=document.querySelector(".coach");if(old&&!old.isConnected)return;const k=NOW&&NOW.kind;if(["over","leave","home","rideask","mealask"].includes(k)||document.querySelector("#toast.show")){if(old){old.remove();if(old._off)document.removeEventListener("pointerdown",old._off,true);}return;} // 閉園・帰る時間の後、確認の時、お知らせが出ている間は出さない
   if(old&&(old.dataset.k!==String(k)||S.tab!=="near")){old.remove();document.removeEventListener("pointerdown",old._off,true);}else if(old)return; // 種類が変わったら文を作り直す
   if(S.coachDone||!S.onb||ob||S.tab!=="near"||document.getElementById("splash")||document.getElementById("making"))return;
-  const btn=document.querySelector("#actbar:not([hidden]) .big-btn.pri");if(!btn)return;const msg=k==="buy"?"買えたらタップ":(k==="meal"?"食事を始めるときにタップ":(k==="ride"?"乗ったらタップ":"迷ったらタップ"));
+  const btn=document.querySelector("#actbar:not([hidden]) .big-btn.pri");if(!btn)return;const msg=k==="gate"?"入園したらタップ":(k==="buy"?"買えたらタップ":(k==="meal"?"食事を始めるときにタップ":(k==="ride"?"乗ったらタップ":"迷ったらタップ")));
   const el=document.createElement("div");el.className="coach";el.innerHTML=`<div class="bub">${msg}<small>タップで閉じる</small></div><div class="ar"></div>`;
   el.dataset.k=String(k);el.classList.add("inbar");const ab=document.getElementById("actbar");ab.insertBefore(el,ab.firstChild); // カードに重ねず、ボタンのすぐ上（画面の流れの中）に出す
   el.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();});
@@ -1738,7 +1817,7 @@ function splashRun(){const sp=document.getElementById("splash");if(!sp)return;sp
   // 音がオンなら「タップして開く」で待つ（iPhone はタップの後でないと音を鳴らせないため）。音オフ・動きを減らす・試しのときは今まで通り自動で閉じる
   const wait=sndOn()&&!splashNoWait();if(wait)sp.classList.add("wait");
   let fin=false,opening=false,revealing=false;
-  const done=()=>{if(fin)return;fin=true;document.removeEventListener("keydown",onKey,true);sp.remove();if(FX.c)FX.c.style.zIndex="";maybeCoach();};
+  const done=()=>{if(fin)return;fin=true;tapShield=performance.now()+1000;OPEN_AT=Date.now();document.removeEventListener("keydown",onKey,true);sp.remove();if(FX.c)FX.c.style.zIndex="";maybeCoach();};
   // 羅針盤の中心から円を広げて中の画面を見せる（半透明の重ね合わせは使わない）
   const reveal=ms=>{if(revealing||fin)return;revealing=true;sp.style.pointerEvents="none";if(opening){sp.style.setProperty("--thr",ms+"ms");sp.classList.add("through");}const c=sp.querySelector(".cmp").getBoundingClientRect();const cx=c.left+c.width/2,cy=c.top+c.height/2;
     const R=Math.hypot(Math.max(cx,innerWidth-cx),Math.max(cy,innerHeight-cy))+20;const ring=sp.querySelector(".sring");const t0=performance.now();
@@ -1764,6 +1843,12 @@ function splashRun(){const sp=document.getElementById("splash");if(!sp)return;sp
   // 最初の描画（予定の計算）が終わってから動かす。遅いスマホでも動きの途中で止まらないように
   setTimeout(()=>{if(fin)return;sp.classList.add(quick?"quick":"full");fxLog(quick?"splash-quick":"splash");window.__splashAt=performance.now();
     setTimeout(()=>{if(fin||opening||revealing)return;if(wait){sp.classList.add("ready");fxLog("splash-wait");}else reveal(quick?380:520);},quick?420:2000);},0);}
+// スプラッシュのタップを下の画面に通さない（出ている間と、閉じた直後の約1秒）
+let tapShield=0;
+["pointerdown","pointerup","mousedown","mouseup","click","dblclick","touchstart","touchend","contextmenu"].forEach(tp=>window.addEventListener(tp,e=>{const sp=document.getElementById("splash");if(!e.isTrusted)return;
+  if(sp&&sp.style.pointerEvents!=="none"&&e.target&&e.target.closest&&e.target.closest("#splash"))return; // スプラッシュ自身へのタップは通す（開く・飛ばす）
+  if(!sp&&e.target&&e.target.closest&&e.target.closest("#obBody"))return; // 最初の質問の選択肢は閉じた直後でも押せる（下の「次へ」は守る）
+  if(sp||performance.now()<tapShield){if(e.cancelable)e.preventDefault();e.stopImmediatePropagation();}},{capture:true,passive:false}));
 // 起動画面のごほうび: 今の「次の行き先」を読むだけ（新しい計算はしない）
 const AREA_POS={MH:[0,0],AWF:[2,.6],PD:[2.3,2],MI:[0,2],LRD:[.6,3.6],AC:[-1,3.6],ML:[-1.7,3],FS:[-.4,4.7]};
 function splashReward(){try{const tk=todayKey();const pc=parkClose(today());
@@ -1771,7 +1856,8 @@ function splashReward(){try{const tk=todayKey();const pc=parkClose(today());
   const n=NOW;if(!n)return null;const nm=nowMin();
   if(n.kind==="over")return{eb:nm>=mins(pc)?"本日の営業は終了しました":"帰る時間です",name:nm>=mins(pc)?"今日のまとめを見る":"出口へ向かいましょう",ic:"moon"};
   if(n.kind==="leave")return{eb:"帰る時間が近づいています",name:"出口へ",ic:"pin"};
-  if(n.kind==="pre"){const f=n.first;const a=f&&f.a;return{eb:`開園 ${fromMin(planStart())} から`,name:a?short(a):"今日の計画を確認",ic:a?"r_"+a.id:"clock",area:a?a.area:null};}
+  if(n.kind==="home")return{eb:"パークに着いたら",name:"もう一度開いてください",ic:"pin"};
+  if(n.kind==="pre"||n.kind==="gate"){const f=n.first;const a=f&&(f.a||(f.row&&f.row.attr&&byId[f.row.attr]));return{eb:n.kind==="pre"?`開園 ${fromMin(planStart())} から`:"最初の行き先",name:a?short(a):"今日の計画を確認",ic:a?"r_"+a.id:"clock",area:a?a.area:null};}
   const a=n.a||(n.row&&n.row.attr&&byId[n.row.attr]);
   if(n.kind==="buy")return{eb:"次は有料パス",name:short(n.a),ic:"ticket",area:n.a.area};
   if(n.kind==="meal"||n.kind==="mealask")return{eb:"次は食事",name:n.row?planLabel(n.row).replace(/^(昼食|夕食)[:：]\s*/,""):"食事",ic:n.row?rowIc(n.row):"meal",area:n.row&&n.row.area};
@@ -1830,6 +1916,7 @@ function wrapTimes(){document.querySelectorAll('input[type="time"]').forEach(inp
 let popArmed=false;
 function armBack(){try{if(!history.state||!history.state.tg){history.pushState({tg:1},"");}popArmed=true;}catch(e){}}
 function backLayer(){
+  if(guideShown()){closeGuide();return true;}
   if(!document.getElementById("sheet").hidden){closeSheet();return true;}
   if(ob){if(ob.step>0){ob.step--;ob.custom=false;renderOb(-1);return true;}if(ob.redo){closeOb();return true;}return false;}
   if(!MAIN.includes(S.tab)){goBack();return true;}
@@ -1990,7 +2077,7 @@ function fitText(){document.querySelectorAll(FIT_SEL).forEach(el=>{if(!el.offset
 
 
 // ===== 同じ状態なら表示を変えない。変わるときは理由を1行 =====
-let lastAct=0;const BOOT_AT=Date.now();document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("button,label,input,select"))lastAct=Date.now();},true);document.addEventListener("change",()=>{lastAct=Date.now();},true);
+let lastAct=0;const BOOT_AT=Date.now();let OPEN_AT=Date.now(); // 開いた（スプラッシュが閉じた・アプリに戻った）時刻document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("button,label,input,select"))lastAct=Date.now();},true);document.addEventListener("change",()=>{lastAct=Date.now();},true);
 const sigOf=c=>c?c.kind+":"+(c.a?c.a.id:(c.row?(c.row.attr||c.row.k+(c.row.mk||"")):(c.mk||""))):"";
 let autoMsg=null;
 // 自動の見直し（10分ごと・自動取得）では、今の主役の行を一時的に「動かさない」にして組み直す（主役を黙って変えない）
@@ -2003,7 +2090,7 @@ function explainAuto(prev,c,nm){ // 押していないのに主役が変わっ�
   else if(c.kind==="leave"||c.kind==="over")why="帰る時間が近いため";
   else if(c.kind==="rideask")why="";
   else if(c.a&&heldDpa(c.a.id))why=`${short(c.a)}の有料パスの時間が近いため`;
-  return why?`${why}、${name?"次は"+name+"へ":"案内を変えました"}`:"";}
+  return why&&name?`${why}、次は${name}へ`:"";} // 中身（次の行き先）が言えない時は出さない
 
 
 function mustOut(){const sk=S.planDay===todayKey()?(S.planSkip||[]):[];return sk.filter(id=>byId[id]&&prio(byId[id])==="must"&&!ridden(id)&&usable(byId[id]));}
@@ -2178,7 +2265,9 @@ const upName=p=>p.k==="ride"&&p.attr?short(byId[p.attr])+(p.dpa?"（有料パス
 let NOW=null,driftAt=null,nowKey=null;
 function renderNow(){
   const st=nowState();let c=nowCard2(st);const nm=st.nm;
-  const isPre=beforeStart()&&c.kind!=="over";NOW=isPre?{kind:"pre",first:c}:c;
+  const isPre=beforeStart()&&c.kind!=="over";const inPk=inPark();
+  const gate=!isPre&&!inPk&&c.kind!=="over"&&c.kind!=="leave",home=!isPre&&!inPk&&!gate; // その日「入園した」を押すまでは入園前の表示（計算はそのまま）
+  NOW=isPre?{kind:"pre",first:c}:(gate?{kind:"gate",first:c}:(home?{kind:"home",first:c}:c));
   const nc=document.getElementById("nextCard");const ab=document.getElementById("actbar");
   const pre=beforeStart()?`入園したら（${fromMin(planStart())}〜）`:"";
   let kind=c.kind,h="",acts="",eating=false;
@@ -2187,8 +2276,15 @@ function renderNow(){
   if(isPre){const lbl=S.start&&mins(S.start)>mins(PLAN_OPEN)?"予定の開始":"開園";kind="other";
     const f=c.kind==="buy"?`入園したら有料パス（${wb(short(c.a))}）を購入`:(c.kind==="ride"?`最初の行き先: ${wb(short(c.a))}`:(c.row?`最初の予定: ${wb(planLabel(c.row))}`:""));
     const fn=c.kind==="ride"?short(c.a):(c.kind==="buy"?`有料パス: ${short(c.a)}`:(c.row?planLabel(c.row):""));
-    h=top(c.kind==="ride"?"r_"+c.a.id:(c.kind==="buy"?"ticket":"clock"),`最初の行き先（${lbl} ${fromMin(planStart())} から）`,fn?wb(fn):`${lbl}までお待ちください`)+`<div class="say">${svg("clock")}${lbl}までお待ちください（${fromMin(planStart())}〜）</div>`;
+    h=top(c.kind==="ride"?"r_"+c.a.id:(c.kind==="buy"?"ticket":"clock"),`最初の行き先<span class="nw">（${lbl} ${fromMin(planStart())} から）</span>`,fn?wb(fn):`${lbl}までお待ちください`)+`<div class="say">${svg("clock")}${lbl}までお待ちください（${fromMin(planStart())}〜）</div>`;
     acts=`<button class="big-btn pri" type="button" data-tab="plan">${svg("clock")}予定を確認</button>`;}
+  else if(gate){const f=c;const a=f.a||(f.row&&f.row.attr&&byId[f.row.attr])||null;const buy=f.kind==="buy";kind=buy?"buy":(a?"ride":"other");
+    const nm1=a?(buy?`有料パス: ${short(a)}`:short(a)):(f.row?planLabel(f.row):(f.kind==="mealask"?(f.mk==="lunch"?"昼食":"夕食"):"今日の予定"));
+    const td=today();h=top(buy?"ticket":(a?"r_"+a.id:(f.row?rowIc(f.row):"pin")),`最初の行き先<span class="nw">（今日 ${td.getMonth()+1}/${td.getDate()}</span><span class="nw">&nbsp;に行く場合）</span>`,wb(nm1))+(a?`<div class="where">${aIco(a.area)}<span>${esc(AREAS[a.area])}</span></div>`:"")+`<div class="say gate">${svg("pin")}<span><span class="nw">入園したら押すと、</span><span class="nw">ここから順番に案内します</span></span></div>`;
+    acts=`<button class="big-btn pri" type="button" data-enter="1">${svg("check")}入園した</button><button class="big-btn sec" type="button" data-tab="plan">${svg("clock")}予定を見る</button>`;}
+  else if(home){kind="over";
+    h=top("pin","入園前","パークに着いたら開いてください")+`<div class="say">${svg("info")}<span><span class="nw">入園してから「今」を開くと、</span><span class="nw">行き先を順番に案内します</span></span></div>`;
+    acts=`<button class="big-btn sec" type="button" data-tab="plan">${svg("clock")}行く日の流れを見る</button>`;}
   else if(c.kind==="rideask"){const a=c.a;kind="ride";
     h=top("r_"+a.id,"確認",`${wb(short(a))}に乗れましたか？`)+`<div class="say">${svg("info")}予定の時間を過ぎました。行き先はそのままです</div>`;
     acts=`<button class="big-btn pri" type="button" data-rideok="${a.id}">${svg("check")}乗れた</button><div class="acts2"><button class="big-btn sec" type="button" data-qext="${a.id}">まだ並んでいる</button><button class="big-btn sec" type="button" data-qquit="${a.id}">やめた</button></div>`;}
@@ -2208,9 +2304,9 @@ function renderNow(){
     const stopP=st.pNext&&st.pNext.attr&&st.pNext.attr!==a.id&&st.pNext.k==="ride"&&stopInfo(byId[st.pNext.attr])?byId[st.pNext.attr]:null;
     const why=hd||stopP?"":(prio(a)==="must"?"絶対乗るもの":((()=>{const u=urgency(a,nm+wk,exitMin());return u>12?"この後は待ちが長くなるため、今のうちに":(wk<=5&&w<=20?"近くて待ちが短いため":"");})()));
     const say=(why?`<div class="say">${svg("star")}${why}</div>`:"")+(stopP?`<div class="say bad">${svg("pause")}${wb(short(stopP))}は休止中のため、代わりにこちら</div>`:(hd?`<div class="say">${svg("ticket")}有料パスで並ばずに乗れます</div>`:(!(l&&l.open)?`<div class="say">${svg("info")}待ち時間は予想です</div>`:"")));
-    h=top("r_"+a.id,hd?"有料パスで乗る":(pre||"次の行き先"),wb(short(a)))+`<div class="facts"><div><small>歩いて</small>${wk?`<b class="num">${cu(wk)}<i>分</i></b>`:`<b class="zero">すぐ近く</b>`}</div><div><small>${hd?"乗れる時間":"待ち"}</small>${hd?`<b class="num">${hd.slot}<i>〜</i></b>`:(w<=0?`<b class="zero">すぐ乗れる</b>`:`<b class="num">${(l&&l.open?"":"<i>約</i>")+cu(w)}<i>分</i></b>`)}</div></div><div class="where">${aIco(a.area)}<span>${esc(AREAS[a.area])}${S.srOk&&a.sr&&!hd?"・1人ずつ乗る列あり":""}${a.to?"・乗ると"+esc(AREAS[a.to])+"に着く":""}</span></div>`+say;
+    h=top("r_"+a.id,hd?"有料パスで乗る":(pre||"次の行き先"),wb(short(a)))+`<div class="facts steps"><div><small>歩いて</small>${wk?`<b class="num">${cu(wk)}<i>分</i></b>`:`<b class="zero">すぐ近く</b>`}</div><div><small>${hd?"乗れる時間":"待ち"}</small>${hd?`<b class="num">${hd.slot}<i>〜</i></b>`:(w<=0?`<b class="zero">すぐ乗れる</b>`:`<b class="num">${(l&&l.open?"":"<i>約</i>")+cu(w)}<i>分</i></b>`)}</div></div><div class="where">${aIco(a.area)}<span>${esc(AREAS[a.area])}${S.srOk&&a.sr&&!hd?"・1人ずつ乗る列あり":""}${a.to?"・乗ると"+esc(AREAS[a.to])+"に着く":""}</span></div>`+say;
     if(hd)kind="buy";
-    acts=`<button class="big-btn pri" type="button" data-rideok="${a.id}">${svg("check")}乗った</button>`+(hd?"":`<button class="big-btn sec" type="button" data-other="${a.id}">${svg("swap")}別の候補</button>`);}
+    acts=`<button class="big-btn pri st3" type="button" data-rideok="${a.id}">${svg("check")}乗った</button>`+(hd?"":`<button class="big-btn sec" type="button" data-other="${a.id}">${svg("swap")}別の候補</button>`);}
   else if(c.kind==="meal"){const p=c.row;const mk=mealKind(p);eating=!!S.eat&&isToday(S.eat.day)&&S.eat.k===mk;const wk=p.area?walk(S.area,p.area):0;
     h=top(rowIc(p),eating?"食事中":(pre||"次は食事"),wb(planLabel(p)))+(eating?"":`<div class="facts"><div><small>歩いて</small>${wk?`<b class="num">${cu(wk)}<i>分</i></b>`:`<b class="zero">すぐ近く</b>`}</div><div><small>目安</small><b class="num">${p.dur||30}<i>分</i></b></div></div>`);
     acts=eating?`<button class="big-btn pri meal" type="button" data-atedone="${mk}">${svg("check")}食べ終わった</button>`:`<button class="big-btn pri meal" type="button" data-eat="${mk}">${svg("meal")}食事にする</button><button class="big-btn sec" type="button" data-eatlater="${mk}">${svg("clock")}後で</button>`;}
@@ -2218,22 +2314,22 @@ function renderNow(){
     h=top(rowIc(p),pre||"次の予定",wb(planLabel(p)))+`<div class="say">${svg("clock")}${fromMin(p.t)}〜${p.dur?fromMin(endOf(p)):""}</div>`;
     acts=`<button class="big-btn sec" type="button" data-tab="waits">待ち時間一覧</button>`;}
   else{
-    h=c.left?top("pause","現在","帰る時間までに回れるものはありません"):top("star","完了","乗りたいものはすべて乗りました");
-    if(c.left)acts=`<button class="big-btn pri" type="button" data-exitsheet="1">${svg("clock")}帰る時間を変える</button>`;}
+    h=c.left?top("pause","現在","帰る時間までに回れるものはありません")+(st.exitM>nm?`<div class="say">${svg("clock")}<span><span class="nw">帰る時間（${fromMin(st.exitM)}）まで あと${st.exitM-nm}分。</span><span class="nw">待ち時間一覧から選べます</span></span></div>`:""):top("star","完了","乗りたいものはすべて乗りました");
+    if(c.left)acts=`<button class="big-btn pri" type="button" data-tab="waits">${svg("clock")}待ち時間一覧</button><button class="big-btn sec" type="button" data-exitsheet="1">${svg("clock")}帰る時間を変える</button>`;}
   const key=c.kind+":"+(c.a?c.a.id:(c.row?c.row.id:""))+":"+eating;const changed=key!==nowKey;const first=nowKey==null;nowKey=key;
   nc.className="hero k-"+kind+(c.kind==="buy"?" buy":"")+(c.kind==="meal"?" meal":"");nc.innerHTML=h;
   if(changed&&!first&&!fxOff()&&S.tab==="near"){void nc.offsetWidth;nc.classList.add("flip");fxLog("flip");}
   if(changed&&S.tab==="near")countUp(nc);
   // 絶対乗るの進みぐあい
   {const {want}=stats();const must=want.filter(a=>prio(a)==="must");const base=must.length?must:want;const dn=base.filter(a=>ridden(a.id)).length;const pg=document.getElementById("prog");
-    pg.hidden=!base.length||c.kind==="over"||isPre;pg.innerHTML=base.length?`${svg("star")}<span>${must.length?"絶対乗る":"乗りたいもの"}</span><span class="bar"><i style="width:${Math.round(dn/base.length*100)}%"></i></span><b class="num">${dn}<small> / ${base.length}</small></b>`:"";}
+    pg.hidden=!base.length||c.kind==="over"||isPre||gate||home;pg.innerHTML=base.length?`${svg("star")}<span>${must.length?"絶対乗る":"乗りたいもの"}</span><span class="bar"><i style="width:${Math.round(dn/base.length*100)}%"></i></span><b class="num">${dn}<small> / ${base.length}</small></b>`:"";}
   if(c.kind==="buy"||c.buy)document.getElementById("dpabar").hidden=true; // カードや紫の箱が同じことを言っているので重ねない
-  {const pn=document.getElementById("passNote");const ps=!isPre&&c.kind!=="over"&&c.kind!=="leave"&&(c.pass||c.leave);if(c.kind==="rideask"&&c.leave)c.pass=null;pn.hidden=!ps;
+  {const pn=document.getElementById("passNote");const ps=!isPre&&!gate&&!home&&c.kind!=="over"&&c.kind!=="leave"&&(c.pass||c.leave);if(c.kind==="rideask"&&c.leave)c.pass=null;pn.hidden=!ps;
     pn.innerHTML=ps&&!c.pass?`${ico("pin","k-over")}<span>帰る時間まで あと${c.leave.left}分（出口まで 歩いて約${c.leave.ex}分）</span>`:ps?`${ico("r_"+c.pass.a.id,"a-"+c.pass.a.area)}<span>${wb(short(c.pass.a))}（有料パス）は <b class="num">${c.pass.slot}</b> から乗れます</span>`:"";
     const ma=document.getElementById("mealAsk");const mk=MEALS.find(m=>isToday((S.mealAsk||{})[m.k])&&!ate(m.k)&&!(S.eat&&isToday(S.eat.day)&&S.eat.k===m.k));ma.hidden=true; // 聞くのは大きなカードだけ
     ma.innerHTML=mk?`<span>${mk.k==="lunch"?"昼食":"夕食"}は済みましたか？</span><button class="sm" type="button" data-mealans="${mk.k}|yes">済んだ</button><button class="sm" type="button" data-mealans="${mk.k}|no">まだ</button>`:"";}
-  {const bb=document.getElementById("buyBox");const B=c.buy;bb.hidden=!B||isPre;
-    bb.classList.toggle("open",!!bbOpen);bb.innerHTML=B&&!isPre?`<button class="bbline" type="button" data-bbtoggle="1">${ico("ticket")}<span>有料パス 今買える: <b>${wb(short(B.a))}</b></span><span class="car" aria-hidden="true">${bbOpen?"▴":"▾"}</span></button><div class="bbh">${ico("ticket")}<div class="bbt"><div class="eb">有料パスも今買えます</div><b>${wb(short(B.a))}</b><div class="note">乗る時間 ${B.slot}ごろ・1人 ${B.a.dpa.toLocaleString()}円・公式アプリで購入してからタップ</div></div></div><div class="bbb"><button class="big-btn sec bbuy" type="button" data-quick="${B.a.id}" data-qslot="${B.slot}">${svg("ticket")}買った</button><button class="big-btn sec" type="button" data-soldx="${B.a.id}">売り切れ</button><button class="big-btn sec" type="button" data-nobuy="${B.a.id}">買わない</button></div>`:"";}
+  {const bb=document.getElementById("buyBox");const B=c.buy;bb.hidden=!B||isPre||gate||home;
+    bb.classList.toggle("open",!!bbOpen);bb.innerHTML=B&&!isPre&&!gate&&!home?`<button class="bbline" type="button" data-bbtoggle="1" aria-expanded="${!!bbOpen}">${ico("ticket")}<span class="bbl">有料パス：<b>${wb(short(B.a))}</b><wbr>を公式アプリで買う</span><span class="car" aria-hidden="true">${bbOpen?"▴":"›"}</span></button><div class="bbx"><div class="note">乗る時間 ${B.slot}ごろ・1人 ${B.a.dpa.toLocaleString()}円</div><div class="bbhow"><span>公式アプリで買う</span><span class="ar" aria-hidden="true">→</span><span>「買った」を押す</span></div><div class="bbb"><button class="big-btn sec bbuy" type="button" data-quick="${B.a.id}" data-qslot="${B.slot}">${svg("ticket")}買った</button><button class="big-btn sec" type="button" data-soldx="${B.a.id}">売り切れ</button><button class="big-btn sec" type="button" data-nobuy="${B.a.id}">買わない</button></div></div>`:"";}
   ab.innerHTML=acts;ab.hidden=!acts||S.tab!=="near"||!S.onb;
   document.documentElement.style.setProperty("--actH",(ab.hidden?0:ab.offsetHeight)+"px");document.documentElement.style.setProperty("--navH",document.querySelector("nav").offsetHeight+"px");
   // 並んでいる行がカードと別のとき（有料パスを買う番など）は、小さく出す
@@ -2243,14 +2339,15 @@ function renderNow(){
   const skipId=c.kind!=="buy"&&c.row?c.row.id:null;const bId=c.kind==="buy"?c.a.id:(c.buy?c.buy.a.id:null);
   const ups0=st.plan.filter(p=>p.k!=="note"&&p.id!==skipId&&!(bId&&p.k==="buy"&&p.attr===bId)&&!(p.k==="ride"&&p.attr&&ridden(p.attr))&&!(c.kind==="ride"&&p.k==="ride"&&!p.dpa&&p.attr===c.a.id)&&c.kind!=="over"&&(p.t>=nm||(p.inq&&endOf(p)>nm))).slice(0,3); // （前の作り方。使わない）
   const ups=c.next?[...c.next,...st.plan.filter(p=>p.k==="buy"&&p.t>=nm&&p.t<st.exitM&&p.attr!==bId&&!noBuy(p.attr)&&!DP().some(x=>x.id===p.attr))].sort((x,y)=>x.t-y.t).slice(0,3):[]; // 主役と同じ一覧から
-  document.getElementById("upNext").innerHTML=ups.length?ups.map(p=>{const kk=kindOfRow(p);return `<button class="up k-${kk}" type="button" data-uprow="${p.id}">${ico(rowIc(p))}<span class="num">${fromMin(p.t)}</span><span class="nm">${wb(upName(p))}</span><span class="car" aria-hidden="true">›</span></button>`;}).join(""):`<div class="empty">この後の予定はありません</div>`;
+  document.getElementById("upNext").innerHTML=ups.length?ups.map(p=>{const kk=kindOfRow(p);return `<button class="up k-${kk}" type="button" data-uprow="${p.id}">${ico(rowIc(p))}<span class="num">${fromMin(p.t)}</span><span class="nm">${wb(upName(p))}${p.k==="buy"?"<small>公式アプリで購入</small>":""}</span><span class="car" aria-hidden="true">›</span></button>`;}).join(""):`<div class="empty">この後の予定はありません</div>`;
   // カードと予定がずれていたら、押さなくても組み直す（1分に1回まで）
-  renderPassLine();if(c.kind==="over"||c.kind==="leave"||isPre)document.getElementById("dpabar").hidden=true;
-  {const ov=c.kind==="over";["upHead","upNext","waitsRow"].forEach(i=>{const e=document.getElementById(i);if(e)e.hidden=ov;});}maybeCoach();
-  {const sg=sigOf(NOW);if(S.lastSig&&S.lastSig!==sg&&!document.querySelector("#toast.show")&&Date.now()-lastAct>3000&&Date.now()-BOOT_AT>4000&&S.onb&&!ob&&!["over","leave"].includes(NOW.kind)){const m=explainAuto(S.lastSig,NOW,nm);if(m&&!document.querySelector("#toast.show .toastbtn"))setTimeout(()=>toast(m),0);}
+  renderPassLine();if(c.kind==="over"||c.kind==="leave"||isPre||gate||home||c.kind==="buy"||(c.buy&&!document.getElementById("buyBox").hidden))document.getElementById("dpabar").hidden=true; // 同じことを言う行は重ねない
+  document.getElementById("areaBtn").hidden=isPre||gate||home; // 開園前・入園前は「今いる場所」を出さない
+  {const ov=c.kind==="over"||home;["upHead","upNext","waitsRow"].forEach(i=>{const e=document.getElementById(i);if(e)e.hidden=ov;});}maybeCoach();
+  {const sg=sigOf(NOW);if(S.lastSig&&S.lastSig!==sg&&!document.querySelector("#toast.show")&&Date.now()-lastAct>3000&&Date.now()-BOOT_AT>4000&&Date.now()-OPEN_AT>8000&&S.onb&&!ob&&!["over","leave","gate","home"].includes(NOW.kind)){const m=explainAuto(S.lastSig,NOW,nm);if(m&&!document.querySelector("#toast.show .toastbtn"))setTimeout(()=>toast(m),0);}
     if(S.lastSig!==sg){S.lastSig=sg;S.lastSigAt=nm;}
     const PS=passState();const pk=PS.id?PS.id+(PS.now?":now":""):"";
-    if(S.lastPass&&S.lastPass!==pk&&/:now$/.test(S.lastPass)&&Date.now()-lastAct>3000&&Date.now()-BOOT_AT>4000&&!document.querySelector("#toast.show")&&!["over","leave"].includes(NOW.kind)){const oid=S.lastPass.split(":")[0];const oa=byId[oid];
+    if(S.lastPass&&S.lastPass!==pk&&/:now$/.test(S.lastPass)&&Date.now()-lastAct>3000&&Date.now()-BOOT_AT>4000&&Date.now()-OPEN_AT>8000&&!document.querySelector("#toast.show")&&!["over","leave","gate","home"].includes(NOW.kind)){const oid=S.lastPass.split(":")[0];const oa=byId[oid];
       if(oa){const why=SOLD_BY[oid]&&nm>mins(SOLD_BY[oid])?`売り切れの目安（${SOLD_BY[oid]}）を過ぎたため`:(soldOut(oid)?"売り切れのため":"買える時間を過ぎたため");setTimeout(()=>toast(`${short(oa)}の有料パスは${why}、案内を変えました`),0);}}
     S.lastPass=pk;
     if(NOW.kind!=="ride"&&NOW.kind!=="rideask")S.stick=null;if(NOW.kind==="ride"&&NOW.row){const same=S.stick&&S.stick.attr===NOW.a.id&&isToday(S.stick.day);S.stick={attr:NOW.a.id,day:todayKey(),end:same?(NOW.queue?Math.max(S.stick.end,nm):S.stick.end):endOf(NOW.row)};}} // 終わり時刻は最初に主役になった時のまま
@@ -2303,6 +2400,22 @@ function renderNear(force){
   const ae0=document.activeElement;if(!force&&ae0&&ae0.dataset&&ae0.dataset.wait){needRender=true;return;}
   renderWaits();
 }
+// 閉園後・まだ入園していない人: 次に行く日の流れ（開園から）を写しで組んで見せるだけ（S と時刻は元に戻す・計算は同じ）
+let PV=null;
+function previewDay(){const key=JSON.stringify([todayKey(),S.exit,S.dpaBudget,S.start,S.prio,S.srOk,S.cond]);if(PV&&PV.key===key)return PV;
+  const snap=JSON.stringify(S);const nowF=now;const b=nowF();const st0=Math.max(mins(PLAN_OPEN),S.start?mins(S.start):0);const d1=new Date(b.getFullYear(),b.getMonth(),b.getDate()+1,Math.floor(st0/60),st0%60,0,0);let rows=[];
+  try{now=()=>new Date(d1.getTime());S.timeOverride="";S.plan=[];S.planBuilt=false;S.planDay=null;buildPlan();rows=planToday().map(p=>Object.assign({},p));}catch(e){rows=[];}
+  finally{now=nowF;S=Object.assign(DEF(),JSON.parse(snap));save();}
+  PV={key,day:d1,rows};return PV;}
+function previewHtml(){const pv=previewDay();const d=pv.day;
+  const head=`<div class="pvhead">${ico("clock","k-other")}<span><span class="nw">行く日の流れ</span><span class="nw">（例 ${d.getMonth()+1}/${d.getDate()}）</span>&nbsp;<span class="nw">開園 ${fromMin(d.getHours()*60+d.getMinutes())} から</span></span></div>`;
+  if(!pv.rows.length)return head+`<div class="empty">予定を組めませんでした</div>`;
+  return head+pv.rows.filter(p=>p.k!=="note").map(p=>{const a=p.attr?byId[p.attr]:null;const meta=[];
+    if(a&&p.k!=="buy")meta.push(`<span>${AN(a.area)}</span>`);
+    if(p.k==="buy"&&a)meta.push(`<span>${a.dpa.toLocaleString()}円</span>`,`<span>公式アプリで購入</span>`);
+    if(p.k==="ride"&&p.dpa)meta.push(`<span class="tag dpa">有料パス</span>`);else if(p.k==="ride"&&p.w)meta.push(`<span>待ち${p.w}分</span>`);
+    if(p.walk)meta.push(`<span>歩いて${p.walk}分</span>`);if(!a&&p.area)meta.push(`<span>${AN(p.area)}</span>`);
+    return `<div class="step ${p.k} k-${kindOfRow(p)} pv"><span class="t num"><span>${fromMin(p.t)}</span></span><div class="rail">${ico(rowIc(p))}</div><div class="stepbody"><span class="txt">${wb(planLabel(p))}</span><span class="meta">${meta.join("")}</span></div></div>`;}).join("");}
 function renderPlan(){
   const {left}=stats();const nm=nowMin();const plan=planToday();
   document.getElementById("planLeft").textContent=`${left.length}`;ROWKEY={};
@@ -2312,13 +2425,15 @@ function renderPlan(){
   let nowIdx=-1;plan.forEach((p,i)=>{if(p.t<=nm)nowIdx=i;});
   const inqIdx=plan.findIndex(p=>p.inq&&p.attr&&!ridden(p.attr));if(inqIdx>=0)nowIdx=inqIdx; // 並び中の行を「今」にする
   const seen={};const rowKey=p=>{const b=p.k+":"+(p.attr||p.text);seen[b]=(seen[b]||0)+1;return b+"#"+seen[b];}; // 組み直しても同じ行を開いたままにする
-  const el=document.getElementById("planList");
-  if(!plan.length){el.innerHTML=`<div class="empty">今日の予定はまだありません</div>`;}
+  const el=document.getElementById("planList");const homeV=!!(NOW&&NOW.kind==="home");
+  {const tt=document.getElementById("planTtl");if(tt)tt.textContent=homeV?"行く日の予定":"今日の予定";}
+  if(!plan.length&&homeV){el.innerHTML=S.tab==="plan"?previewHtml():"";}
+  else if(!plan.length){el.innerHTML=`<div class="empty">今日の予定はまだありません</div>`;}
   else el.innerHTML=plan.map((p,i)=>{
     const a=p.attr?byId[p.attr]:null;const ride=p.k==="ride"&&a;const done=ride&&ridden(a.id);const inq=ride&&p.inq&&!done;
     const meta=[];
     if(a&&p.k!=="buy")meta.push(`<span>${AN(a.area)}</span>`);
-    if(p.k==="buy")meta.push(`<span>${a.dpa.toLocaleString()}円</span>`);
+    if(p.k==="buy")meta.push(`<span>${a.dpa.toLocaleString()}円</span>`,`<span>公式アプリで購入</span>`);
     if(ride&&p.dpa)meta.push(`<span class="tag dpa">${p.prov?"有料パス（これから買う）":"有料パス"}</span>`);
     if(ride&&p.prov&&!done)meta.push(`<span class="tag mute">買えなかったら並んで乗る（待ち約${estWait(a,p.t)}分）</span>`);
     if(inq){} // 自動の並び中は内部の印だけ（画面には出さない）
@@ -2366,10 +2481,11 @@ function renderPlan(){
   const mustSkip=skipIds.filter(id=>prio(byId[id])==="must").length;
   const buyPlan=plan.filter(p=>p.k==="buy").reduce((s,p)=>s+byId[p.attr].dpa,0);
   const lines=[];
-  if(mustSkip){const dpaLeft=skipIds.filter(id=>prio(byId[id])==="must"&&byId[id].dpa&&!soldOut(id)&&!(SOLD_BY[id]&&nowMin()>mins(SOLD_BY[id]))).length;lines.push(`<b>入らない絶対乗るもの: ${skipIds.filter(id=>prio(byId[id])==="must").map(id=>esc(short(byId[id]))).join("・")}</b>${dpaLeft&&S.dpaBudget!==""?"。有料パスを増やすと入ります":""}`);}
+  if(mustSkip&&!(NOW&&NOW.kind==="home")){const dpaLeft=skipIds.filter(id=>prio(byId[id])==="must"&&byId[id].dpa&&!soldOut(id)&&!(SOLD_BY[id]&&nowMin()>mins(SOLD_BY[id]))).length;lines.push(`<b>入らない絶対乗るもの: ${skipIds.filter(id=>prio(byId[id])==="must").map(id=>esc(short(byId[id]))).join("・")}</b>${dpaLeft&&S.dpaBudget!==""&&nowMin()<exitMin()?"。有料パスを増やすと入ります":""}`);}
   if(spent()+buyPlan>0)lines.push(`有料パス 1人 <b>¥${(spent()+buyPlan).toLocaleString()}</b>${buyPlan?`（これから買う分 ¥${buyPlan.toLocaleString()}）`:""}`);
   if((S.planMiss||[]).length&&S.planDay===todayKey())lines.push(`<b>${S.planMiss.join("・")}が入りません</b>`);
   if(condSummary())lines.push(esc(condSummary()));
+  if(NOW&&NOW.kind==="gate"){const td=today();lines.unshift(`今日（${td.getMonth()+1}/${td.getDate()}）行く場合の流れです`);}
   note.innerHTML=lines.join("<br>");note.hidden=!lines.length;
   const sel=document.getElementById("addAttr");
   if(!sel.options.length)sel.innerHTML=ATTR.filter(isOpen).map(a=>`<option value="${a.id}">${esc(short(a))}</option>`).join("");
@@ -2417,8 +2533,7 @@ function renderFood(){
   if(S.openOnly)list=list.filter(foodOpen);
   list.sort((x,y)=>walk(S.area,x.a)-walk(S.area,y.a)||x.n.localeCompare(y.n,"ja"));
   document.getElementById("foodList").innerHTML=list.length?list.map(f=>{const c=closeOf(f);const closeIn=c-nowMin();
-    return `<div class="row"><div class="name nmi">${ico(foodIc(f),"a-"+f.a)}<span>${wb(f.n)}</span></div><div class="sub"><span>${AN(f.a)}・${walk(S.area,f.a)?`歩いて${walk(S.area,f.a)}分`:"すぐ近く"}</span><span>${f.o}〜${fromMin(c)}頃</span>${f.mo?`<span class="tag sea">スマホで注文できる</span>`:""}${f.ps?`<span class="tag warn">事前予約が必要</span>`:""}<span>${esc(fd(f.d))}</span></div>
-      <div class="right">${foodOpen(f)?(closeIn<=60?`<span class="tag warn">あと${closeIn}分</span>`:`<span class="tag ok">営業中</span>`):`<span class="tag mute">時間外</span>`}</div>${foodOpen(f)&&f.k==="meal"?`<div class="sub" style="grid-column:1/-1"><button class="sm" type="button" data-eatat="${FOOD.indexOf(f)}">ここで食べる</button></div>`:""}</div>`;}).join(""):`<div class="empty">${S.openOnly?"営業中の店はありません":"なし"}</div>`;
+    return `<div class="row frow"><div class="name nmi" style="grid-column:1/-1">${ico(foodIc(f),"a-"+f.a)}<span>${wb(f.n)}</span></div><div class="sub" style="grid-column:1/-1">${foodOpen(f)?(closeIn<=60?`<span class="tag warn">あと${closeIn}分</span>`:`<span class="tag ok">営業中</span>`):`<span class="tag mute">時間外</span>`}<span><span class="nw">${AN(f.a)}</span>・<span class="nw">${walk(S.area,f.a)?`歩いて${walk(S.area,f.a)}分`:"すぐ近く"}</span></span><span>${f.o}〜${fromMin(c)}頃</span>${f.mo?`<span class="tag sea">スマホで注文できる</span>`:""}${f.ps?`<span class="tag warn">事前予約が必要</span>`:""}<span>${esc(fd(f.d))}</span></div>${foodOpen(f)&&f.k==="meal"?`<div class="sub" style="grid-column:1/-1"><button class="sm" type="button" data-eatat="${FOOD.indexOf(f)}">ここで食べる</button></div>`:""}</div>`;}).join(""):`<div class="empty">${S.openOnly?"営業中の店はありません":"なし"}</div>`;
   document.getElementById("popList").innerHTML=POP.slice().sort((x,y)=>walk(S.area,x.a)-walk(S.area,y.a)).map(p=>`<div class="row pop"><div class="name nmi" style="grid-column:1/-1">${ico("f_popcorn","a-"+p.a)}<span>${wb(p.n)}</span></div><div class="sub" style="grid-column:1/-1"><span>${AN(p.a)}・${walk(S.area,p.a)?`歩いて${walk(S.area,p.a)}分`:"すぐ近く"}</span></div><div class="sub" style="grid-column:1/-1"><input type="text" data-pop="${p.id}" placeholder="味をメモ" value="${esc(S.pop[p.id]||"")}" aria-label="${esc(p.n)}のフレーバー"></div></div>`).join("");
 }
 function renderSet(){
@@ -2554,6 +2669,7 @@ document.addEventListener("click",e=>{
   if(ds.nobuy){const id=ds.nobuy;const n=Object.keys(S.noBuy).filter(k=>k!==id&&isToday(S.noBuy[k])).length+1;const off=n>=2&&S.dpaBudget!=="0";
     withReason(off?"今日は有料パスを勧めません（設定で戻せます）":"この有料パスは買いません",`${short(byId[id])}の有料パスを買わない`,()=>{S.noBuy[id]=todayKey();if(off){S.dpaPrev=S.dpaBudget;S.dpaBudget="0";S.dpaOffDay=todayKey();}S.plan=S.plan.filter(q=>!(q.attr===id&&(q.k==="buy"||q.prov)));S.day=todayKey();rebuild();});return;}
   if(ds.buygo){const v=document.getElementById("buySlot").value;if(!v){toast("乗れる時間を入れてください");return;}if(addDpa(ds.buygo,v))closeSheet();return;}
+  if(ds.enter){S.inPark=todayKey();if(S.area!=="MH"){S.area="MH";touchQ();S.areaAt=nowMin();save();rebuild();}else save();renderAll();return;} // 入園した: 今いる場所はハーバー
   if(ds.tab){showTab(ds.tab);return;}
   if(ds.help){const h=document.getElementById("help-"+ds.help);h.hidden=!h.hidden;return;}
   if(ds.area){closeSheet();if(S.area!==ds.area){S.area=ds.area;touchQ();S.areaAt=nowMin();enteredNow();save();rebuild();}renderAll();toast("今いる場所: "+AREAS[S.area]);return;}
@@ -2684,7 +2800,7 @@ document.addEventListener("drop",e=>{const s=e.target.closest(".step");if(!s||dr
   // 入力中は一覧を描き直さない（キーボードが閉じるのを防ぐ）
   setInterval(()=>{const ae=document.activeElement;const typing=ae&&ae.closest&&ae.closest("main")&&/INPUT|SELECT|TEXTAREA/.test(ae.tagName);if(!typing&&ensureFresh()){renderAll();return;}renderHeader();if((S.tab==="near"||S.tab==="waits")&&!typing)renderNear();if(S.tab==="dpa"&&!typing)renderDpa();if(S.tab==="plan"&&!typing)renderPlan();},30000);
   if(AUTO_WAIT)setInterval(()=>{if(S.apiOn)fetchApi(true);},60000);
-  document.addEventListener("visibilitychange",()=>{if(document.hidden)return;if(typingIn())renderHeader();else renderAll();if(autoOn()&&(!apiFresh()||nowMin()-S.api.at>=3))fetchApi(true);});
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)return;OPEN_AT=Date.now();if(typingIn())renderHeader();else renderAll();if(autoOn()&&(!apiFresh()||nowMin()-S.api.at>=3))fetchApi(true);});
 })();
 </script>
 
