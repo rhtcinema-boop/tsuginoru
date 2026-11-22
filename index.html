@@ -496,7 +496,6 @@ nav button{font-size:13px}
 #guide .gnote{margin:16px 0 0;font-size:14px;color:var(--muted);text-align:center;line-height:1.5}
 #guide .gnote span{display:inline-block}
 #guide .gfoot{flex:none;padding:10px 0 calc(16px + env(safe-area-inset-bottom,0px))}
-html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-shadow:0 1px 10px rgba(5,20,60,.55)}
 .hrow .hq{width:42px;height:42px;padding:4px;background-clip:content-box;margin:-8px -9px -8px -3px}
 .hrow .hq::after{content:none}
 #buyBox .bbline .bbl{flex:1;min-width:0;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
@@ -1089,37 +1088,9 @@ html .tn-ring .rent{fill:#F5B93A;stroke:#fff;stroke-width:2.4}
 #tab-pass.confirm .ps-card{padding:16px 20px}
 #tab-pass.confirm .ps-facts>div{padding:10px 0}
 #tab-pass.confirm .ps-btns{margin-top:12px}
-#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;color:var(--ink);padding:env(safe-area-inset-top,0px) 16px 0;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
-background:radial-gradient(70% 45% at 50% 20%,#FFFBEA 0,rgba(255,251,234,0) 62%),linear-gradient(180deg,#F6FBFF 0,#DDF1FF 55%,#C2E7FF 100%)}
-#splash:not(.out):not(.js){animation:splFail .01s 7s forwards}
 @keyframes splFail{to{opacity:0;visibility:hidden}}
-#splash .spgl{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 550ms var(--e-out);pointer-events:none}
-#splash.gl .spgl{opacity:1}
-#splash.quick .spgl{transition-duration:150ms}
-#splash .spmid{position:relative;z-index:1;flex:1 1 auto;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
-#splash .cmp{width:min(168px,26vh);height:min(168px,26vh);overflow:visible;filter:drop-shadow(0 16px 28px rgba(16,32,80,.16))}
-#splash .needle{transform-origin:0 0;transform-box:view-box}
-#splash .spt{font-size:min(40px,6.4vh);font-weight:800;letter-spacing:.12em;margin:4px 0 0 .12em;color:var(--ink);line-height:1.1}
-#splash .sps{font-size:16px;font-weight:700;color:var(--ink-2)}
-#splash .reward{min-height:60px;display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:8px;opacity:0;max-width:100%}
-#splash .reward .re{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--ink-3)}
-#splash .reward .rn{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800;color:var(--ink);max-width:100%}
-#splash .reward .rn .rt{min-width:0;text-align:center}
-#splash .reward .ic{width:32px;height:32px}
-#splash .tapopen{position:relative;z-index:1;flex:none;height:44px;line-height:44px;margin-bottom:calc(14vh + env(safe-area-inset-bottom,0px));padding:0 24px;border-radius:999px;background:rgba(255,255,255,.78);box-shadow:var(--sh-1);font-size:18px;font-weight:700;color:var(--ink);opacity:0;white-space:nowrap;max-width:100%}
-#splash .sring{position:absolute;left:0;top:0;border-radius:50%;border:1.5px solid rgba(30,91,216,.45);opacity:0;pointer-events:none;z-index:2}
-#splash.full .cmp{animation:spIn 300ms var(--e-out) both}
-#splash.full .spt{animation:spIn 300ms 200ms var(--e-out) both}
-#splash.full .sps{animation:spFade 300ms 300ms var(--e-out) both}
-#splash.full .reward{animation:spIn 300ms 500ms var(--e-out) forwards}
-#splash.quick .cmp,#splash.quick .spt,#splash.quick .sps,#splash.quick .reward{animation:spFade 150ms var(--e-out) both}
-#splash.quick .reward{opacity:1}
-#splash.ready .tapopen{animation:spIn 200ms var(--e-out) forwards}
-#splash.quick.ready .tapopen{animation-duration:150ms}
-#splash.wait{cursor:pointer}
 @keyframes spIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes spFade{from{opacity:0}to{opacity:1}}
-@media (max-height:600px){#splash .reward{min-height:52px}#splash .tapopen{margin-bottom:calc(8vh + env(safe-area-inset-bottom,0px))}}
 #making .needle{animation:mkNeedle 520ms var(--e-out) both!important}
 #making.ok .mt{animation:spIn 240ms var(--e-out) both!important}
 #making.out{animation:spOut 200ms var(--e-out) forwards!important}
@@ -1274,9 +1245,189 @@ html #buyBox .bbline .bbl{display:block!important;white-space:normal!important;o
 html #buyBox .bbline .bbl b{white-space:normal!important;overflow:visible;text-overflow:clip;font-size:16px!important}
 html #buyBox .bbline .bbl .bbk{margin-right:0!important}
 html #buyBox .bbline .bbl{font-size:16px!important;font-weight:700;flex:1;min-width:0}html #buyBox .bbline .bbl i{font-style:normal}html .st-big.num,html div.ps-price.num{font-size:64px!important}
+
+/* ==== 起動演出（前の版から戻した。夜空・羅針盤・タップ後の約4秒の演出） ==== */
+/* ==== 19. 起動画面の並び直しと4秒の開く演出 ==== */
+html #splash{justify-content:flex-start;gap:0;padding-top:env(safe-area-inset-top,0px)}
+html #splash .spmid{flex:1 1 auto;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,2.4vh,18px);position:relative;z-index:1}
+html #splash .cmp{width:min(176px,26vh);height:min(176px,26vh)}
+html #splash .spt{font-size:min(46px,7vh)}
+html #splash .tapopen{position:relative;left:auto;right:auto;bottom:auto!important;flex:none;height:44px;line-height:44px;margin-bottom:calc(20vh + 8px + env(safe-area-inset-bottom,0px));z-index:1}
+#splash.quick .cmp{animation:none}
+#splash .bloom{position:absolute;left:0;top:0;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;background:radial-gradient(circle,rgba(233,199,122,.55) 0,rgba(233,199,122,.18) 38%,rgba(233,199,122,0) 66%);opacity:0;transform:scale(.3);pointer-events:none;z-index:2}
+#splash .sring{position:absolute;left:0;top:0;border-radius:50%;border:1.5px solid #e9c77a;box-shadow:0 0 10px rgba(233,199,122,.45);opacity:0;pointer-events:none;z-index:3}
+html #splash.opening{cursor:default}
+html #splash.opening .tapopen{animation:none;opacity:0;transition:opacity .4s ease}
+html #splash.opening .needle{animation:osp-spinLux 1.6s cubic-bezier(.16,1,.3,1) both}
+html #splash.opening .gring{animation:osp-drawLux 1.35s .15s cubic-bezier(.65,0,.35,1) forwards}
+html #splash.opening .sp-ring{stroke-dasharray:none;stroke-dashoffset:0;animation:osp-ringGold 1.2s 1.45s ease forwards}
+html #splash.opening .bloom{animation:osp-bloom 1.8s 1.45s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .spt::after{animation:osp-streak 1.1s 1.9s cubic-bezier(.45,0,.25,1) forwards}
+html #splash.opening .kira:nth-of-type(1){animation:osp-glint 1.2s 2.2s ease-in-out forwards}
+html #splash .gring{stroke-dasharray:100;stroke-dashoffset:100}
+html #splash .spt::after{content:attr(data-t);position:absolute;inset:0;letter-spacing:inherit;background:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,250,235,.95) 50%,rgba(255,255,255,0) 58%);background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none}
+/* 開く前の演出も跳ねない動きに */
+html #splash.full .cmp{animation:osp-cmpLux .9s cubic-bezier(.22,1,.36,1) both}
+html #splash.full .needle{animation:osp-spinLux 1.4s .1s cubic-bezier(.16,1,.3,1) both}
+html #splash.full .spt{animation:osp-titleLux 1.1s .7s cubic-bezier(.22,1,.36,1) forwards}
+html #splash.full .kira{animation:none;opacity:0}
+/* ==== 映画の始まりのような開く演出（紺と金・羅針盤の輪を光がなぞるのが主役） ==== */
+html #splash .streaks,html #splash .dust{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+html #splash .streaks i{position:absolute;left:-30%;top:var(--y);width:var(--w);height:1.5px;border-radius:2px;background:linear-gradient(90deg,rgba(233,199,122,0),rgba(255,236,190,.9),rgba(233,199,122,0));opacity:0;transform:rotate(var(--a))}
+html #splash .dust i{position:absolute;left:50%;top:44%;width:var(--s);height:var(--s);border-radius:50%;background:#f3dca0;opacity:0}
+html #splash .comet{transform-origin:0 0;transform-box:view-box;opacity:0}
+html #splash .flare{position:absolute;left:0;right:0;top:0;height:2px;margin-top:-1px;background:linear-gradient(90deg,rgba(255,240,200,0) 0,rgba(255,240,200,.95) 50%,rgba(255,240,200,0) 100%);box-shadow:0 0 18px 4px rgba(233,199,122,.55);opacity:0;transform:scaleX(0);pointer-events:none;z-index:3}
+html #splash.opening .spmid{animation:osp-push 3.3s cubic-bezier(.45,0,.25,1) both}
+html #splash.opening .cmp{animation:osp-emerge 2s cubic-bezier(.33,0,.2,1) both}
+html #splash.opening .spt{animation:osp-titleCine 2.6s cubic-bezier(.33,0,.2,1) both}
+html #splash.opening .sps{animation:osp-subCine 3s ease both}
+html #splash.opening .needle{animation:osp-spinLux 1.9s .35s cubic-bezier(.16,1,.3,1) both}
+html #splash.opening .gring{animation:osp-drawLux 1.3s .3s cubic-bezier(.65,0,.35,1) forwards}
+html #splash.opening .comet{animation:osp-orbit 1.3s .3s cubic-bezier(.65,0,.35,1) both}
+html #splash.opening .streaks i{animation:osp-sweep 1.5s var(--d) cubic-bezier(.45,0,.25,1) forwards}
+html #splash.opening .dust i{animation:osp-drift 2.4s var(--d) cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .bloom{animation:osp-bloom 1.4s 2.75s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .flare{animation:osp-flare .75s 2.85s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .spt::after{animation:osp-streak 1s 2.1s cubic-bezier(.45,0,.25,1) forwards}
+html #splash.opening .kira{animation:none!important;opacity:0}
+/* ==== 開いた瞬間（毎回・約2秒）と、待っている間の静かな動き ==== */
+html #splash.full .streaks i{animation:osp-sweep 1.3s var(--d) cubic-bezier(.45,0,.25,1) forwards}
+html #splash.full .cmp{animation:osp-cmpLux .8s .1s cubic-bezier(.22,1,.36,1) both}
+html #splash.full .gring{animation:osp-drawLux 1.1s .25s cubic-bezier(.65,0,.35,1) forwards}
+html #splash.full .comet{animation:osp-orbit 1.1s .25s cubic-bezier(.65,0,.35,1) both}
+html #splash.full .needle{animation:osp-spinLux 1.3s .35s cubic-bezier(.16,1,.3,1) both}
+html #splash.full .spt{animation:osp-titleLux 1s .9s cubic-bezier(.22,1,.36,1) both}
+html #splash.full .sps{animation:osp-fadeUp .7s 1.3s ease-out both}
+html #splash.ready .gring{stroke-dashoffset:0;animation:none}
+html #splash.ready .comet{opacity:.75;animation:osp-orbitIdle 7s linear infinite}
+html #splash.ready .needle{transform:rotate(0);animation:osp-sway 4.5s ease-in-out infinite alternate}
+html #splash.ready .spt,html #splash.ready .cmp{opacity:1;animation:none}
+html #splash.ready .sps{opacity:.95;animation:none}
+/* ==== タップした後（約4秒・音に合わせて大きく） ==== */
+html #splash .ripples{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:0}
+html #splash .ripples i{position:absolute;left:calc(var(--cs,176px)/-2);top:calc(var(--cs,176px)/-2);width:var(--cs,176px);height:var(--cs,176px);border-radius:50%;border:1.5px solid #e9c77a;box-shadow:0 0 12px rgba(233,199,122,.5);opacity:0}
+html #splash.opening .ripples i{animation:osp-ripple 1.6s cubic-bezier(.22,.61,.36,1) forwards}
+html #splash.opening .ripples i:nth-child(2){animation-delay:.22s}
+html #splash.opening .ripples i:nth-child(3){animation-delay:1.45s}
+html #splash.opening .spmid{animation:osp-pushBig 3.15s cubic-bezier(.5,0,.75,.4) both}
+html #splash.opening .cmp{animation:osp-flashCmp .7s ease-out both}
+html #splash.opening .spt{animation:none;opacity:1}
+html #splash.opening .sps{animation:none;opacity:.9}
+html #splash.opening .needle{animation:osp-spinBig 1.45s cubic-bezier(.12,.75,.25,1) both}
+html #splash.opening .gring{stroke-dashoffset:0;animation:none}
+html #splash.opening .comet{animation:osp-orbitFast 1.45s cubic-bezier(.12,.75,.25,1) both}
+html #splash.opening .dust i{animation:osp-toward 2.6s var(--d) cubic-bezier(.45,0,.75,.3) forwards}
+html #splash.opening .stars{animation:osp-starPush 4s cubic-bezier(.5,0,.75,.4) forwards}
+html #splash.opening .bloom{animation:osp-bloom 1.3s 1.45s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .flare{animation:osp-flare .7s 2.75s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .spt::after{animation:osp-streak 1s 1.9s cubic-bezier(.45,0,.25,1) forwards}
+html #splash.opening .streaks i{animation:osp-sweep 1.2s calc(var(--d) * .6 + 1.45s) cubic-bezier(.45,0,.25,1) forwards}
+html #splash.through .spmid{animation:osp-through var(--thr,.9s) cubic-bezier(.55,0,.45,1) forwards}
+/* ==== ため → 解放 → ごほうび ==== */
+html #splash .spmid{position:relative}
+html #splash .reward{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;pointer-events:none;color:#fff}
+html #splash .reward .re{font-size:13px;letter-spacing:.24em;color:#e9c77a;font-weight:700}
+html #splash .reward .rn{display:flex;align-items:center;justify-content:center;gap:10px;font-size:min(20px,3.8vh);font-weight:800;letter-spacing:.06em;max-width:min(76vw,320px);text-align:left;word-break:keep-all;overflow-wrap:anywhere;line-height:1.3}
+html #splash .reward .ic{width:34px;height:34px;flex:none;box-shadow:0 0 0 1.5px #e9c77a,0 0 16px rgba(233,199,122,.6)}
+html #splash.opening .needle{animation:osp-needleGo 1.5s linear both}
+html #splash.opening .comet{animation:osp-orbitCharge 1.5s cubic-bezier(.55,0,1,.45) both}
+html #splash.opening .dust i{animation:osp-gatherBurst 3s calc(var(--d) * .15) linear forwards}
+html #splash.opening .ripples i{animation:osp-ripple 1.5s 1.5s cubic-bezier(.22,.61,.36,1) forwards}
+html #splash.opening .ripples i:nth-child(2){animation-delay:1.62s}
+html #splash.opening .ripples i:nth-child(3){animation-delay:1.78s}
+html #splash.opening .cmp{animation:osp-flashCmp 1s 1.45s ease-out both}
+html #splash.opening .bloom{animation:osp-bloom 1.2s 1.48s cubic-bezier(.33,0,.2,1) forwards}
+html #splash.opening .sps{animation:osp-spsOut .3s 1.45s ease forwards}
+html #splash.opening .reward{animation:osp-rewardIn .8s 1.75s cubic-bezier(.22,1,.36,1) forwards}
+html #splash.opening .spt::after{animation:osp-streak 1s 1.9s cubic-bezier(.45,0,.25,1) forwards}
+html #splash .reward .rn span{min-width:0}
+html #splash:not(.full):not(.ready):not(.opening) .cmp{opacity:0}
+html #splash.opening .cmp{opacity:1}
+html #splash .bloom{z-index:0}
+html #splash .reward{z-index:2}
+html #splash .reward .rn .rt{text-align:center;white-space:nowrap}
+html #splash .reward .rn.wrap{flex-direction:column;gap:6px}
+html #splash .reward .rn.wrap .rt{white-space:normal;text-wrap:balance}
+/* スプラッシュ（開くとき） */
+#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;overflow:hidden;color:#fff;background:linear-gradient(180deg,#06163f 0%,#0e3492 58%,#2a6fe0 100%)}
+#splash:not(.out):not(.js){animation:splFail .01s 7s forwards}
+#splash .glow{position:absolute;left:50%;top:42%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(127,178,255,.45),rgba(127,178,255,0) 65%)}
+#splash .stars i{position:absolute;width:var(--s,3px);height:var(--s,3px);border-radius:50%;background:#fff;opacity:.55}
+#splash .waves{position:absolute;left:0;bottom:0;width:100%;height:20%;overflow:hidden}
+#splash .waves svg{position:absolute;left:0;bottom:0;width:200%;height:100%}
+#splash .w1{opacity:.18}
+#splash .w2{opacity:.3;height:72%!important}
+#splash .cmp{width:176px;height:176px;position:relative}
+#splash .needle{transform-origin:0 0;transform-box:view-box}
+#splash .spt{font-size:46px;font-weight:900;letter-spacing:.14em;margin-left:.14em;background:linear-gradient(100deg,#f5b93a 0%,#fff1b8 38%,#ffffff 50%,#fff1b8 62%,#f5b93a 100%);background-size:260% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;position:relative}
+#splash .sps{font-size:14px;font-weight:700;letter-spacing:.2em;color:#cfe0ff;opacity:0;position:relative}
+#splash .kira{position:absolute;width:26px;height:26px;opacity:0}
+#splash.full .stars i{animation:osp-tw 1.4s ease-in-out infinite alternate;animation-delay:var(--d)}
+#splash.full .w1{animation:osp-wave 3.2s linear infinite}
+#splash.full .w2{animation:osp-wave 2.2s linear infinite reverse}
+#splash.full .cmp{animation:osp-cmpIn .6s cubic-bezier(.2,1.4,.4,1) both}
+#splash.full .sp-ring{stroke-dasharray:742;stroke-dashoffset:742;animation:osp-draw .8s .1s ease-out forwards}
+#splash.full .needle{animation:osp-spin 1.25s .15s cubic-bezier(.25,.1,.2,1.2) both}
+#splash.full .spt{background-position:20% 0;animation:osp-tin .55s .85s cubic-bezier(.2,1.4,.4,1) forwards}
+#splash.full .sps{animation:osp-fadeUp .4s 1.15s ease-out forwards}
+#splash.full .kira{animation:osp-kira .7s ease-out forwards;animation-delay:var(--d)}
+#splash.quick .cmp{animation:osp-cmpIn .3s ease-out both}
+#splash.quick .needle{animation:osp-spin .45s cubic-bezier(.25,.1,.2,1.2) both}
+#splash.quick .spt{opacity:1;background-position:0 0}
+#splash.quick .sps{opacity:1}
+#splash.out{animation:osp-splOut .42s ease-in forwards;pointer-events:none}
+#splash.quick.out{animation-duration:.25s}
+#splash .tapopen{position:absolute;left:0;right:0;bottom:calc(24% + env(safe-area-inset-bottom,0px));text-align:center;font-size:16px;font-weight:700;letter-spacing:.12em;color:#fff;opacity:0;pointer-events:none}
+#splash.ready .tapopen{animation:osp-tapIn .5s ease-out forwards,osp-tapPulse 2.4s ease-in-out .5s infinite}
+#splash.wait{cursor:pointer}
+/* ==== 21. 開いた時の分かりやすさ ==== */
+html #splash .tapopen{font-size:19px;font-weight:800;letter-spacing:.14em;text-shadow:0 1px 10px rgba(5,20,60,.55)}
+@media (prefers-reduced-motion:reduce){#splash{display:none!important}}
+@keyframes osp-spinLux{from{transform:rotate(-720deg)}to{transform:rotate(0)}}
+@keyframes osp-drawLux{to{stroke-dashoffset:0}}
+@keyframes osp-ringGold{to{stroke:#e9c77a}}
+@keyframes osp-bloom{0%{opacity:0;transform:scale(.6)}45%{opacity:.7;transform:scale(1.1)}100%{opacity:.5;transform:scale(1.3)}}
+@keyframes osp-streak{from{background-position:100% 0}to{background-position:0 0}}
+@keyframes osp-glint{0%{opacity:0;transform:scale(.4)}50%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(.7)}}
+@keyframes osp-cmpLux{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes osp-titleLux{from{opacity:0;letter-spacing:.34em;transform:translateY(6px)}to{opacity:1;letter-spacing:.14em;transform:none}}
+@keyframes osp-push{from{transform:scale(1)}to{transform:scale(1.045)}}
+@keyframes osp-emerge{0%{opacity:1}14%{opacity:.08;transform:scale(.97)}55%{opacity:1;transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+@keyframes osp-titleCine{0%{opacity:1}10%{opacity:0;letter-spacing:.34em}62%{opacity:0;letter-spacing:.34em;transform:translateY(6px)}100%{opacity:1;letter-spacing:.14em;transform:none}}
+@keyframes osp-subCine{0%{opacity:.95}8%{opacity:0}78%{opacity:0}100%{opacity:.9}}
+@keyframes osp-orbit{0%{opacity:0;transform:rotate(0)}8%{opacity:1}88%{opacity:1}100%{opacity:0;transform:rotate(360deg)}}
+@keyframes osp-sweep{0%{opacity:0;transform:translateX(0) rotate(var(--a))}25%{opacity:.85}100%{opacity:0;transform:translateX(170vw) rotate(var(--a))}}
+@keyframes osp-drift{0%{opacity:0;transform:translate(0,0) scale(.6)}30%{opacity:.9}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.6)}}
+@keyframes osp-flare{0%{opacity:0;transform:scaleX(0)}35%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1.2)}}
+@keyframes osp-fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:.95;transform:none}}
+@keyframes osp-orbitIdle{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes osp-sway{from{transform:rotate(-3deg)}to{transform:rotate(3deg)}}
+@keyframes osp-ripple{0%{opacity:0;transform:scale(1)}12%{opacity:1}100%{opacity:0;transform:scale(3.4)}}
+@keyframes osp-pushBig{from{transform:scale(1)}to{transform:scale(1.1)}}
+@keyframes osp-flashCmp{0%{filter:none}30%{filter:drop-shadow(0 0 18px rgba(245,210,122,.9))}100%{filter:drop-shadow(0 0 6px rgba(245,210,122,.35))}}
+@keyframes osp-spinBig{from{transform:rotate(0)}to{transform:rotate(585deg)}}
+@keyframes osp-orbitFast{0%{opacity:1;transform:rotate(0)}85%{opacity:1}100%{opacity:.6;transform:rotate(720deg)}}
+@keyframes osp-toward{0%{opacity:0;transform:translate(0,0) scale(.3)}25%{opacity:.95}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(2.4)}}
+@keyframes osp-starPush{from{transform:scale(1)}to{transform:scale(1.18)}}
+@keyframes osp-through{from{transform:scale(1.1)}to{transform:scale(3.4)}}
+@keyframes osp-needleGo{0%{transform:rotate(0)}5%{transform:rotate(-4deg)}10%{transform:rotate(4deg)}15%{transform:rotate(-3deg)}20%{transform:rotate(0);animation-timing-function:cubic-bezier(.18,.7,.2,1)}100%{transform:rotate(var(--fin,585deg))}}
+@keyframes osp-orbitCharge{0%{opacity:.8;transform:rotate(0)}95%{opacity:1}100%{opacity:0;transform:rotate(1080deg)}}
+@keyframes osp-gatherBurst{0%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.4)}10%{opacity:.8}36%{opacity:.95;transform:translate(0,0) scale(.35)}48%{opacity:0;transform:translate(0,0) scale(.3)}50%{opacity:1;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(calc(var(--x) * 1.3),calc(var(--y) * 1.3)) scale(2.4)}}
+@keyframes osp-spsOut{to{opacity:0}}
+@keyframes osp-rewardIn{from{opacity:0;transform:translateY(10px);filter:drop-shadow(0 0 0 rgba(233,199,122,0))}to{opacity:1;transform:none;filter:drop-shadow(0 0 10px rgba(233,199,122,.55))}}
+@keyframes osp-tw{from{opacity:.15;transform:scale(.6)}to{opacity:1;transform:scale(1.15)}}
+@keyframes osp-wave{to{transform:translateX(-50%)}}
+@keyframes osp-cmpIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes osp-draw{to{stroke-dashoffset:0}}
+@keyframes osp-spin{from{transform:rotate(-540deg)}to{transform:rotate(0)}}
+@keyframes osp-tin{from{opacity:0;transform:translateY(14px) scale(.85)}to{opacity:1;transform:none}}
+@keyframes osp-kira{0%{opacity:0;transform:scale(0) rotate(-45deg)}50%{opacity:1;transform:scale(1.2) rotate(0)}100%{opacity:0;transform:scale(.6) rotate(20deg)}}
+@keyframes osp-splOut{to{opacity:0;transform:scale(1.08);visibility:hidden}}
+@keyframes osp-tapIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes osp-tapPulse{0%,100%{opacity:1}50%{opacity:.76}}
 </style>
 
-<div id="splash" aria-hidden="true"><canvas class="spgl" aria-hidden="true"></canvas><div class="spmid"><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#F5B93A"/></linearGradient><radialGradient id="spd" cx=".5" cy=".38" r=".7"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EEF5FF"/></radialGradient></defs><circle class="disc" r="124" fill="url(#spd)"/><circle class="ring" r="124" fill="none" stroke="#1E5BD8" stroke-width="3"/><circle r="104" fill="none" stroke="#C9D6EE" stroke-width="1.5" stroke-dasharray="1.5 9"/><g stroke="#8592AB" stroke-width="3" stroke-linecap="round"><path d="M0 -118v16M0 102v16M-118 0h16M102 0h16"/></g><g class="needle"><path d="M0 -92 L16 0 L-16 0Z" fill="url(#spg)"/><path d="M0 92 L16 0 L-16 0Z" fill="#C9D6EE"/></g><circle r="10" fill="#1B2A4A"/><circle r="4" fill="#fff"/></svg><div class="spt">ツギノル</div><div class="sps">今日の順番を、自分で組む</div><div class="reward" aria-hidden="true"></div></div><div class="tapopen">タップして開く</div><div class="sring" aria-hidden="true"></div></div>
+<div id="splash" aria-hidden="true"><div class="glow"></div><div class="stars"><i style="left:33.4%;top:13.1%;--d:0.91s;--s:2px"></i><i style="left:80.2%;top:9.3%;--d:0.82s;--s:4px"></i><i style="left:23.2%;top:8.8%;--d:0.59s;--s:2px"></i><i style="left:11.5%;top:31.4%;--d:1.16s;--s:2px"></i><i style="left:92.1%;top:45.3%;--d:0.82s;--s:2px"></i><i style="left:57.2%;top:29.6%;--d:1.37s;--s:2px"></i><i style="left:55.3%;top:11.9%;--d:0.59s;--s:4px"></i><i style="left:14.1%;top:23.7%;--d:1.14s;--s:2px"></i><i style="left:12.7%;top:41.3%;--d:0.26s;--s:2px"></i><i style="left:54.5%;top:7.2%;--d:0.08s;--s:2px"></i><i style="left:49.7%;top:38.6%;--d:1.09s;--s:3px"></i><i style="left:58.0%;top:33.4%;--d:0.42s;--s:2px"></i><i style="left:68.7%;top:19.4%;--d:0.80s;--s:4px"></i><i style="left:49.5%;top:26.0%;--d:0.63s;--s:4px"></i><i style="left:95.1%;top:10.9%;--d:0.59s;--s:3px"></i><i style="left:17.3%;top:35.8%;--d:0.05s;--s:2px"></i><i style="left:74.9%;top:41.4%;--d:1.23s;--s:3px"></i><i style="left:35.0%;top:26.5%;--d:0.70s;--s:3px"></i><i style="left:9.5%;top:9.3%;--d:0.38s;--s:2px"></i><i style="left:8.7%;top:50.0%;--d:0.91s;--s:3px"></i><i style="left:29.8%;top:28.8%;--d:0.94s;--s:2px"></i><i style="left:91.4%;top:26.8%;--d:0.86s;--s:3px"></i><i style="left:8.5%;top:54.5%;--d:0.18s;--s:2px"></i><i style="left:40.4%;top:64.4%;--d:0.70s;--s:2px"></i><i style="left:45.2%;top:39.8%;--d:1.24s;--s:3px"></i><i style="left:84.2%;top:21.7%;--d:0.58s;--s:3px"></i></div><div class="spmid"><svg class="cmp" viewBox="-150 -150 300 300" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset="1" stop-color="#f5b93a"/></linearGradient></defs><circle r="96" fill="#0c2d6b" opacity=".4"/><circle class="sp-ring" r="118" fill="none" stroke="#fff" stroke-width="14" transform="rotate(-90)"/><circle class="gring" r="136" fill="none" stroke="url(#spg)" stroke-width="2.5" transform="rotate(-90)" pathLength="100"/><g class="comet"><circle cx="0" cy="-136" r="11" fill="#f5d27a" opacity=".25"/><circle cx="0" cy="-136" r="4.5" fill="#fffaf0"/></g><g stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"><path d="M0 -104v16M0 88v16M-104 0h16M88 0h16"/></g><g class="needle"><path d="M70 -70 L19 19 L-19 -19Z" fill="url(#spg)"/><path d="M-70 70 L-19 -19 L19 19Z" fill="#fff"/></g><circle r="12" fill="#0c2d6b"/></svg><div class="spt" data-t="ツギノル">ツギノル<svg class="kira" style="right:-26px;top:-12px;--d:1.25s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg><svg class="kira" style="left:-30px;bottom:-4px;width:18px;height:18px;--d:1.45s" viewBox="0 0 24 24"><path d="M12 1c.8 6 3.2 9.2 11 11-7.8 1.8-10.2 5-11 11-.8-6-3.2-9.2-11-11 7.8-1.8 10.2-5 11-11z" fill="#f5b93a"/></svg></div><div class="sps">今日の順番を、自分で組む</div><div class="reward" aria-hidden="true"></div></div><div class="tapopen">タップして開く</div><div class="bloom" aria-hidden="true"></div><div class="streaks" aria-hidden="true"><i style="--y:42%;--d:0.73s;--w:220px;--a:-10deg"></i><i style="--y:46%;--d:0.76s;--w:130px;--a:-8deg"></i><i style="--y:43%;--d:0.80s;--w:130px;--a:-14deg"></i><i style="--y:41%;--d:0.18s;--w:90px;--a:-8deg"></i><i style="--y:77%;--d:1.25s;--w:130px;--a:-8deg"></i><i style="--y:13%;--d:0.69s;--w:90px;--a:-14deg"></i><i style="--y:25%;--d:0.31s;--w:90px;--a:-10deg"></i><i style="--y:34%;--d:0.77s;--w:130px;--a:-8deg"></i></div><div class="dust" aria-hidden="true"><i style="--x:51vw;--y:45vh;--d:1.61s;--s:2px"></i><i style="--x:-58vw;--y:-19vh;--d:0.68s;--s:3px"></i><i style="--x:-44vw;--y:-31vh;--d:0.80s;--s:2px"></i><i style="--x:14vw;--y:40vh;--d:0.19s;--s:3px"></i><i style="--x:-9vw;--y:1vh;--d:1.32s;--s:3px"></i><i style="--x:32vw;--y:-29vh;--d:0.06s;--s:3px"></i><i style="--x:19vw;--y:12vh;--d:1.75s;--s:3px"></i><i style="--x:8vw;--y:36vh;--d:1.74s;--s:3px"></i><i style="--x:19vw;--y:-19vh;--d:0.15s;--s:3px"></i><i style="--x:-39vw;--y:-2vh;--d:1.42s;--s:2px"></i><i style="--x:-38vw;--y:-32vh;--d:0.58s;--s:4px"></i><i style="--x:-37vw;--y:-39vh;--d:0.18s;--s:2px"></i><i style="--x:8vw;--y:44vh;--d:0.51s;--s:4px"></i><i style="--x:-20vw;--y:-13vh;--d:0.52s;--s:3px"></i><i style="--x:47vw;--y:-5vh;--d:0.39s;--s:2px"></i><i style="--x:-47vw;--y:28vh;--d:1.27s;--s:3px"></i><i style="--x:-31vw;--y:5vh;--d:1.65s;--s:4px"></i><i style="--x:-48vw;--y:-12vh;--d:0.81s;--s:2px"></i><i style="--x:-53vw;--y:-8vh;--d:0.04s;--s:2px"></i><i style="--x:22vw;--y:47vh;--d:1.45s;--s:2px"></i><i style="--x:5vw;--y:49vh;--d:1.35s;--s:3px"></i><i style="--x:-58vw;--y:29vh;--d:0.88s;--s:2px"></i><i style="--x:-51vw;--y:-3vh;--d:0.35s;--s:3px"></i><i style="--x:54vw;--y:-28vh;--d:0.19s;--s:4px"></i><i style="--x:18vw;--y:19vh;--d:1.00s;--s:2px"></i><i style="--x:-30vw;--y:-8vh;--d:1.62s;--s:3px"></i><i style="--x:31vw;--y:16vh;--d:0.75s;--s:2px"></i><i style="--x:47vw;--y:19vh;--d:0.74s;--s:2px"></i></div><div class="ripples" aria-hidden="true"><i></i><i></i><i></i></div><div class="flare" aria-hidden="true"></div><div class="sring" aria-hidden="true"></div><div class="waves"><svg class="w1" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg><svg class="w2" viewBox="0 0 800 100" preserveAspectRatio="none"><path d="M0 50 C100 24 100 24 200 50 S300 76 400 50 S500 24 600 50 S700 76 800 50 V100 H0Z" fill="#fff"/></svg></div></div>
 <header>
   <div class="hrow">
     <h1>ツギノル</h1>
@@ -2457,6 +2608,49 @@ const seq=(ns,gap,v,d)=>(c,o,t)=>ns.forEach((n,i)=>bell(c,o,n,t+i*gap,v,i===ns.l
 const CUES={open:seq(["G5","D6"],.09,.22,.36),hello:seq(["E5","B5"],.08,.2,.32),ride:seq(["A5","E6"],.08,.24,.3),ticket:seq(["D5","A5","D6"],.09,.22,.4),
   big:seq(["C5","G5","D6","A6"],.16,.26,.9),close:seq(["E6","B5","E5"],.12,.2,.6),plan:seq(["F5","C6","G6"],.08,.2,.4)};
 const CUE_LEN={open:.5,hello:.45,ride:.4,ticket:.6,big:1.5,plan:.6,close:1};
+
+// 起動の音（前の版のオーケストラ風を戻した。すべてオリジナル）
+const OPEN_ORCH=(()=>{const NOTE_IX={C:-9,D:-7,E:-5,F:-4,G:-2,A:0,B:2};
+const nf=n=>{const m=/^([A-G])([#b]?)(\d)$/.exec(n);return 440*Math.pow(2,(NOTE_IX[m[1]]+(m[2]==="#"?1:m[2]==="b"?-1:0)+(+m[3]-4)*12)/12);};
+function makeIR(ctx,sec){const sr=ctx.sampleRate,n=Math.floor(sr*sec),b=ctx.createBuffer(2,n,sr);
+  for(let c=0;c<2;c++){const d=b.getChannelData(c);let lp=0;for(let i=0;i<n;i++){const t=i/sr;lp=lp*.55+(Math.random()*2-1)*.45; // 少し丸めたノイズ
+    d[i]=lp*Math.exp(-t*2.1)*(t<.015?t/.015:1)*(c?1:.92);}}return b;}
+function sndChain(ctx){ // ホールの響きと音量の天井をまとめて作る（1つの ctx に1回）
+  const comp=ctx.createDynamicsCompressor();comp.threshold.value=-20;comp.knee.value=14;comp.ratio.value=5;comp.attack.value=.008;comp.release.value=.3;
+  const master=ctx.createGain();master.gain.value=.32;master.connect(comp);comp.connect(ctx.destination);
+  const dry=ctx.createGain();dry.gain.value=.78;dry.connect(master);
+  const conv=ctx.createConvolver();conv.buffer=makeIR(ctx,2.8);const wet=ctx.createGain();wet.gain.value=.42;conv.connect(wet);wet.connect(master);
+  const bus=ctx.createGain();bus.gain.value=1;bus.connect(dry);bus.connect(conv);
+  const nb=ctx.createBuffer(1,ctx.sampleRate,ctx.sampleRate);const nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;bus._noise=nb;
+  return bus;}
+function env(g,t,a,v,hold,r){g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(v,t+a);g.gain.setValueAtTime(v,t+a+Math.max(0,hold));g.gain.exponentialRampToValueAtTime(0.0001,t+a+Math.max(0,hold)+r);return t+a+Math.max(0,hold)+r;}
+function vib(ctx,t,end,rate,cents,delay){const l=ctx.createOscillator();l.frequency.value=rate;const lg=ctx.createGain();lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(cents,t+delay);l.connect(lg);l.start(t);l.stop(end);return lg;}
+// 弦: 1音につき3本のノコギリ波を数セントずつずらす。アタック・リリースは長め
+function iStrings(ctx,out,notes,t,dur,v){const lp=ctx.createBiquadFilter();lp.type="lowpass";lp.Q.value=.4;lp.frequency.setValueAtTime(700,t);lp.frequency.linearRampToValueAtTime(2000,t+.5);
+  const g=ctx.createGain();lp.connect(g);g.connect(out);const end=env(g,t,.32,v,dur-.32,1.1);const vb=vib(ctx,t,end,5.2,7,.4);
+  notes.forEach(n=>{const f=nf(n);[-9,0,8].forEach(dt=>{const o=ctx.createOscillator();o.type="sawtooth";o.frequency.value=f;o.detune.value=dt+(Math.random()*4-2);vb.connect(o.detune);
+    const og=ctx.createGain();og.gain.value=1/(notes.length*3);o.connect(og);og.connect(lp);o.start(t);o.stop(end+.05);});});}
+// 金管風: フィルターが開いていく立ち上がり
+function iBrass(ctx,out,n,t,dur,v){const f=nf(n);const lp=ctx.createBiquadFilter();lp.type="lowpass";lp.Q.value=1.2;lp.frequency.setValueAtTime(380,t);lp.frequency.linearRampToValueAtTime(2600,t+.07);lp.frequency.linearRampToValueAtTime(1500,t+.35);
+  const g=ctx.createGain();lp.connect(g);g.connect(out);const end=env(g,t,.06,v,dur-.06,.45);const vb=vib(ctx,t,end,5.6,9,.25);
+  [[0,"sawtooth",.5],[6,"sawtooth",.35],[-1200,"square",.15]].forEach(([dt,ty,a])=>{const o=ctx.createOscillator();o.type=ty;o.frequency.value=f;o.detune.value=dt;vb.connect(o.detune);const og=ctx.createGain();og.gain.value=a;o.connect(og);og.connect(lp);o.start(t);o.stop(end+.05);});}
+// ティンパニ風: 下がる音程の正弦波＋こもった打音
+function iTimp(ctx,out,n,t,v){const f=nf(n);const o=ctx.createOscillator();o.type="sine";o.frequency.setValueAtTime(f*1.5,t);o.frequency.exponentialRampToValueAtTime(f,t+.06);
+  const g=ctx.createGain();o.connect(g);g.connect(out);g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(v,t+.006);g.gain.exponentialRampToValueAtTime(0.0001,t+1.5);o.start(t);o.stop(t+1.55);
+  const o2=ctx.createOscillator();o2.type="sine";o2.frequency.value=f*1.51;const g2=ctx.createGain();o2.connect(g2);g2.connect(out);g2.gain.setValueAtTime(0.0001,t);g2.gain.linearRampToValueAtTime(v*.28,t+.006);g2.gain.exponentialRampToValueAtTime(0.0001,t+.6);o2.start(t);o2.stop(t+.65);
+  const ns=ctx.createBufferSource();ns.buffer=out._noise;const nl=ctx.createBiquadFilter();nl.type="lowpass";nl.frequency.value=260;const ng=ctx.createGain();ns.connect(nl);nl.connect(ng);ng.connect(out);
+  ng.gain.setValueAtTime(v*.7,t);ng.gain.exponentialRampToValueAtTime(0.0001,t+.22);ns.start(t);ns.stop(t+.25);}
+// ベル・グロッケン風: 整数倍でない倍音を重ねて長く減衰
+function iBell(ctx,out,n,t,v){const f=nf(n);[[1,1,1.9],[2.76,.42,1.1],[5.4,.18,.6],[8.93,.07,.35]].forEach(([m,a,d])=>{const o=ctx.createOscillator();o.type="sine";o.frequency.value=f*m;const g=ctx.createGain();o.connect(g);g.connect(out);
+  g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(v*a,t+.004);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.start(t);o.stop(t+d+.05);});}
+function roll(ctx,out,n,t,len,v0,v1){for(let x=0;x<len;x+=.075){iTimp(ctx,out,n,t+x,v0+(v1-v0)*(x/len));}}
+
+let bus=null,bctx=null;const play=(c,o,t)=>{ // 起動: 羅針盤〜金の文字に合わせて約2秒
+    roll(c,o,"D2",t,.55,.12,.4);iStrings(c,o,["D3","A3","E4","F#4"],t,1.0,.5);iStrings(c,o,["G2","D3","B3","F#4"],t+1.0,.55,.5);iStrings(c,o,["D3","A3","D4","F#4","A4"],t+1.5,1.0,.55);
+    iBrass(c,o,"A4",t+.55,.22,.22);iBrass(c,o,"D5",t+.8,.2,.24);iBrass(c,o,"E5",t+1.02,.45,.24);iBrass(c,o,"F#5",t+1.5,1.0,.27);
+    iTimp(c,o,"D2",t+1.5,.55);["A5","D6","F#6","A6","D7"].forEach((n,i)=>iBell(c,o,n,t+1.55+i*.07,.09));};
+return (c,o,t)=>{if(bctx!==c){bctx=c;bus=sndChain(c);}play(c,bus,t);};})();
+CUES.open=OPEN_ORCH;CUE_LEN.open=3.6;
 function sndInit(){if(SND.ctx||!sndOn())return SND.ctx;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;SND.ctx=new AC();SND.bus=sndChain(SND.ctx);}catch(e){SND.ctx=null;}return SND.ctx;}
 function playCue(name){if(!sndOn())return;(window.__sndLog=window.__sndLog||[]).push(name);
   if(!SND.ctx&&S.snd)SND.ctx=null;const c=sndInit();if(!c)return;try{if(c.state!=="running")c.resume();CUES[name](c,SND.bus,c.currentTime+.04);}catch(e){}}
@@ -3515,30 +3709,40 @@ function splashGL(c,dur){let gl=null;try{gl=c.getContext("webgl",{alpha:false,an
   gl.uniform1f(uT,1.3);gl.drawArrays(gl.TRIANGLES,0,3);SPGL.raf=requestAnimationFrame(f);window.__splashGL=1;return true;}
 function splashGLEnd(g){g=g||SPGL.gl;cancelAnimationFrame(SPGL.raf);SPGL.raf=0;if(g){try{const ext=g.getExtension("WEBGL_lose_context");ext&&ext.loseContext();}catch(e){}window.__splashGLLost=(window.__splashGLLost||0)+1;}if(!g||g===SPGL.gl)SPGL.gl=null;}
 const easeIOS=t=>{let a=0,b=1,x=t;for(let i=0;i<14;i++){const m=(a+b)/2;const bx=3*m*(1-m)*(1-m)*.32+3*m*m*(1-m)*0+m*m*m;if(bx<t)a=m;else b=m;x=(a+b)/2;}return 3*x*(1-x)*(1-x)*.72+3*x*x*(1-x)*1+x*x*x;};
+// 起動演出（前の版から戻した）
 splashRun=function(){const sp=document.getElementById("splash");if(!sp)return;sp.classList.add("js");
   if(fxOff()){sp.remove();return;}
-  const quick=S.splashDay===todayKey();S.splashDay=todayKey();
+  const quick=false;S.splashDay=todayKey(); // 毎回、開いた瞬間の演出（約2秒）
+  // 音がオンなら「タップして開く」で待つ（iPhone はタップの後でないと音を鳴らせないため）。音オフ・動きを減らす・試しのときは今まで通り自動で閉じる
   const wait=sndOn()&&!splashNoWait();if(wait)sp.classList.add("wait");
-  let fin=false,revealing=false;
-  const done=()=>{if(fin)return;fin=true;window.__splashDoneAt=performance.now();tapShield=performance.now()+1000;OPEN_AT=Date.now();document.removeEventListener("keydown",onKey,true);splashGLEnd();sp.remove();if(FX.c)FX.c.style.zIndex="";maybeCoach();};
-  const reveal=ms=>{if(revealing||fin)return;revealing=true;sp.style.pointerEvents="none";fxLog("splash-open");const c=sp.querySelector(".cmp").getBoundingClientRect();const cx=c.left+c.width/2,cy=c.top+c.height/2;
+  let fin=false,opening=false,revealing=false;
+  const done=()=>{if(fin)return;fin=true;window.__splashDoneAt=performance.now();tapShield=performance.now()+1000;OPEN_AT=Date.now();document.removeEventListener("keydown",onKey,true);sp.remove();if(FX.c)FX.c.style.zIndex="";maybeCoach();};
+  // 羅針盤の中心から円を広げて中の画面を見せる（半透明の重ね合わせは使わない）
+  const reveal=ms=>{if(revealing||fin)return;revealing=true;sp.style.pointerEvents="none";if(opening){sp.style.setProperty("--thr",ms+"ms");sp.classList.add("through");}const c=sp.querySelector(".cmp").getBoundingClientRect();const cx=c.left+c.width/2,cy=c.top+c.height/2;
     const R=Math.hypot(Math.max(cx,innerWidth-cx),Math.max(cy,innerHeight-cy))+20;const ring=sp.querySelector(".sring");const t0=performance.now();
-    setTimeout(()=>{if(!fin)done();},ms+60);
-    let tA=null;const f=t=>{if(fin)return;if(tA==null)tA=t;const k=Math.min(1,(t-tA)/ms);const r=Math.max(0,easeIOS(k)*R);
+    const f=t=>{if(fin)return;const k=Math.min(1,(t-t0)/ms);const e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;const r=Math.max(0,e*R);
       const m=`radial-gradient(circle at ${cx}px ${cy}px, transparent ${r}px, #000 ${r+.5}px)`;sp.style.webkitMaskImage=m;sp.style.maskImage=m;
-      ring.style.width=ring.style.height=(2*r)+"px";ring.style.transform=`translate(${cx-r}px,${cy-r}px)`;ring.style.opacity=k<.8?1:(1-k)/.2;
+      ring.style.width=ring.style.height=(2*r)+"px";ring.style.left=(cx-r)+"px";ring.style.top=(cy-r)+"px";ring.style.opacity=k<.85?1:(1-k)/.15;
       if(k<1)requestAnimationFrame(f);else done();};requestAnimationFrame(f);};
-  setTimeout(()=>{if(fin)return;const rw=splashReward();const rb=sp.querySelector(".reward");if(rw){rb.innerHTML=`<div class="re">${esc(rw.eb)}</div><div class="rn">${rw.ic?ico(rw.ic,rw.area?"a-"+rw.area:"k-ride"):""}<span class="rt">${wb(rw.name)}</span></div>`;}
-   const nd=sp.querySelector(".needle");const to=((needleFinal(rw)%360)+360)%360;const t1=to>180?to-360:to;nd.style.transform=`rotate(${t1}deg)`;
-   if(!quick)setTimeout(()=>{if(!fin)springTo(nd,v=>({transform:`rotate(${v}deg)`}),t1-64,t1,{k:200,c:22});},150);},0);
-  const open=()=>{if(fin)return;if(revealing)return;if(sndOn()){SND.helloed=true;playCue("open");}buzz([20]);fxLog("tap-open");reveal(380);};
+  // タップした後の約4秒: 針が回って止まる → 金の光ときらめき → 文字が光る → 円で開く（起動の音に合わせる）
+  const openShow=()=>{const rw=splashReward();sp.style.setProperty("--fin",needleFinal(rw)+"deg");
+    const rb=sp.querySelector(".reward");if(rw){const ps=sp.querySelector(".sps");const mr=sp.querySelector(".spmid").getBoundingClientRect(),pr=ps.getBoundingClientRect();rb.style.top=(pr.top-mr.top-4)+"px";
+      rb.innerHTML=`<div class="re">${esc(rw.eb)}</div><div class="rn">${rw.ic?ico(rw.ic,rw.area?"a-"+rw.area:"k-ride"):""}<span class="rt">${wb(rw.name)}</span></div>`;
+      const rn=rb.querySelector(".rn"),nm=rn.querySelector(".rt");let fs=parseFloat(getComputedStyle(rn).fontSize);const maxW=Math.min(innerWidth*.76,320)-(rw.ic?44:0);
+      if(nm.scrollWidth>maxW)rn.style.letterSpacing=".02em";while(nm.scrollWidth>maxW&&fs>15){fs-=1;rn.style.fontSize=fs+"px";}if(nm.scrollWidth>maxW)rn.classList.add("wrap");}else rb.innerHTML="";
+    setTimeout(()=>{if(!fin&&!revealing)buzz([35]);},1500); // 針が止まる「決まった」瞬間に短く振動
+    opening=true;sp.classList.remove("ready");sp.classList.add("opening");fxLog("open-show");{const c=sp.querySelector(".cmp").getBoundingClientRect();const bl=sp.querySelector(".bloom");bl.style.left=(c.left+c.width/2)+"px";bl.style.top=(c.top+c.height/2)+"px";const fl=sp.querySelector(".flare");fl.style.top=(c.top+c.height/2)+"px";const rp=sp.querySelector(".ripples");rp.style.left=(c.left+c.width/2)+"px";rp.style.top=(c.top+c.height/2)+"px";rp.style.setProperty("--cs",c.width+"px");
+      const mid=sp.querySelector(".spmid");const mr=mid.getBoundingClientRect();mid.style.transformOrigin=`${c.left+c.width/2-mr.left}px ${c.top+c.height/2-mr.top}px`;}
+    setTimeout(()=>reveal(880),3120);};
+  const open=()=>{if(fin)return;if(opening){reveal(380);return;} // 演出中にもう一度タップしたら飛ばす
+    if(!wait){if(sndOn()){SND.helloed=true;playCue("open");}reveal(quick?380:520);return;}
+    SND.helloed=true;playCue("open");buzz([20]);fxLog("tap-open");openShow();};
   const onKey=e=>{if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();open();}};
   sp.addEventListener("click",open);document.addEventListener("keydown",onKey,true);
-  document.addEventListener("visibilitychange",()=>{if(document.hidden)splashGLEnd();},{once:true});
-  setTimeout(()=>{if(fin)return;
-  const c=sp.querySelector(".spgl");if(c&&splashGL(c,quick?400:1000))sp.classList.add("gl");
-  sp.classList.add(quick?"quick":"full");fxLog("splash");if(quick)fxLog("splash-quick");window.__splashAt=performance.now();window.__splashAtD=Date.now();
-  setTimeout(()=>{if(fin||revealing)return;window.__splashReadyAt=performance.now();if(wait){sp.classList.add("ready");fxLog("splash-wait");}else reveal(350);},quick?50:650);},0);};
+  // 最初の描画（予定の計算）が終わってから動かす。遅いスマホでも動きの途中で止まらないように
+  setTimeout(()=>{if(fin)return;sp.classList.add(quick?"quick":"full");fxLog(quick?"splash-quick":"splash");window.__splashAtD=Date.now();window.__splashAt=performance.now();
+    setTimeout(()=>{if(fin||opening||revealing)return;if(wait){sp.classList.add("ready");fxLog("splash-wait");}else reveal(quick?380:520);},quick?420:2000);},0);};
+
 {const _sh=shimmer;shimmer=function(dur){_sh(Math.min(1800,dur||1800));const c=[...document.querySelectorAll(".tn-gl")].pop();if(!c)return;const stop=()=>{c.style.transition="opacity 160ms cubic-bezier(.23,1,.32,1)";c.style.opacity="0";setTimeout(()=>{c.width=c.height=1;},170);};document.addEventListener("pointerdown",stop,{once:true,capture:true});};}
 {const _bu=bubbles;bubbles=function(ox,oy,n,dur){_bu(ox,oy,n,Math.min(1800,dur||1200));const c=BUB.c;if(!c)return;setTimeout(()=>{const stop=()=>{if(BUB.c===c){cancelAnimationFrame(BUB.raf);c.remove();BUB.c=null;}};document.addEventListener("pointerdown",stop,{once:true,capture:true});},0);};}
 {const _ce=celebrate;celebrate=function(b0){const r=_ce(b0);const els=document.querySelectorAll(".cele");const el=els[els.length-1];if(el){setTimeout(()=>{if(el.isConnected){el.remove();placeToast();}},1800);setTimeout(()=>document.addEventListener("pointerdown",()=>{if(el.isConnected){el.remove();placeToast();}},{once:true,capture:true}),0);}return r;};}
