@@ -543,6 +543,8 @@ nav button{font-size:13px}
 @media (max-width:359px){html .phtop{grid-template-columns:auto 1fr}html .phsub{grid-column:1/-1;text-align:left}html .phsub b{display:inline;margin-left:6px;font-size:15px}html .phbtns{grid-template-columns:1fr}html .phbtns .ghost{min-height:40px}}
 #planList .step{margin-bottom:6px}
 #planList .step .stepbody{padding:7px 62px 7px 12px;min-height:0}
+#planList .step .stepbody{min-height:44px!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
+@media (max-width:360px){#planList .step{grid-template-columns:minmax(0,1fr) auto auto auto!important}#planList .step>.t{grid-column:1!important;grid-row:1!important;width:auto!important}#planList .step>.stepbody{grid-column:1!important;grid-row:2!important}#planList .step>.rw{grid-column:2!important;grid-row:1 / span 2!important}#planList .step>.rowx{grid-column:3!important;grid-row:1 / span 2!important}#planList .step>.rowmore{grid-column:4!important;grid-row:1 / span 2!important}#planList .step .t,#planList .step .t *{font-size:13px!important}}
 #planList .step .txt{font-size:15px;line-height:1.3}
 #planList .step .meta{font-size:13px;line-height:1.35;gap:0 8px;margin-top:2px}
 #planList .step .meta>span{white-space:nowrap}
@@ -3912,6 +3914,180 @@ document.addEventListener("pointerdown",e=>{if(fxOff()||!e.isTrusted)return;cons
   try{b.__pd=b.animate([{transform:"scale(1)"},{transform:`scale(${s})`}],{duration:110,easing:"cubic-bezier(.2,0,0,1)",fill:"forwards"});}catch(x){return;}
   const up=()=>{removeEventListener("pointerup",up,true);removeEventListener("pointercancel",up,true);const pd=b.__pd;b.__pd=null;if(pd)try{pd.cancel();}catch(x){}if(b.isConnected)mSpring(b,x=>({transform:`scale(${1-(1-s)*x})`}),{k:420,c:21});};
   addEventListener("pointerup",up,true);addEventListener("pointercancel",up,true);},true);
+
+// ============ v5 シンプル化（2026-11-23 オーナー「文字が多い・AIが作ったゴミみたい」） ============
+// 1画面で1つのことだけ答える。今＝次どこ・何分。予定＝順番。待ち時間＝一覧。飾り・数字の箱・バッジは出さない。
+{const css=`
+:root{--bg:#fff;--ink:#111418;--fg:#111418;--ink-2:#5d636c;--muted:#646b75;--ink-3:#646b75;--line:#eceef1;--acc:#1f5eff}
+html,body{background:#fff!important}
+body::before,body::after{display:none!important}
+header{background:#fff!important;box-shadow:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+header .hrow h1{font-size:15px!important;font-weight:800!important;color:var(--ink)!important;margin:0 10px 0 0!important;letter-spacing:0!important}header .hrow h1::before,header .hrow h1::after,header .hrow h1 svg,header .hrow h1 img,header .hrow h1 *{display:none!important}#planList .step .txt::before,#planList .step .txt::after,#planList .step .stepbody *::before{display:none!important}
+header .hrow .clock{margin-right:auto}
+header .hrow .clock .num{font-size:15px!important;font-weight:600!important;color:var(--muted)!important}
+header .help.hq,#v5Menu{background:transparent!important;box-shadow:none!important;border:0!important;color:var(--muted)!important;width:44px;height:44px;font-size:17px}
+#v5Menu{display:grid;place-items:center;padding:0;cursor:pointer}
+#v5Menu svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+/* ---- 今 ---- */
+#nextCard.hero{background:none!important;box-shadow:none!important;border:0!important;color:var(--ink)!important;padding:56px 4px 0!important;min-height:0!important;overflow:visible!important;border-radius:0!important}
+#nextCard.hero::before,#nextCard.hero::after{display:none!important}
+#nextCard .tn-hero__water,#nextCard .tn-hero__contour,#nextCard .tn-hero__compass,#nextCard .top>.ic,#nextCard .where,#nextCard .hgain,#nextCard.k-ride .say,#nextCard .msheen{display:none!important}
+#nextCard .say{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin-top:14px!important;font-size:15px!important;font-weight:600!important;color:var(--muted)!important}#nextCard .say svg{display:none!important}
+#nextCard .top{display:block!important;margin:0!important}
+#nextCard .eb{font-size:15px!important;font-weight:600!important;color:var(--muted)!important;letter-spacing:0!important;text-transform:none!important;opacity:1!important;margin:0!important}
+#nextCard .big{font-size:clamp(34px,11vw,46px)!important;line-height:1.12!important;font-weight:800!important;color:var(--ink)!important;letter-spacing:-.02em!important;margin-top:10px!important;text-shadow:none!important}
+#nextCard .facts{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:12px!important;margin-top:28px!important;background:none!important;border:0!important;padding:0!important;box-shadow:none!important}
+#nextCard .facts>div{background:none!important;border:0!important;padding:0!important;box-shadow:none!important;color:var(--ink)!important;display:flex;align-items:baseline;gap:6px}
+#nextCard .facts>div:first-child{order:2;font-size:17px;color:var(--muted)!important;justify-content:flex-start!important;width:auto!important;margin:0!important;text-align:left!important}
+#nextCard .facts>div:first-child small,#nextCard .facts>div:first-child b{font-size:17px!important;font-weight:600!important;color:var(--muted)!important;font-family:inherit!important}
+#nextCard .facts small::before{display:none!important;content:none!important}
+#nextCard .facts>div:first-child>*,#nextCard .facts>div:first-child{margin-left:0!important;padding-left:0!important;text-indent:0!important}#nextCard .facts>div:first-child::before,#nextCard .facts>div:first-child svg{display:none!important}
+#nextCard .facts>div:nth-child(2)>small{display:none!important}
+#nextCard .facts>div:nth-child(2) b.num{font-size:clamp(80px,25vw,104px)!important;line-height:.9!important;font-weight:800!important;letter-spacing:-.04em!important;color:var(--ink)!important;text-shadow:none!important}
+#nextCard .facts>div:nth-child(2) b.num i{font-style:normal!important;font-size:22px!important;letter-spacing:0!important;font-weight:700!important;color:var(--ink)!important;margin-left:6px}
+#nextCard .facts>div:nth-child(2) b.num i:first-child{display:none!important}
+
+#nextCard .facts>div:only-child{order:0}
+#nextCard *{color:inherit}
+#nextCard .note,#nextCard p{color:var(--muted)!important}
+@media (max-height:700px){#nextCard.hero{padding-top:6px!important}#nextCard .big{font-size:30px!important;margin-top:4px!important}#nextCard .facts{margin-top:12px!important;gap:6px!important}#nextCard .facts>div:nth-child(2) b.num{font-size:64px!important}#nextCard .facts>div:nth-child(2) b.num i{font-size:18px!important}}
+#heroPeek,#bento,#upHead,#upNext,#prog{display:none!important}
+#locChip{margin:14px 0 0!important;padding:0 4px!important;background:none!important;border:0!important;box-shadow:none!important}
+#locChip .areabtn{background:none!important;border:0!important;box-shadow:none!important;padding:6px 0!important;min-height:0!important;color:var(--muted)!important;font-size:14px!important;font-weight:600!important;gap:4px!important}
+#locChip #areaIc{display:none!important}
+#locChip .lbl{font-size:14px!important}
+#locChip b{font-weight:600!important;color:var(--muted)!important;font-size:14px!important}
+#actbar{background:#fff!important;box-shadow:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+#actbar::before{display:none!important}
+#actbar .big-btn.pri{background:var(--ink)!important;color:#fff!important;box-shadow:none!important;border-radius:32px!important;min-height:60px!important;font-size:18px!important}
+#actbar .big-btn.pri::before{display:none!important;content:none!important}
+#actbar .big-btn svg{display:none!important}
+#actbar .big-btn.sec,#actbar .big-btn.ghost{background:none!important;border:0!important;box-shadow:none!important;color:var(--muted)!important;font-size:15px!important;min-height:44px!important}
+#actbar .big-btn.sec::before,#actbar .big-btn.sec::after{display:none!important}
+.askin,#dayBanner>*,.mealask,.passnote{background:#f6f7f9!important;border:0!important;box-shadow:none!important;color:var(--ink)!important}
+/* ---- 乗った ---- */
+.cele.v5c{opacity:1;transform:none!important;translate:none!important;scale:none!important;position:fixed!important;inset:0!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:auto!important;max-width:none!important;transform:none;margin:0!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;border:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:0!important;z-index:60!important;padding:0!important}
+.cele.v5c::before,.cele.v5c::after{display:none!important}
+.cele.v5c .tn-stamp,.cele.v5c .cgain,.cele.v5c .cbadge,.cele.v5c .c2{display:none!important}
+.cele.v5c .cbody{background:none!important;box-shadow:none!important;border:0!important;padding:0!important;text-align:center!important;display:flex;flex-direction:column;align-items:center}
+.cele.v5c .v5ck{width:88px;height:88px;border-radius:50%;background:var(--ink);display:grid;place-items:center;margin-bottom:26px}
+.cele.v5c .v5ck svg{width:40px;height:40px;fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cele.v5c .c1{font-size:30px!important;font-weight:800!important;color:var(--ink)!important;background:none!important;box-shadow:none!important;padding:0!important;border:0!important}
+.cele.v5c .c1 em{font-style:normal!important;color:inherit!important;font-size:inherit!important}
+.cele.v5c .v5nx{margin-top:10px;font-size:16px;font-weight:600;color:var(--muted)}
+#bento.v5off{display:none!important}
+/* ---- 予定 ---- */
+#tab-plan:not([hidden]){display:flex;flex-direction:column}
+#tab-plan>*{order:5}
+#tab-plan>#planBanner{order:0}#tab-plan>#planH2{order:1}#tab-plan>#help-plan{order:2}#tab-plan>#v5Sub{order:2}#tab-plan>#planList{order:3}#tab-plan>.planhead{order:4}#tab-plan>#addForm{order:4}#tab-plan>#planNote{order:4}
+#planH2{font-size:32px!important;font-weight:800!important;letter-spacing:-.02em!important;margin:18px 0 0!important;color:var(--ink)!important}
+#planH2 .help{font-size:15px}
+#v5Sub{margin:18px 0 18px}#tab-plan #v5Sub h2{font-size:32px!important;font-weight:800!important;letter-spacing:-.02em!important;color:var(--ink)!important;margin:0!important;padding:0!important}#v5Sub p{font-size:15px;font-weight:600;color:var(--muted);margin:6px 0 0}
+.planhead .phmini,.planhead .ring,.planhead .dayarc,.planhead .phline,.planhead .phdate,.planhead .phk,.planhead .phsub{display:none!important}
+.planhead .card,.planhead .phcard{background:none!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0!important}
+.planhead .phtop{display:block!important;min-height:0!important;margin:0!important;padding:0!important}
+.planhead .phbtns{display:flex!important;gap:18px!important;margin:18px 0 0!important;justify-content:flex-start!important}
+.planhead .phbtns button{background:none!important;border:0!important;box-shadow:none!important;color:var(--acc)!important;padding:8px 0!important;min-height:44px!important;font-size:16px!important;font-weight:700!important;width:auto!important;flex:none!important}
+.planhead .phbtns button#replan{color:var(--muted)!important}
+#planList{border-top:1px solid var(--line)}
+#planList .step{background:none!important;box-shadow:none!important;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;margin:0!important;padding:16px 4px!important;display:grid!important;grid-template-columns:58px minmax(0,1fr) auto!important;grid-template-areas:none!important;grid-template-rows:auto!important;align-items:center!important;gap:0 8px!important;min-height:0!important}
+#planList .step::before,#planList .step::after{display:none!important}
+#planList .step .rail,#planList .step .meta .ar,#planList .step .meta>span:not(.tag),#planList .step .ic{display:none!important}
+
+#planList .step .t{position:relative!important;grid-column:1!important;font-size:15px!important;font-weight:600!important;color:var(--muted)!important;margin:0!important}
+#planList .step .t input{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:0!important;margin:0!important;padding:0!important}
+#planList .step .stepbody::before,#planList .step .stepbody::after{display:none!important}
+#planH2{display:flex!important;align-items:center;gap:8px}#planH2[hidden]{display:none!important}
+#planList .step .stepbody{grid-column:2!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;text-align:left!important;min-height:44px!important}
+#planList .step .txt{font-size:17px!important;font-weight:700!important;color:var(--ink)!important}
+#planList .step .meta{margin:2px 0 0!important}
+#planList .step .meta .tag{background:none!important;border:0!important;padding:0!important;font-size:13px!important;font-weight:600!important;color:#b35c00!important}
+#planList .step .rw{grid-column:3!important;display:flex!important;align-items:baseline!important;white-space:nowrap!important;font-size:17px!important;color:var(--ink)!important}
+#planList .step .rw b{font-size:17px!important;font-weight:700!important}
+#planList .step .rw small{font-size:12px!important;color:var(--muted)!important}
+#planList .step.done .txt,#planList .step.done .t,#planList .step.done .rw{color:#c3c7cd!important}
+#planList .step.cur .txt,#planList .step.cur .t{color:var(--acc)!important}
+#planList>*:not(.step){background:none!important;box-shadow:none!important;border-radius:0!important}
+#planList .nowline,#planList [class*="now"]:not(.step){border-color:var(--acc)!important}
+#planTools{gap:18px!important}
+#planTools button,#tab-plan .ghost{background:none!important;border:0!important;box-shadow:none!important;color:var(--acc)!important;padding:8px 0!important;font-weight:700!important}
+#planSkipHead{font-size:15px!important;color:var(--muted)!important;font-weight:700!important;margin-top:34px!important}
+#planSkip .row{background:none!important;box-shadow:none!important;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;padding:12px 4px!important;margin:0!important}
+#planSkip .row{display:block!important}#planSkip .row .name{font-size:15px!important;font-weight:600!important;color:var(--ink-2)!important}
+#planSkip .row .sub{display:block!important;margin-top:2px}#planSkip .row .sub>span:first-child{display:none!important}#planSkip .row .sub .tag{background:none!important;border:0!important;padding:0!important;font-size:14px!important;font-weight:600!important;color:var(--muted)!important;margin-right:8px}
+#tab-plan .card.note,#planBanner>*{background:#f6f7f9!important;box-shadow:none!important;border:0!important}
+#planList .step{display:grid!important;grid-template-columns:52px minmax(0,1fr) auto auto auto!important;grid-template-areas:none!important;grid-auto-rows:auto!important;align-items:center!important;gap:0 10px!important}
+#planList .step>.t{grid-column:1!important;grid-row:1!important}#planList .step>.stepbody{grid-column:2!important;grid-row:1!important}#planList .step>.rw{grid-column:3!important;grid-row:1!important}#planList .step>.rowx{grid-column:4!important;grid-row:1!important}#planList .step>.rowmore{grid-column:5!important;grid-row:1!important;align-self:center!important;top:auto!important;transform:none!important;display:grid!important;place-items:center!important;position:static!important;background:none!important;border:0!important;box-shadow:none!important;color:var(--muted)!important;width:44px!important;min-width:44px!important;height:44px!important;margin:0 -8px 0 0!important}
+#planList .step.open .txt{font-size:22px!important}
+#planList .step>*:not(.t):not(.stepbody):not(.rw):not(.rail):not(.rowmore):not(.rowx):not(input){grid-column:1 / -1!important;grid-row:auto!important;position:static!important;margin:6px 0 0!important}
+#planList .step>.rowx{flex:none!important;order:4!important;margin:0!important;width:44px!important;height:44px!important;min-height:0!important;padding:0!important;background:none!important;box-shadow:none!important;border:0!important;position:static!important}
+#planList .step>.stepbody{flex:1 1 0!important;min-width:0!important;order:2!important}#planList .step>.t{order:1!important}#planList .step>.rw{order:3!important}
+#planList .step .t{flex:0 0 52px!important;width:52px!important;padding:0!important;height:auto!important}
+#planList .step .t,#planList .step .t *{font-size:15px!important;font-weight:600!important;color:var(--muted)!important;font-family:inherit!important}
+#planList .step .stepbody{flex:1 1 auto!important;min-width:0!important;margin:0!important}
+#planList .step .rw{flex:none!important;margin:0!important;position:static!important;right:auto!important;top:auto!important;transform:none!important}
+#planList::before,#planList::after,#planList.mplin::before{display:none!important}
+/* ---- 待ち時間 ---- */
+#tab-waits>h2{font-size:32px!important;font-weight:800!important;letter-spacing:-.02em!important}
+#impBar{background:none!important;box-shadow:none!important;border:0!important;padding:0!important}
+#impBar .link{background:none!important;padding:0!important;color:var(--acc)!important;font-size:14px!important}
+#tab-waits .filters .sm,#tab-food .filters .sm{background:none!important;border:0!important;box-shadow:none!important;color:var(--muted)!important;padding:8px 10px!important;font-weight:700!important}
+#tab-waits .filters .sm.on,#tab-food .filters .sm.on{color:var(--ink)!important;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+#nearList{border-top:1px solid var(--line)}
+#nearList .row{background:none!important;box-shadow:none!important;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;margin:0!important}
+#nearList .row::before{display:none!important}
+#nearList .rowbtn{background:none!important;padding:16px 4px!important;min-height:0!important}
+#nearList .rowbtn>.ic,#nearList .car{display:none!important}
+#nearList .name{font-size:17px!important;font-weight:700!important;color:var(--ink)!important}
+#nearList .name small{display:block;font-size:13px!important;font-weight:600!important;color:var(--muted)!important}
+#nearList .wait,#nearList .wait *{color:var(--ink)!important;font-size:17px!important}
+#nearList .wait b,#nearList .wait .u{font-size:22px!important;font-weight:800!important}
+#nearList .wait.ok,#nearList .wait.ok *{color:#0b7a45!important}
+/* ---- メニュー・ほかの画面 ---- */
+#tab-menu .menurow,#tab-menu .list>*{background:none!important;box-shadow:none!important;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;margin:0!important}
+#tab-menu .menurow .ic{display:none!important}
+main .card,#tab-food .row,#tab-dpa .row,#tab-set .row,#tab-book .row,#prioList .row{box-shadow:none!important;border:0!important}
+main .card{background:#f6f7f9!important}
+:root{--navy:#111418;--btn-pri-1:#111418;--btn-pri-2:#111418}
+main h2,main .bk-title{color:var(--ink)!important}
+/* ---- 下のタブ ---- */
+nav{background:#fff!important;border-top:1px solid var(--line)!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+nav .tabpill{display:none!important}
+nav button{background:none!important;color:var(--muted)!important;box-shadow:none!important}
+nav button[aria-selected="true"]{color:var(--ink)!important}
+nav button[data-tab="menu"]{display:none!important}
+#adNear{display:none!important}
+#toast{z-index:70!important}
+#planList .step .meta .tag{font-size:14px!important}
+#nearList .name small{font-size:14px!important}
+#nearList .wait{font-variant-numeric:tabular-nums;min-width:84px;text-align:right;justify-content:flex-end}
+#nearList .wait .u{font-size:17px!important}
+#locChip .areabtn{min-height:44px!important}
+`;const st=document.createElement("style");st.id="v5css";st.textContent=css;document.head.appendChild(st);}
+// メニューはヘッダーの右上へ（下のタブは3つ）
+{const h=document.querySelector("header .hrow");const q=document.getElementById("guideBtn");
+ if(h&&q&&!document.getElementById("v5Menu")){q.insertAdjacentHTML("beforebegin",`<button type="button" id="v5Menu" data-tab="menu" aria-label="メニュー"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>`);}}
+// 右上のメニューも、メニュー側の画面にいる間は選ばれている扱いにする
+{const _st=showTab;showTab=function(){const r=_st.apply(this,arguments);try{const m=document.getElementById("v5Menu");const nb=document.querySelector("nav [data-tab=menu]");if(m&&nb)m.setAttribute("aria-selected",nb.getAttribute("aria-selected")||"false");}catch(e){}return r;};}
+// 起動画面が実際に消えた直後（0.3秒）も、下の画面にタップを通さない（消えるのが遅れた時の押し間違い防止）
+{const sp0=document.getElementById("splash");if(sp0){const mo=new MutationObserver(()=>{if(!document.getElementById("splash")){window.__splashGoneAt=performance.now();if(window.__splashDoneAt&&!document.getElementById("ob").offsetParent)tapShield=Math.max(tapShield,performance.now()+300);mo.disconnect();}});mo.observe(document.body,{childList:true});}}
+// 「今いる場所」→「いま」
+{const l=document.querySelector("#areaBtn .lbl");if(l)l.textContent="いま";}
+// 「次の行き先」→「次はこれ」
+{const _rn=renderNow;renderNow=function(){const r=_rn.apply(this,arguments);try{const eb=document.querySelector("#nextCard .eb");if(eb&&eb.textContent.trim()==="次の行き先")eb.textContent="次はこれ";const u=document.querySelector("#nextCard .facts>div:nth-child(2) b.num i:last-child");if(u&&u.textContent.trim()==="分")u.textContent="分待ち";}catch(e){}return r;};}
+// 予定の見出しの下に「◯:◯◯に帰る」だけ出す
+{const _rp=renderPlan;renderPlan=function(){const r=_rp.apply(this,arguments);try{let s=document.getElementById("v5Sub");const h=document.getElementById("planH2");if(!s&&h){h.insertAdjacentHTML("afterend",`<div id="v5Sub"></div>`);s=document.getElementById("v5Sub");}const rb=document.getElementById("replan");if(rb&&rb.textContent.trim()==="おすすめに戻す")rb.textContent="自動で組み直す";if(s)s.innerHTML=`<h2>今日の予定</h2>`+(S.exit?`<p>${esc(S.exit)}に帰る</p>`:"");}catch(e){}return r;};}
+// 乗った：粒・花火は出さない。お知らせは1行だけ
+bubbles=function(){};fireworks=function(){};
+{const _t=toast;toast=function(m,a,f){if(typeof m==="string"&&/に乗りました\n/.test(m))m=m.split("\n")[0];return _t(m,a,f);};}
+// 乗った：✓・「◯つ目」・次の行き先だけ
+{const _ce=celebrate;celebrate=function(b0){const big=_ce(b0);const els=document.querySelectorAll(".cele");const el=els[els.length-1];if(!el||el.__v5)return big;el.__v5=1;el.classList.add("v5c");
+ const rmT=()=>document.querySelectorAll(".bigtitle,.bigglow").forEach(e=>e.remove());rmT();setTimeout(rmT,0);setTimeout(rmT,60);
+ const c1=el.querySelector(".c1");const n=ATTR.filter(x=>ridden(x.id)).length;
+ if(c1)c1.innerHTML=big?"絶対乗るものをすべて達成":`<em>${n}</em>つ目`;
+ const cb=el.querySelector(".cbody");if(cb){cb.insertAdjacentHTML("afterbegin",`<div class="v5ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>`);cb.insertAdjacentHTML("beforeend",`<div class="v5nx"></div>`);
+  const fill=()=>{const nx=el.querySelector(".v5nx");const b=document.querySelector("#nextCard .big");if(nx)nx.textContent=b&&b.textContent.trim()?"次は "+b.textContent.trim():"";};fill();setTimeout(fill,60);setTimeout(fill,400);}
+ return big;};}
 
 // ============ boot ============
 (function boot(){
